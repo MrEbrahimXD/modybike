@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="ModyBike">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff4ed"/>
+      <stop offset="1" stop-color="#ffc9a8"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0v40" fill="none" stroke="#0d141c" stroke-opacity="0.06" stroke-width="1.5"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <g transform="translate(80 150)">
+    <rect width="72" height="72" rx="18" fill="#f85016"/>
+    <g transform="translate(11 11) scale(2.08)" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="5.5" cy="16.5" r="3.5"/>
+      <circle cx="18.5" cy="16.5" r="3.5"/>
+      <path d="M5.5 16.5L9 7h4M12 16.5L15.5 7M9 7h7l2.5 9.5M14 7l-1.5-3h-2"/>
+    </g>
+  </g>
+
+  <text x="176" y="200" font-family="Cairo, Segoe UI, system-ui, sans-serif" font-size="62" font-weight="800" fill="#0d141c">
+    ModyBike
+  </text>
+  <text x="176" y="245" font-family="Cairo, Segoe UI, system-ui, sans-serif" font-size="30" font-weight="700" fill="#c12b07">
+    مودي بايك
+  </text>
+
+  <text x="80" y="360" font-family="Cairo, Segoe UI, system-ui, sans-serif" font-size="46" font-weight="800" fill="#0d141c">
+    دراجات وسكوتر وعربيات أطفال
+  </text>
+  <text x="80" y="420" font-family="Cairo, Segoe UI, system-ui, sans-serif" font-size="30" font-weight="600" fill="#3a4c5f">
+    أبو كبير، الشرقية · اختار حسب العمر والنوع
+  </text>
+
+  <g transform="translate(80 480)">
+    <rect width="290" height="58" rx="29" fill="#0d141c"/>
+    <text x="145" y="38" text-anchor="middle" font-family="Cairo, Segoe UI, system-ui, sans-serif" font-size="26" font-weight="700" fill="#fff">
+      01102637511
+    </text>
+  </g>
+
+  <g opacity="0.14" transform="translate(760 180)">
+    <g fill="none" stroke="#430e04" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" transform="scale(14)">
+      <circle cx="5.5" cy="16.5" r="3.5"/>
+      <circle cx="18.5" cy="16.5" r="3.5"/>
+      <path d="M5.5 16.5L9 7h4M12 16.5L15.5 7M9 7h7l2.5 9.5M14 7l-1.5-3h-2"/>
+    </g>
+  </g>
+</svg>

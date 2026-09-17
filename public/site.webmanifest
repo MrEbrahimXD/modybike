@@ -1,0 +1,15 @@
+{
+  "name": "مودي بايك — ModyBike",
+  "short_name": "ModyBike",
+  "description": "أفخم وأمتن الدراجات في محافظة الشرقية — لكل الأعمار",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f85016",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

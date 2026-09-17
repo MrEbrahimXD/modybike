@@ -1,0 +1,277 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   ModyBike — base layer
+   ========================================================================== */
+
+@layer base {
+  :root {
+    --header-h: 68px;
+    --rule: theme('colors.carbon.200');
+    color-scheme: light;
+
+    /* Arabic is the default locale and gets the Arabic face. */
+    --font-sans: 'Readex Pro', 'Segoe UI', system-ui, sans-serif;
+    /* Arabic sits slightly lower and needs more line height than Latin. */
+    --lh-display: 1.14;
+    --track-display: -0.005em;
+  }
+
+  /* The English tree (/en) is a different typeface, not the same one reused. */
+  html[lang^='en'] {
+    --font-sans: 'Archivo', 'Segoe UI', system-ui, sans-serif;
+    --lh-display: 0.94;
+    --track-display: -0.025em;
+  }
+
+  .dark {
+    --rule: theme('colors.carbon.800');
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100svh;
+    overflow-wrap: break-word;
+    background: theme('colors.paper.DEFAULT');
+    color: theme('colors.carbon.900');
+    font-feature-settings: 'ss01', 'cv05';
+    /* 17px base rather than 16. Most of this shop's customers read Arabic on a
+       cheap phone in daylight; the extra pixel costs nothing and helps a lot. */
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  .dark body {
+    background: theme('colors.carbon.950');
+    color: theme('colors.carbon.100');
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto !important;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  /* Latin digits inside Arabic copy — that is how prices and sizes are quoted
+     in Egyptian shops, and it keeps spec tables aligned in both directions. */
+  [dir='rtl'] {
+    font-feature-settings: 'ss01';
+  }
+
+  /* One focus ring, square, high contrast — matches the rest of the geometry. */
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid theme('colors.signal.500');
+    outline-offset: 3px;
+    border-radius: 0;
+  }
+  .dark :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline-color: theme('colors.signal.400');
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-bold;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  img,
+  svg,
+  video {
+    @apply block max-w-full;
+  }
+
+  ::selection {
+    background: theme('colors.signal.500');
+    color: #fff;
+  }
+
+  @supports (scrollbar-width: thin) {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: theme('colors.carbon.300') transparent;
+    }
+    .dark * {
+      scrollbar-color: theme('colors.carbon.700') transparent;
+    }
+  }
+}
+
+/* ==========================================================================
+   Components
+   ========================================================================== */
+
+@layer components {
+  /* A wide editorial measure. Content breathes; images break out of it. */
+  .container-page {
+    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12;
+  }
+  .container-narrow {
+    @apply mx-auto w-full max-w-[960px] px-5 sm:px-8;
+  }
+
+  /**
+   * `.label` — navigation, kickers, meta and form labels.
+   *
+   * Plain sentence case in the page's own typeface. It used to be tracked
+   * uppercase mono, which is the house style of every generated template and
+   * made a section kicker look like a machine part number.
+   */
+  .label {
+    @apply text-[0.875rem] font-medium leading-tight;
+    letter-spacing: 0.005em;
+  }
+
+  /**
+   * `.spec` — the tracked mono micro-type, kept for the one place it is
+   * honest: actual technical data. Spec-table keys, part numbers, the
+   * wheel/gear/brake summary on a product tile.
+   */
+  .spec {
+    @apply font-mono text-spec font-medium uppercase;
+  }
+
+  /* Hairline rules do the work that borders-on-cards used to do. */
+  .rule {
+    border-color: var(--rule);
+  }
+  .rule-t {
+    border-top-width: 1px;
+    border-color: var(--rule);
+  }
+  .rule-b {
+    border-bottom-width: 1px;
+    border-color: var(--rule);
+  }
+
+  /* Secondary text, not faint text. carbon-500 on paper is ~4.6:1 — technically
+     a pass and practically hard to read in sunlight. carbon-600 is ~7:1. */
+  .muted {
+    @apply text-carbon-600 dark:text-carbon-300;
+  }
+
+  .skip-link {
+    @apply sr-only;
+  }
+  .skip-link:focus {
+    @apply not-sr-only fixed inset-x-0 top-0 z-[100] mx-auto w-max bg-signal-500 px-6 py-3 text-base font-bold text-white;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Underline that grows from the leading edge — replaces colour-change hover. */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    transition: background-size 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  [dir='rtl'] .link-underline {
+    background-position: 100% 100%;
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* Photography that scales inside a fixed frame on hover. */
+  .zoom-frame {
+    @apply relative overflow-hidden;
+  }
+  .zoom-frame img {
+    transition: transform 0.75s cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  .group:hover .zoom-frame img,
+  .zoom-frame:hover img {
+    transform: scale(1.045);
+  }
+
+  /* Blog body typography */
+  .post-body :where(h2) {
+    @apply mt-14 scroll-mt-28 text-display-sm;
+  }
+  .post-body :where(h3) {
+    @apply mt-10 scroll-mt-28 text-xl font-bold sm:text-2xl;
+  }
+  .post-body :where(table) {
+    @apply w-full text-start text-sm;
+  }
+  .post-body :where(table th) {
+    @apply label border-b py-3 text-carbon-500 dark:text-carbon-400;
+    border-color: var(--rule);
+  }
+  .post-body :where(table td) {
+    @apply border-b py-3 align-top;
+    border-color: var(--rule);
+  }
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Logical-direction arrow flip: one class, correct in both directions. */
+  [dir='rtl'] .flip-rtl {
+    @apply -scale-x-100;
+  }
+
+  .tap-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  .content-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+  }
+
+  /* Legibility scrim over photography — a real gradient, doing real work,
+     as opposed to a decorative one doing none. */
+  /* Tuned against the brightest hero (a sunset sky) so body copy sitting
+     two-thirds up the frame still clears contrast, not just the headline. */
+  .scrim-b {
+    background: linear-gradient(
+      to top,
+      rgba(11, 11, 10, 0.88) 0%,
+      rgba(11, 11, 10, 0.7) 32%,
+      rgba(11, 11, 10, 0.42) 62%,
+      rgba(11, 11, 10, 0.12) 88%,
+      rgba(11, 11, 10, 0) 100%
+    );
+  }
+  .scrim-full {
+    background: linear-gradient(to top, rgba(11, 11, 10, 0.75), rgba(11, 11, 10, 0.3));
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}

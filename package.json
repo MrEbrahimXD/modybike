@@ -1,0 +1,33 @@
+{
+  "name": "modybike",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "ModyBike — متجر دراجات محافظة الشرقية | Bike store for Al Sharqia, Egypt",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run build:client && npm run build:server && npm run prerender",
+    "build:client": "vite build --outDir dist",
+    "build:server": "vite build --ssr src/entry-server.jsx --outDir .ssr-build",
+    "prerender": "node scripts/prerender.mjs",
+    "verify": "node scripts/verify-site.mjs",
+    "preview": "vite preview --outDir dist",
+    "serve": "node scripts/serve-dist.mjs",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true});require('fs').rmSync('.ssr-build',{recursive:true,force:true})\"",
+    "images": "node scripts/build-images.mjs"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.15",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "sharp": "^0.35.4",
+    "tailwindcss": "^3.4.17",
+    "vite": "^5.4.11"
+  }
+}
