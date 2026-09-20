@@ -175,27 +175,9 @@ export default function ProductDetail() {
               </dl>
             ) : null}
 
-            {/* Plain words, right where the decision is made. The spec grid above
-                is only useful to someone who already knows what "V-Brake" is. */}
-            {!accessory && (specs.brakes || specs.frameMaterial) ? (
-              <div className="mt-7 border-s-2 border-signal-500 ps-5">
-                <p className="label text-signal-700 dark:text-signal-400">
-                  {t('specHelp.plainTitle')}
-                </p>
-                <ul className="mt-2.5 space-y-2">
-                  {specs.brakes ? (
-                    <li className="text-[15px] leading-relaxed muted">
-                      {t(`specHelp.brakes.${specs.brakes}`)}
-                    </li>
-                  ) : null}
-                  {specs.frameMaterial ? (
-                    <li className="text-[15px] leading-relaxed muted">
-                      {t(`specHelp.material.${specs.frameMaterial}`)}
-                    </li>
-                  ) : null}
-                </ul>
-              </div>
-            ) : null}
+            {/* The plain-words gloss on brakes and frame lives in the spec
+                table below, where the term it explains is actually sitting —
+                repeating it up here only pushed the buy button off the fold. */}
 
             {/* colours */}
             {specs.colors?.length ? (

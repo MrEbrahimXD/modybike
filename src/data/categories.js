@@ -26,28 +26,6 @@ export const CATEGORIES = [
     icon: 'mountain',
   },
   {
-    slug: 'hybrid',
-    kind: 'bike',
-    name: { ar: 'دراجات هجين', en: 'Hybrid bikes' },
-    short: { ar: 'الأكثر استخدامًا يوميًا', en: 'Best all-rounder' },
-    description: {
-      ar: 'الاختيار الأنسب للاستخدام اليومي داخل المدن: جلسة مريحة، سرعة كويسة، وتحمّل للشوارع.',
-      en: 'The best pick for daily city riding: comfortable posture, decent speed and street-ready durability.',
-    },
-    icon: 'hybrid',
-  },
-  {
-    slug: 'road',
-    kind: 'bike',
-    name: { ar: 'دراجات طريق (سباق)', en: 'Road bikes' },
-    short: { ar: 'للسرعة والمسافات', en: 'Speed and distance' },
-    description: {
-      ar: 'دراجات خفيفة بإطارات رفيعة ومقود منحني، للسرعة والمسافات الطويلة على الأسفلت.',
-      en: 'Light bikes with narrow tyres and drop bars, for speed and long asphalt rides.',
-    },
-    icon: 'road',
-  },
-  {
     slug: 'city',
     kind: 'bike',
     name: { ar: 'دراجات مدينة وسيدات', en: 'City & women’s bikes' },
@@ -61,35 +39,13 @@ export const CATEGORIES = [
   {
     slug: 'bmx',
     kind: 'bike',
-    name: { ar: 'دراجات BMX وحركات', en: 'BMX & freestyle' },
-    short: { ar: 'للحركات والقفز', en: 'Tricks and jumps' },
+    name: { ar: 'دراجات برامج و BMX', en: 'Programme & BMX bikes' },
+    short: { ar: 'الشكل اللي الولاد بيطلبوه', en: 'The look kids ask for' },
     description: {
-      ar: 'شاسيه قوي وجنط ٢٠ بوصة، مخصوص للحركات والقفز وركوب الشباب.',
-      en: 'Strong frames and 20-inch wheels, made for tricks, jumps and street riding.',
+      ar: 'شاسيه واطي وجدون مرتفع وكرسي خلفي عريض، بجنط ٢٠ و٢٤ بوصة — اللي السوق بيسميه «برامج».',
+      en: 'Low frames, raised bars and a long rear seat, on 20 and 24-inch wheels — what the market calls “programme” bikes.',
     },
     icon: 'bmx',
-  },
-  {
-    slug: 'folding',
-    kind: 'bike',
-    name: { ar: 'دراجات قابلة للطي', en: 'Folding bikes' },
-    short: { ar: 'للمواصلات والشقق الصغيرة', en: 'Commute and small flats' },
-    description: {
-      ar: 'بتتطوي في ثوانٍ وتتحط في شنطة العربية أو خلف باب الشقة — مثالية للمواصلات.',
-      en: 'Folds in seconds into a car boot or behind a door — ideal for commuting.',
-    },
-    icon: 'folding',
-  },
-  {
-    slug: 'electric',
-    kind: 'bike',
-    name: { ar: 'دراجات كهربائية', en: 'Electric bikes' },
-    short: { ar: 'مجهود أقل، مدى أطول', en: 'Less effort, more range' },
-    description: {
-      ar: 'موتور مساعد وبطارية ليثيوم، تقطع مسافات أطول بمجهود أقل — مناسبة للطرق الطويلة والعمل.',
-      en: 'Assist motor and lithium battery for longer distances with less effort — great for commuting.',
-    },
-    icon: 'electric',
   },
 ];
 

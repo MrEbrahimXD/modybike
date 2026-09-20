@@ -20,13 +20,13 @@ export const SITE = {
   basePath: new URL(siteUrl).pathname.replace(/\/+$/, ''),
 
   tagline: {
-    ar: 'دراجات وسكوتر وعربيات أطفال في أبو كبير، الشرقية',
-    en: 'Bikes, scooters and ride-on cars in Abu Kabir, Al Sharqia',
+    ar: 'دراجات أطفال وشباب وكبار — من ١٢ لـ ٢٦ بوصة',
+    en: 'Bikes for children, teens and adults — 12 to 26 inch',
   },
 
   description: {
-    ar: 'مودي بايك للدراجات ولعب الأطفال في أبو كبير، الشرقية. اختار حسب العمر: ٣–٥، ٥–٨، ٧–١٠، ٨–١٢، و١٢ سنة فأكثر. دراجات وسكوتر وعربيات ومشايات أطفال، وتواصل مباشر لمعرفة المتاح والأسعار.',
-    en: 'ModyBike for bicycles and children’s toys in Abu Kabir, Al Sharqia. Shop ages 3–5, 5–8, 7–10, 8–12 and 12+. Bikes, scooters, ride-on cars and walkers. Contact the shop for availability and prices.',
+    ar: 'مودي بايك للدراجات ولعب الأطفال. دراجات بمقاسات ١٢ و١٦ و٢٠ و٢٤ و٢٦ بوصة بأسعار معلنة — اختار حسب العمر: ٣–٥، ٥–٨، ٧–١٠، ٨–١٢، و١٢ سنة فأكثر، وتواصل معنا لمعرفة المتاح.',
+    en: 'ModyBike for bicycles and children’s toys. Bikes in 12, 16, 20, 24 and 26 inch with prices listed — shop by age: 3–5, 5–8, 7–10, 8–12 and 12+. Contact us to check what is in stock.',
   },
 
   /* ---------------------------------------------------------------- CONTACT */
@@ -107,8 +107,8 @@ export const SITE = {
     facebookDomainVerification: '',
   },
 
-  /** علامة للمحتوى المؤقت — خليها true لحد ما العميل يبعت البيانات الحقيقية */
-  isPlaceholderContent: true,
+  /** علامة للمحتوى المؤقت — اتقفلت بعد ما وصلت بيانات الدراجات الحقيقية (٢٠ سبتمبر ٢٠٢٦) */
+  isPlaceholderContent: false,
 };
 
 /** رقم الواتساب جاهز للاستخدام في لينك wa.me */

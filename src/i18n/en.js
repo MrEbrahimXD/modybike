@@ -61,13 +61,12 @@ export default {
   },
 
   home: {
-    heroEyebrow: 'Bicycle showroom in Al Sharqia',
+    heroEyebrow: 'A bicycle showroom for every age',
     heroTitle: "Every age. A new adventure.",
-    heroSubtitle:
-      "ModyBike for bicycles and children’s toys in Abu Kabir, Al Sharqia. Bikes, scooters and ride-on cars — browse by age and type, and ask us what is available.",
+    heroSubtitle: "ModyBike — from their very first bike to your everyday ride.",
     heroCtaPrimary: "Explore the collections",
     heroCtaSecondary: 'Find your size',
-    heroStat1: "Illustrative models",
+    heroStat1: "Models in the catalogue",
     heroStat2: 'districts covered',
     heroStat3: "Age groups",
     categoriesTitle: 'Choose a bike type',
@@ -165,6 +164,10 @@ export default {
     inStockOnly: 'In stock only',
     clearFilters: 'Clear all filters',
     showingResults: 'Showing {count} of {total} products',
+    /* Short forms for the one-line summary on a product tile, where the full
+       label does not fit. The long names stay in the spec table. */
+    gearCount: '{count} speeds',
+    singleSpeed: 'Single speed',
   },
 
   material: {
@@ -173,6 +176,16 @@ export default {
     carbon: 'Carbon fibre',
     plastic: 'Reinforced plastic',
   },
+  brakesShort: {
+    'disc-hydraulic': 'Hydraulic disc',
+    'disc-mech': 'Disc',
+    'v-brake': 'V-brake',
+    caliper: 'Caliper',
+    coaster: 'Coaster',
+    'v-brake+coaster': 'V-brake + coaster',
+    none: 'No brakes',
+  },
+
   brakes: {
     'disc-hydraulic': 'Hydraulic disc',
     'disc-mech': 'Mechanical disc',

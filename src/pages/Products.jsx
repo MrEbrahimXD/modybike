@@ -152,7 +152,7 @@ export default function Products({ variant }) {
     <>
       <Seo
         lang={lang}
-        title={`${title} — ${lang === 'ar' ? 'مودي بايك أبو كبير' : 'ModyBike Abu Kabir'}`}
+        title={`${title} — ${lang === 'ar' ? 'مودي بايك' : 'ModyBike'}`}
         description={lede}
         canonicalPath={canonicalPath}
         noindex={sp.size > 0}
@@ -166,7 +166,7 @@ export default function Products({ variant }) {
       />
 
       <PageHeader
-        eyebrow={lang === 'ar' ? 'مودي بايك · أبو كبير، الشرقية' : 'ModyBike · Abu Kabir, Al Sharqia'}
+        eyebrow={lang === 'ar' ? 'مودي بايك · كتالوج الدراجات' : 'ModyBike · Bike catalogue'}
         title={title}
         lede={lede}
         image={isAccessories || (typeCollection && typeSlug !== 'bikes') ? editorialImage('hero-shop-in') : editorialImage('hero-range')}

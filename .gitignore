@@ -8,3 +8,13 @@ dist
 !.env.example
 .vite
 npm-debug.log*
+
+# Supplier material dropped in the project root while building the catalogue —
+# the shop's own WhatsApp export and the raw photos it came with. The cropped,
+# web-ready versions live in assets-src/ and public/images/ and are committed.
+/products/
+/Claude outputs/
+/wa_ahmed_shalaby/
+*.jpeg
+!assets-src/**/*.jpeg
+whatsapp_*.zip

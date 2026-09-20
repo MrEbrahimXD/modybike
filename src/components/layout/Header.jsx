@@ -300,7 +300,7 @@ export default function Header() {
         onMouseLeave={() => setMenuOpen(false)}
       >
         <div className="container-page">
-          <div className="flex h-[68px] items-center justify-between gap-6">
+          <div className="flex h-[68px] items-center justify-between gap-4 xl:gap-6">
             <Link to={path(paths.home())} aria-label={t('common.brand')} className="shrink-0">
               <Logo />
             </Link>
@@ -310,14 +310,14 @@ export default function Header() {
                 dark orange that reads well on paper disappears into a bright
                 sky when the bar is transparent over the hero. */}
             <nav aria-label={t('nav.mainNav')} className="hidden lg:block">
-              <ul className="flex items-center gap-8">
+              <ul className="flex items-center gap-5 xl:gap-8">
                 <li>
                   <button
                     type="button"
                     onMouseEnter={() => setMenuOpen(true)}
                     onClick={() => setMenuOpen((v) => !v)}
                     aria-expanded={menuOpen}
-                    className={`label flex items-center gap-1.5 py-2 transition-opacity hover:opacity-60 ${
+                    className={`label flex items-center gap-1.5 whitespace-nowrap py-2 transition-opacity hover:opacity-60 ${
                       menuOpen ? currentAccent : ''
                     }`}
                   >
@@ -334,7 +334,7 @@ export default function Header() {
                       to={path(l.to)}
                       onMouseEnter={() => setMenuOpen(false)}
                       className={({ isActive }) =>
-                        `label py-2 transition-opacity hover:opacity-60 ${isActive ? currentAccent : ''}`
+                        `label whitespace-nowrap py-2 transition-opacity hover:opacity-60 ${isActive ? currentAccent : ''}`
                       }
                     >
                       {l.label}
@@ -345,7 +345,7 @@ export default function Header() {
             </nav>
 
             {/* ------------------------------------------------------- actions */}
-            <div className="flex items-center gap-1">
+            <div className="flex shrink-0 items-center gap-1">
               {/* A magnifier on its own is only obvious to people who already
                   know the convention. On anything wider than a phone this looks
                   like the search box it opens, and says what it searches. */}
@@ -353,7 +353,7 @@ export default function Header() {
                 type="button"
                 onClick={() => setSearchOpen(true)}
                 aria-label={t('common.search')}
-                className={`me-2 hidden h-10 items-center gap-2.5 border ps-3 pe-14 text-start text-sm transition-colors md:flex ${
+                className={`me-2 hidden h-10 shrink-0 items-center gap-2.5 border ps-3 pe-6 text-start text-sm transition-colors md:flex xl:pe-14 ${
                   overHero
                     ? 'border-white/40 text-white/75 hover:border-white hover:text-white'
                     : 'rule text-carbon-500 hover:border-carbon-950 hover:text-carbon-900 dark:text-carbon-400 dark:hover:border-carbon-300 dark:hover:text-carbon-100'
@@ -413,9 +413,13 @@ export default function Header() {
                 variant="whatsapp"
                 size="md"
                 icon="whatsapp"
-                className="ms-2 hidden lg:inline-flex"
+                aria-label={lang === 'ar' ? 'واتساب' : 'WhatsApp'}
+                className="ms-2 hidden !px-3.5 lg:inline-flex xl:!px-6"
               >
-                {lang === 'ar' ? 'واتساب' : 'WhatsApp'}
+                {/* Between lg and xl the bar is only just wide enough for the
+                    nav, so the button drops to its icon rather than pushing
+                    the links into a second line. */}
+                <span className="hidden xl:inline">{lang === 'ar' ? 'واتساب' : 'WhatsApp'}</span>
               </Button>
 
               <button

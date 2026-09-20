@@ -17,15 +17,22 @@ import { isAccessory } from '../../data/products.js';
    the name and the quick-add that slides in over the image on hover.
    ========================================================================== */
 
-/** The one-line spec summary that makes a tile feel like a real bike listing. */
+/**
+ * The one-line spec summary that makes a tile feel like a real bike listing.
+ *
+ * Three short tokens, not four long ones. The full brake name ("فرامل قرصية
+ * ميكانيكية") and the frame material ran past the tile and got cut off by an
+ * ellipsis, and the material reads the same on every bike in the shop, so it
+ * told a browsing customer nothing. Wheel size, brake type and gear count are
+ * what actually separates one listing from the next.
+ */
 function specLine(product, t) {
   if (isAccessory(product)) return null;
   const s = product.specs || {};
   const bits = [
     s.wheelSize ? `${s.wheelSize}"` : null,
-    s.gears ? `${s.gears}${s.gears > 1 ? 'v' : 'sp'}` : null,
-    s.brakes ? t(`brakes.${s.brakes}`) : null,
-    s.frameMaterial ? t(`material.${s.frameMaterial}`) : null,
+    s.brakes ? t(`brakesShort.${s.brakes}`) : null,
+    s.gears ? (s.gears > 1 ? t('product.gearCount', { count: s.gears }) : t('product.singleSpeed')) : null,
   ].filter(Boolean);
   return bits.join(' · ');
 }
@@ -92,7 +99,7 @@ export default function ProductCard({ product, priority = false, sizes, classNam
       </Link>
 
       <div className="mt-4 flex flex-1 flex-col border-t pt-4 rule">
-        {spec ? <p className="spec mb-2 truncate muted">{spec}</p> : null}
+        {spec ? <p className="spec mb-2 muted">{spec}</p> : null}
 
         <h3 className="text-base font-bold leading-snug">
           {/* stretched link: the whole card is clickable, one tab stop */}

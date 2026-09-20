@@ -1,26 +1,11 @@
 /* ============================================================================
  *  Media manifest — GENERATED. لا تعدّله بإيدك | do not hand-edit.
  * ============================================================================
- *  كل صور الموقع بتتقرا من هنا.
+ *  حط صورك في  assets-src/<group>/<slug>.jpg  وشغّل  npm run images
+ *  المصادر والتراخيص للصور المؤقتة في /public/images/CREDITS.json
  *
- *  ⚠️ الصور الحالية مؤقتة (Placeholder) — صور حقيقية لدراجات بترخيص
- *     CC0 / Public Domain، يعني مفيش أي التزام قانوني، لكنها مش صور بضاعتك.
- *     المصادر والتراخيص كلها متسجلة في /public/images/CREDITS.json
- *
- *  إزاي تحط صورك الحقيقية:
- *    ١) حط الصور في مجلد  assets-src/  بأسماء الـ slug:
- *         assets-src/products/rock-26.jpg      (الصورة الأساسية)
- *         assets-src/products/rock-26-2.jpg    (صورة إضافية)
- *         assets-src/categories/mountain.jpg
- *         assets-src/journal/tyre-pressure-guide.jpg
- *         assets-src/editorial/hero-primary.jpg
- *    ٢) شغّل:  npm run images
- *    الاسكريبت هيعمل كل المقاسات + WebP + صورة الـ blur تلقائيًا،
- *    وهيحدّث الملف ده. الصور اللي مش هتبعتها هتفضل زي ما هي.
- *
- *  Placeholder imagery — CC0 / public domain only. Drop your own photographs
- *  into assets-src/<group>/<slug>.jpg and run `npm run images` to replace them;
- *  anything you do not supply is left untouched.
+ *  Drop your own photographs into assets-src/<group>/<slug>.jpg and run
+ *  `npm run images`. Anything you do not supply is left untouched.
  * ========================================================================== */
 
 export const MEDIA = {
@@ -189,528 +174,6 @@ export const MEDIA = {
     }
   },
   "products": {
-    "first-ride-12": [
-      {
-        "src": "/images/products/first-ride-12-1200.webp",
-        "srcset": "/images/products/first-ride-12-400.webp 400w, /images/products/first-ride-12-760.webp 760w, /images/products/first-ride-12-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADwAQCdASoOAAsABIB0JZwAAv6t8zbdsAAA/jGLpRh9kFcd/9oPPvTwYIg3c21K5+k0AhAFMLzoSsxgAAA="
-      },
-      {
-        "src": "/images/products/first-ride-12-2-1200.webp",
-        "srcset": "/images/products/first-ride-12-2-400.webp 400w, /images/products/first-ride-12-2-760.webp 760w, /images/products/first-ride-12-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoOAAsABIB0JQBdgCHbHf6VgADh/NU3rZ+uwgF7eOuFgper1+0/bzfxCGmsrNVgut6lb3+gSejWGkAA"
-      }
-    ],
-    "mini-racer-14": [
-      {
-        "src": "/images/products/mini-racer-14-1200.webp",
-        "srcset": "/images/products/mini-racer-14-400.webp 400w, /images/products/mini-racer-14-760.webp 760w, /images/products/mini-racer-14-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoOAAsABIB0JQBdgCHbHf6VgADh/NU3rZ+uwgF7eOuFgper1+0/bzfxCGmsrNVgut6lb3+gSejWGkAA"
-      },
-      {
-        "src": "/images/products/mini-racer-14-2-1200.webp",
-        "srcset": "/images/products/mini-racer-14-2-400.webp 400w, /images/products/mini-racer-14-2-760.webp 760w, /images/products/mini-racer-14-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoOAAsABIB0JQBOgCP6oHA6AAAA/ud2D0DGRoSf6wlLy52GT7Ab8SbrZ+QJ9ta3JGk9pZgVL4re7S6SgapLQOAAAAA="
-      }
-    ],
-    "junior-sport-16": [
-      {
-        "src": "/images/products/junior-sport-16-1200.webp",
-        "srcset": "/images/products/junior-sport-16-400.webp 400w, /images/products/junior-sport-16-760.webp 760w, /images/products/junior-sport-16-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoOAAsABIB0JQBOgCP6oHA6AAAA/ud2D0DGRoSf6wlLy52GT7Ab8SbrZ+QJ9ta3JGk9pZgVL4re7S6SgapLQOAAAAA="
-      },
-      {
-        "src": "/images/products/junior-sport-16-2-1200.webp",
-        "srcset": "/images/products/junior-sport-16-2-400.webp 400w, /images/products/junior-sport-16-2-760.webp 760w, /images/products/junior-sport-16-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAACwAQCdASoOAAsABIB0JZQAAxZeEkqAAP7u5kfikg4GnXodpOU0c76mia7TwmpwVDJHwRQ2qiTo2NjgAAA="
-      }
-    ],
-    "bloom-16": [
-      {
-        "src": "/images/products/bloom-16-1200.webp",
-        "srcset": "/images/products/bloom-16-400.webp 400w, /images/products/bloom-16-760.webp 760w, /images/products/bloom-16-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADwAQCdASoOAAsABIB0JZQC06DdYX5hEcAA/uFQTxxJo4X0PndC6F0WBfoRY/19QZ8MF3L4bzGfGfzweeI52B6x8CPi4vuDNugAAA=="
-      },
-      {
-        "src": "/images/products/bloom-16-2-1200.webp",
-        "srcset": "/images/products/bloom-16-2-400.webp 400w, /images/products/bloom-16-2-760.webp 760w, /images/products/bloom-16-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADQAQCdASoOAAsABIB0JZwAAi1Hsj3CIAD+t0tF/AyHPcEEux7W++ZlBnMUfA6oyYPMKhYShufvzZxFU3i85dOOioh3B1+ZkrYAAA=="
-      }
-    ],
-    "adventure-20": [
-      {
-        "src": "/images/products/adventure-20-1200.webp",
-        "srcset": "/images/products/adventure-20-400.webp 400w, /images/products/adventure-20-760.webp 760w, /images/products/adventure-20-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADQAQCdASoOAAsABIB0JZQAAfQNJWn+8AD+05ucdRidgYZppTOST89LVeuXfs+Z+QlG7jh0cR5yClwwl3WAAA=="
-      },
-      {
-        "src": "/images/products/adventure-20-2-1200.webp",
-        "srcset": "/images/products/adventure-20-2-400.webp 400w, /images/products/adventure-20-2-760.webp 760w, /images/products/adventure-20-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAQCdASoOAAsABIB0JYwC7ADak6oMkAD5SK1kvvD95LAmeaMceKGLdubfFhWs3RA6dnaj1LNBJ+pvTxRo+YFzwhOBnRYx7r/WBAIxx3wdkb7JAAA="
-      }
-    ],
-    "teen-trail-24": [
-      {
-        "src": "/images/products/teen-trail-24-1200.webp",
-        "srcset": "/images/products/teen-trail-24-400.webp 400w, /images/products/teen-trail-24-760.webp 760w, /images/products/teen-trail-24-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAwAgCdASoOAAsABIB0JZQC7ADhhaqyvHoXAAD+Xv6Q/9hnAkUGkB4xN698DaXOkNDOAyK6dmWaR5wvhpL7byp5undRDAX9CvtD9LnMFQ+mn+eqgAA="
-      },
-      {
-        "src": "/images/products/teen-trail-24-2-1200.webp",
-        "srcset": "/images/products/teen-trail-24-2-400.webp 400w, /images/products/teen-trail-24-2-760.webp 760w, /images/products/teen-trail-24-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoOAAsABIB0JZACdAEWy3+AegAA/qX+BV0/vGDrPUn0aPGBEumfWldqDi4QDeJVm0onJcGaeTEyi5pXZuurHkDMrVwDoAAA"
-      }
-    ],
-    "balance-12": [
-      {
-        "src": "/images/products/balance-12-1200.webp",
-        "srcset": "/images/products/balance-12-400.webp 400w, /images/products/balance-12-760.webp 760w, /images/products/balance-12-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAACwAQCdASoOAAsABIB0JYwCw7Eec4UoAMp7cSTYk2b5/2Jmm4rAynO40IqPjylujgAAAA=="
-      },
-      {
-        "src": "/images/products/balance-12-2-1200.webp",
-        "srcset": "/images/products/balance-12-2-400.webp 400w, /images/products/balance-12-2-760.webp 760w, /images/products/balance-12-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADQAQCdASoOAAsABIB0JZwAAltbV1ZiAAD+q5kxe+uSzCKRvurcL3BTiJvUfFRY+efs1/EAALkU9nq0R6j+VLnJbEX+X+LvcpZdIAAA"
-      }
-    ],
-    "rock-26": [
-      {
-        "src": "/images/products/rock-26-1200.webp",
-        "srcset": "/images/products/rock-26-400.webp 400w, /images/products/rock-26-760.webp 760w, /images/products/rock-26-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoOAAsABIB0JbACdGuAASaMAFAA/tclyeL41xZ+PS2AOXO+ER93n16ZQGrohLka2VJ+VH+M+YxQVr9mxO7VPC+lspfh5oAA"
-      },
-      {
-        "src": "/images/products/rock-26-2-1200.webp",
-        "srcset": "/images/products/rock-26-2-400.webp 400w, /images/products/rock-26-2-760.webp 760w, /images/products/rock-26-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoOAAsABIB0JbACdAEUruzIAAD+wGa2k6f7coh1UcJSEKCfVhGHp6cJDMoLFrYVVtQrPheIVJQYAAAA"
-      }
-    ],
-    "summit-26-disc": [
-      {
-        "src": "/images/products/summit-26-disc-1200.webp",
-        "srcset": "/images/products/summit-26-disc-400.webp 400w, /images/products/summit-26-disc-760.webp 760w, /images/products/summit-26-disc-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAAAQAgCdASoOAAsABIB0JQBOgB9lfprqLqd0AP6Rc0fE54JqeytHcggbARJtfpQ43fRQrCr47tM72Q7PdBNgAA=="
-      },
-      {
-        "src": "/images/products/summit-26-disc-2-1200.webp",
-        "srcset": "/images/products/summit-26-disc-2-400.webp 400w, /images/products/summit-26-disc-2-760.webp 760w, /images/products/summit-26-disc-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAAAQAgCdASoOAAsABIB0JYgCdAD5jcJ8CJcAAPzLkyR87rVMo5n7V1wi3PJDKPXRWI0odb3KdA26kvWdkEeCeDxoAAA="
-      }
-    ],
-    "trail-master-275": [
-      {
-        "src": "/images/products/trail-master-275-1200.webp",
-        "srcset": "/images/products/trail-master-275-400.webp 400w, /images/products/trail-master-275-760.webp 760w, /images/products/trail-master-275-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACwAQCdASoOAAsABIB0JbACdAEHJyJAAP6+d+I9MRBOpJis3QzwQgucD5uMmpZnyMPctCx5hgY5fAvOGKXSpYxWJwAAAA=="
-      },
-      {
-        "src": "/images/products/trail-master-275-2-1200.webp",
-        "srcset": "/images/products/trail-master-275-2-400.webp 400w, /images/products/trail-master-275-2-760.webp 760w, /images/products/trail-master-275-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoOAAsABIB0JQBOgCPOrpqq1OgA/rYWH8IBEOv0XtYYYzjrCengz6DDKAORqFHUkjUd4I3tmUE8KEOAAAA="
-      }
-    ],
-    "apex-29-hydraulic": [
-      {
-        "src": "/images/products/apex-29-hydraulic-1200.webp",
-        "srcset": "/images/products/apex-29-hydraulic-400.webp 400w, /images/products/apex-29-hydraulic-760.webp 760w, /images/products/apex-29-hydraulic-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoOAAsABIB0JbACdAEUruzIAAD+wGa2k6f7coh1UcJSEKCfVhGHp6cJDMoLFrYVVtQrPheIVJQYAAAA"
-      },
-      {
-        "src": "/images/products/apex-29-hydraulic-2-1200.webp",
-        "srcset": "/images/products/apex-29-hydraulic-2-400.webp 400w, /images/products/apex-29-hydraulic-2-760.webp 760w, /images/products/apex-29-hydraulic-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADQAQCdASoOAAsABIB0JQBOgBo93FDgAAD93dtFgb5yAmx/OckGHcPGXa08S8IB+NmlSsMBjX7u/dJs7NA1/CScDBAAAA=="
-      }
-    ],
-    "dual-shock-26": [
-      {
-        "src": "/images/products/dual-shock-26-1200.webp",
-        "srcset": "/images/products/dual-shock-26-400.webp 400w, /images/products/dual-shock-26-760.webp 760w, /images/products/dual-shock-26-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAAAQAgCdASoOAAsABIB0JYgCdAD5jcJ8CJcAAPzLkyR87rVMo5n7V1wi3PJDKPXRWI0odb3KdA26kvWdkEeCeDxoAAA="
-      },
-      {
-        "src": "/images/products/dual-shock-26-2-1200.webp",
-        "srcset": "/images/products/dual-shock-26-2-400.webp 400w, /images/products/dual-shock-26-2-760.webp 760w, /images/products/dual-shock-26-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAwAgCdASoOAAsABIB0JagCdAEQCu5Wz20hEAD8j8mZ2LmPOLH5F1b9aGf5btWOMDs5Z6tWRj9vaQqwHEY3P9mNMygQo9PbQAA="
-      }
-    ],
-    "lady-trail-26": [
-      {
-        "src": "/images/products/lady-trail-26-1200.webp",
-        "srcset": "/images/products/lady-trail-26-400.webp 400w, /images/products/lady-trail-26-760.webp 760w, /images/products/lady-trail-26-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADQAQCdASoOAAsABIB0JQBOgBo93FDgAAD93dtFgb5yAmx/OckGHcPGXa08S8IB+NmlSsMBjX7u/dJs7NA1/CScDBAAAA=="
-      },
-      {
-        "src": "/images/products/lady-trail-26-2-1200.webp",
-        "srcset": "/images/products/lady-trail-26-2-400.webp 400w, /images/products/lady-trail-26-2-760.webp 760w, /images/products/lady-trail-26-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAwAgCdASoOAAsABIB0JagCdAEQCu5Wz20hEAD8j8mZ2LmPOLH5F1b9aGf5btWOMDs5Z6tWRj9vaQqwHEY3P9mNMygQo9PbQAA="
-      }
-    ],
-    "carbon-elite-29": [
-      {
-        "src": "/images/products/carbon-elite-29-1200.webp",
-        "srcset": "/images/products/carbon-elite-29-400.webp 400w, /images/products/carbon-elite-29-760.webp 760w, /images/products/carbon-elite-29-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADQAQCdASoOAAsABIB0JQBdgB8vpgsHjgD9rk6AIFI5Ui+XZ3gCOTNpyjsXAV63AtFuXUyDkEpBqU0WbWWHVDxmK16fquEAXfS5kAAA"
-      },
-      {
-        "src": "/images/products/carbon-elite-29-2-1200.webp",
-        "srcset": "/images/products/carbon-elite-29-2-400.webp 400w, /images/products/carbon-elite-29-2-760.webp 760w, /images/products/carbon-elite-29-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAACQAQCdASoOAAsABIB0JQAAVCtrdaAAyUUToRFJN9N6RlcRgl4mrMAe/OV7HRAGQ4v1d68/0DwAAA=="
-      }
-    ],
-    "daily-26": [
-      {
-        "src": "/images/products/daily-26-1200.webp",
-        "srcset": "/images/products/daily-26-400.webp 400w, /images/products/daily-26-760.webp 760w, /images/products/daily-26-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoOAAsABIB0JZACdADyAFuNVbQAAMyBdwFTDkPyvwhAnOiWGmfk6z6I+E+sUxksmf0jPJVG1u+l5BUBe8DDKMAA"
-      },
-      {
-        "src": "/images/products/daily-26-2-1200.webp",
-        "srcset": "/images/products/daily-26-2-400.webp 400w, /images/products/daily-26-2-760.webp 760w, /images/products/daily-26-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoOAAsABIB0JQBOgB583Sym3QAA/kEiDLDSnVX8uqdTmiZby8s4I7JEjqPP6dwbV31PK6CVrA4dNjcdM2gVujWAAAA="
-      }
-    ],
-    "commuter-700": [
-      {
-        "src": "/images/products/commuter-700-1200.webp",
-        "srcset": "/images/products/commuter-700-400.webp 400w, /images/products/commuter-700-760.webp 760w, /images/products/commuter-700-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoOAAsABIB0JQBOgB583Sym3QAA/kEiDLDSnVX8uqdTmiZby8s4I7JEjqPP6dwbV31PK6CVrA4dNjcdM2gVujWAAAA="
-      },
-      {
-        "src": "/images/products/commuter-700-2-1200.webp",
-        "srcset": "/images/products/commuter-700-2-400.webp 400w, /images/products/commuter-700-2-760.webp 760w, /images/products/commuter-700-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAACQAQCdASoOAAsABIB0JZwAAucMboAA/uqOoXF6RWK1BmHOvMvz3oouwA2F+v9m/9njgkIehhAAAA=="
-      }
-    ],
-    "comfort-plus-26": [
-      {
-        "src": "/images/products/comfort-plus-26-1200.webp",
-        "srcset": "/images/products/comfort-plus-26-400.webp 400w, /images/products/comfort-plus-26-760.webp 760w, /images/products/comfort-plus-26-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAwAgCdASoOAAsABIB0JagCdAEQCu5Wz20hEAD8j8mZ2LmPOLH5F1b9aGf5btWOMDs5Z6tWRj9vaQqwHEY3P9mNMygQo9PbQAA="
-      },
-      {
-        "src": "/images/products/comfort-plus-26-2-1200.webp",
-        "srcset": "/images/products/comfort-plus-26-2-400.webp 400w, /images/products/comfort-plus-26-2-760.webp 760w, /images/products/comfort-plus-26-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADQAQCdASoOAAsABIB0JZQAAxZajidAAAD8hPuM/O8XRxO+wuEC0mEPQYHqEWr3LlK4ugAA"
-      }
-    ],
-    "sport-fitness-700": [
-      {
-        "src": "/images/products/sport-fitness-700-1200.webp",
-        "srcset": "/images/products/sport-fitness-700-400.webp 400w, /images/products/sport-fitness-700-760.webp 760w, /images/products/sport-fitness-700-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAACQAQCdASoOAAsABIB0JZwAAucMboAA/uqOoXF6RWK1BmHOvMvz3oouwA2F+v9m/9njgkIehhAAAA=="
-      },
-      {
-        "src": "/images/products/sport-fitness-700-2-1200.webp",
-        "srcset": "/images/products/sport-fitness-700-2-400.webp 400w, /images/products/sport-fitness-700-2-760.webp 760w, /images/products/sport-fitness-700-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADwAQCdASoOAAsABIB0JZQAAxZLdN8qe4AA/ug+9bxjQurmjUJmX1VOVdHmib3/5TKF+9qsF8k8CQ7I9aWgoAAA"
-      }
-    ],
-    "velocity-alloy": [
-      {
-        "src": "/images/products/velocity-alloy-1200.webp",
-        "srcset": "/images/products/velocity-alloy-400.webp 400w, /images/products/velocity-alloy-760.webp 760w, /images/products/velocity-alloy-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAAAwAgCdASoOAAsABIB0JZQCdAEPAFzFHhWeAAD+4vUjM4UuM9aQiBTM1/k60qaOJCHoGyuAAAA="
-      },
-      {
-        "src": "/images/products/velocity-alloy-2-1200.webp",
-        "srcset": "/images/products/velocity-alloy-2-400.webp 400w, /images/products/velocity-alloy-2-760.webp 760w, /images/products/velocity-alloy-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADQAQCdASoOAAsABIB0JQBYdhMdN3z0gAD1h99gQBjgrTAjxMlz4DXAhZsL9gjc4Z/qV871SHLz4p9foN5wpiFXbe4d9KUy/A31AAAA"
-      }
-    ],
-    "aero-carbon-pro": [
-      {
-        "src": "/images/products/aero-carbon-pro-1200.webp",
-        "srcset": "/images/products/aero-carbon-pro-400.webp 400w, /images/products/aero-carbon-pro-760.webp 760w, /images/products/aero-carbon-pro-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADQAQCdASoOAAsABIB0JZQAAuhcqGNIAAD+tfZcKFuORmahYizhQAi2z6qiH7C1JiYJppRjpdPeaWz5F2NuU9TjwiT8BCAA"
-      },
-      {
-        "src": "/images/products/aero-carbon-pro-2-1200.webp",
-        "srcset": "/images/products/aero-carbon-pro-2-400.webp 400w, /images/products/aero-carbon-pro-2-760.webp 760w, /images/products/aero-carbon-pro-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAACwAQCdASoOAAsABIB0JYwCdAB6RbgAAP7SNgm6Ch0piI2UTwLH2H9nJCABuqsC+dmth3tVWCt9e7ysj5G1AAAA"
-      }
-    ],
-    "gravel-explorer": [
-      {
-        "src": "/images/products/gravel-explorer-1200.webp",
-        "srcset": "/images/products/gravel-explorer-400.webp 400w, /images/products/gravel-explorer-760.webp 760w, /images/products/gravel-explorer-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoOAAsABIB0JQBOgCFZpr1Cv9QAAP38+9bLVjv3LPKdD/7DzTGRQZCpF5YQFcZhJZ9ApuKCXiVni1IfjbbC62JyQD2Vew6jFgCRVAAA"
-      },
-      {
-        "src": "/images/products/gravel-explorer-2-1200.webp",
-        "srcset": "/images/products/gravel-explorer-2-400.webp 400w, /images/products/gravel-explorer-2-760.webp 760w, /images/products/gravel-explorer-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAAAQAgCdASoOAAsABIB0JZgCdAEQ4qO1ebAAAPi2S+QU1EGwL3yLEdnfGBg0bxzX8VWDBhsVYPM+0fljySAIYfJf82AAAA=="
-      }
-    ],
-    "classic-lady-26": [
-      {
-        "src": "/images/products/classic-lady-26-1200.webp",
-        "srcset": "/images/products/classic-lady-26-400.webp 400w, /images/products/classic-lady-26-760.webp 760w, /images/products/classic-lady-26-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAQCdASoOAAsABIB0JbACdAC97KvIzAD+hfNmiHwr11z2SOKk9+yiUdmzHFUL0bV2SKkenc90VnsqJ2cuHcIZkwm1fm9lFC3ilUmXDOTQAAAA"
-      },
-      {
-        "src": "/images/products/classic-lady-26-2-1200.webp",
-        "srcset": "/images/products/classic-lady-26-2-400.webp 400w, /images/products/classic-lady-26-2-760.webp 760w, /images/products/classic-lady-26-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADwAQCdASoOAAsABIB0JZAAAxSg/c1GsAAA+/QO5IzD5k7qI9bsq3fE9b4GZqktH4jXXY5TBoEBq+RxSnY3c4QA"
-      }
-    ],
-    "dutch-cruiser-28": [
-      {
-        "src": "/images/products/dutch-cruiser-28-1200.webp",
-        "srcset": "/images/products/dutch-cruiser-28-400.webp 400w, /images/products/dutch-cruiser-28-760.webp 760w, /images/products/dutch-cruiser-28-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADQAQCdASoOAAsABIB0JZwAAveAtyEoAAD940Pw7/urd9iGD0a88f7o6YneaDeowdCgAA=="
-      },
-      {
-        "src": "/images/products/dutch-cruiser-28-2-1200.webp",
-        "srcset": "/images/products/dutch-cruiser-28-2-400.webp 400w, /images/products/dutch-cruiser-28-2-760.webp 760w, /images/products/dutch-cruiser-28-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoOAAsABIB0JZQC7ADTAAD+5CpuMrELj5JBPuXO95OaaQWNTomp9GAA"
-      }
-    ],
-    "vintage-cruiser-26": [
-      {
-        "src": "/images/products/vintage-cruiser-26-1200.webp",
-        "srcset": "/images/products/vintage-cruiser-26-400.webp 400w, /images/products/vintage-cruiser-26-760.webp 760w, /images/products/vintage-cruiser-26-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADwAQCdASoOAAsABIB0JZAAAxSg/c1GsAAA+/QO5IzD5k7qI9bsq3fE9b4GZqktH4jXXY5TBoEBq+RxSnY3c4QA"
-      },
-      {
-        "src": "/images/products/vintage-cruiser-26-2-1200.webp",
-        "srcset": "/images/products/vintage-cruiser-26-2-400.webp 400w, /images/products/vintage-cruiser-26-2-760.webp 760w, /images/products/vintage-cruiser-26-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoOAAsABIB0JZwAAsfvfkeZxAAA/uXoA7Y4wW04EjnSresNHQLVDN+PM9SiP0AA"
-      }
-    ],
-    "street-20": [
-      {
-        "src": "/images/products/street-20-1200.webp",
-        "srcset": "/images/products/street-20-400.webp 400w, /images/products/street-20-760.webp 760w, /images/products/street-20-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADQAQCdASoOAAsABIB0JYwC7AClDc7LgAD97Y8HSuAEfOvqsZiKWmPiIMBnG+x7iK2EAAAA"
-      },
-      {
-        "src": "/images/products/street-20-2-1200.webp",
-        "srcset": "/images/products/street-20-2-400.webp 400w, /images/products/street-20-2-760.webp 760w, /images/products/street-20-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoOAAsABIB0JYwCdADNCUwjWAAA/e8+2shlbd/41ypjbOOx5WjI26ZvH/QjVlMlsqmlXgroO4+pDJlgAAA="
-      }
-    ],
-    "freestyle-pro-20": [
-      {
-        "src": "/images/products/freestyle-pro-20-1200.webp",
-        "srcset": "/images/products/freestyle-pro-20-400.webp 400w, /images/products/freestyle-pro-20-760.webp 760w, /images/products/freestyle-pro-20-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAACwAQCdASoOAAsABIB0JZQC7ACU8ZQAAP4781PLgS/YFLCOnN+mNspvcu1RjzFVlfU6KCZIYAA="
-      },
-      {
-        "src": "/images/products/freestyle-pro-20-2-1200.webp",
-        "srcset": "/images/products/freestyle-pro-20-2-400.webp 400w, /images/products/freestyle-pro-20-2-760.webp 760w, /images/products/freestyle-pro-20-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoOAAsABIB0JYgC7AEe4ZrKebAAAP7HazrFm8/ZJARfEvCnbntUlveDxFF1tXWkgZjkZ8WBhlr9biCcibEgMxvpVYb+GR0SaAA="
-      }
-    ],
-    "compact-fold-20": [
-      {
-        "src": "/images/products/compact-fold-20-1200.webp",
-        "srcset": "/images/products/compact-fold-20-400.webp 400w, /images/products/compact-fold-20-760.webp 760w, /images/products/compact-fold-20-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQAgCdASoOAAsABIB0JQBdgCBSnUY7XAIAAM4nBJl7c2SlTyJKmf+HqnXLcdrf20hd78kT9fNebXdjMd2BW5A27cM0yg75+XRhIQAA"
-      },
-      {
-        "src": "/images/products/compact-fold-20-2-1200.webp",
-        "srcset": "/images/products/compact-fold-20-2-400.webp 400w, /images/products/compact-fold-20-2-760.webp 760w, /images/products/compact-fold-20-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoOAAsABIB0JQBdgCHbHf6VgADh/NU3rZ+uwgF7eOuFgper1+0/bzfxCGmsrNVgut6lb3+gSejWGkAA"
-      }
-    ],
-    "e-city-700": [
-      {
-        "src": "/images/products/e-city-700-1200.webp",
-        "srcset": "/images/products/e-city-700-400.webp 400w, /images/products/e-city-700-760.webp 760w, /images/products/e-city-700-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAQCdASoOAAsABIB0JagAAZ8u8OlAgADh/X7ocqOB00t8EhrcOdgleahrF181jfGb8dwp6is4iHQdkVxb/NHeURR7iTbw2xNoxAzV/yTbvAAA"
-      },
-      {
-        "src": "/images/products/e-city-700-2-1200.webp",
-        "srcset": "/images/products/e-city-700-2-400.webp 400w, /images/products/e-city-700-2-760.webp 760w, /images/products/e-city-700-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoOAAsABIB0JYgCdAEQFWAU5YAA/bWx5VR+G9145JR/nL8ArUGXRAdzNta8te8nZok46KwdB3i8dZmFAAA="
-      }
-    ],
-    "e-mtb-275": [
-      {
-        "src": "/images/products/e-mtb-275-1200.webp",
-        "srcset": "/images/products/e-mtb-275-400.webp 400w, /images/products/e-mtb-275-760.webp 760w, /images/products/e-mtb-275-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADwAQCdASoOAAsABIB0JZwAAttpKsjREAAAyjyURuKfXVAA1teRirbPKblbZi1vRpadJuanu/5RujuzbR0jpYAA"
-      },
-      {
-        "src": "/images/products/e-mtb-275-2-1200.webp",
-        "srcset": "/images/products/e-mtb-275-2-400.webp 400w, /images/products/e-mtb-275-2-760.webp 760w, /images/products/e-mtb-275-2-1200.webp 1200w",
-        "w": 1200,
-        "h": 900,
-        "ratio": 1.3333,
-        "lqip": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoOAAsABIB0JYgCdAEQFWAU5YAA/bWx5VR+G9145JR/nL8ArUGXRAdzNta8te8nZok46KwdB3i8dZmFAAA="
-      }
-    ],
     "light-set-basic": [
       {
         "src": "/images/products/light-set-basic-1200.webp",
@@ -989,6 +452,242 @@ export const MEDIA = {
         "h": 900,
         "ratio": 1.3333,
         "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAAAQAgCdASoOAAsABIB0JZwAAvqpMpLxxrgUAP7jf/1CmFhzUwJ0rETHpP2v3gYFIBUgcZtUgGJgPIVo9EDLgAAA"
+      }
+    ],
+    "alamin-26-400-fat": [
+      {
+        "src": "/images/products/alamin-26-400-fat-1200.webp",
+        "srcset": "/images/products/alamin-26-400-fat-400.webp 400w, /images/products/alamin-26-400-fat-760.webp 760w, /images/products/alamin-26-400-fat-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADwAQCdASoOAAsABIB0JQAB8cnFqLoxYaAA/us1aKwBcmytVPF9Nu8Y4E/wst4yVr9pPc5ZTLcHFVmujlUoPxlf2V3yHa8Yhc0WnOttaYEOm/IxeUOf3SjNjXthu3hiv9HAAA=="
+      }
+    ],
+    "alamin-26-mag": [
+      {
+        "src": "/images/products/alamin-26-mag-1200.webp",
+        "srcset": "/images/products/alamin-26-mag-400.webp 400w, /images/products/alamin-26-mag-760.webp 760w, /images/products/alamin-26-mag-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoOAAsABIB0JZwAD46tViAFW01AAP5U8Yrvb+PiQPHnjDZUiWm8WJ64zcBBmrY1NjB0GGlJXU8idikr8AGLpI6WbFIdXa2yocGvKkKAAAA="
+      }
+    ],
+    "alamir-26-mag": [
+      {
+        "src": "/images/products/alamir-26-mag-1200.webp",
+        "srcset": "/images/products/alamir-26-mag-400.webp 400w, /images/products/alamir-26-mag-760.webp 760w, /images/products/alamir-26-mag-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAQAgCdASoOAAsABIB0JQAB8XYDf4u+kmYAAP7wQYX6ZMD0VYZS8OdYMfmMRTwVVQIXZz+bhsPtenrq6uzuqOnYF8s21sLDtjmS5S7m9IntL6oSl5c831cmGZJWryTjr7sMikAA"
+      }
+    ],
+    "arizon-20-mag": [
+      {
+        "src": "/images/products/arizon-20-mag-1200.webp",
+        "srcset": "/images/products/arizon-20-mag-400.webp 400w, /images/products/arizon-20-mag-760.webp 760w, /images/products/arizon-20-mag-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADQAQCdASoOAAsABIB0JQBOgMX1UisSAAD+05tAeXKH5xGhMX11el2IvZWWwUP1VXQ8Bq+C6jSYJzMRVEGz3FBIlTxR3ifBUdPz/qFzG6juz5JU54AAAA=="
+      }
+    ],
+    "bmx-20-csk": [
+      {
+        "src": "/images/products/bmx-20-csk-1200.webp",
+        "srcset": "/images/products/bmx-20-csk-400.webp 400w, /images/products/bmx-20-csk-760.webp 760w, /images/products/bmx-20-csk-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAABQAgCdASoOAAsABIB0JaQAD43xaXnFM7+d6AAA/sb1lBj5RzBgZxAogUwNto8H+vdOhflePigxnyYqmyB5ZKniiey/vB919JXpgAAA"
+      },
+      {
+        "src": "/images/products/bmx-20-csk-2-1200.webp",
+        "srcset": "/images/products/bmx-20-csk-2-400.webp 400w, /images/products/bmx-20-csk-2-760.webp 760w, /images/products/bmx-20-csk-2-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoOAAsABIB0JZwAAxU2u6oplAAA/tXE9rMm6xZukRl+NtTVwmJgHTNP6UUm/kSTMRwFFPbFrIV2dXYiy0xfCHx7HLGMECgAAAA="
+      },
+      {
+        "src": "/images/products/bmx-20-csk-3-1200.webp",
+        "srcset": "/images/products/bmx-20-csk-3-400.webp 400w, /images/products/bmx-20-csk-3-760.webp 760w, /images/products/bmx-20-csk-3-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAACwAQCdASoOAAsABIB0JZwAD42GudeAAP7wQexbveCCj1895RnGZl23ngB8jHOiLL2cr9DfxcJLlrpxoiN3edJyVps/z9GeyvAiMpopL6iiW6RYUpShQAAA"
+      },
+      {
+        "src": "/images/products/bmx-20-csk-4-1200.webp",
+        "srcset": "/images/products/bmx-20-csk-4-400.webp 400w, /images/products/bmx-20-csk-4-760.webp 760w, /images/products/bmx-20-csk-4-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoOAAsABIB0JYwCdAEG+ViJ2vQAAP7EDyP8BPYGHHhAds5W/U9Xz0rphrEw2YWldeFCxIgLaoNXZX+2teBZsLWgeyuUz+fDAWhvFoUJr5oYagAA"
+      }
+    ],
+    "bmx-20-paris": [
+      {
+        "src": "/images/products/bmx-20-paris-1200.webp",
+        "srcset": "/images/products/bmx-20-paris-400.webp 400w, /images/products/bmx-20-paris-760.webp 760w, /images/products/bmx-20-paris-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADQAQCdASoOAAsABIB0JZwAAuDAVtCgAAD+52MXddS+Dl10y1B+m9Y28vcdxcejLMNFsw9CfqFbSpd+1g7Vk55Xx0p1wlRI7e3hAAAA"
+      }
+    ],
+    "bmx-20-spoke": [
+      {
+        "src": "/images/products/bmx-20-spoke-1200.webp",
+        "srcset": "/images/products/bmx-20-spoke-400.webp 400w, /images/products/bmx-20-spoke-760.webp 760w, /images/products/bmx-20-spoke-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAwAgCdASoOAAsABIB0JYwCdADp9M/nK4AfAAD+j2txOQ8Gz6xPEsGVkqapUZgXqg2wPltfk0Do/o4SluKurAZZwlaIoAAA"
+      },
+      {
+        "src": "/images/products/bmx-20-spoke-2-1200.webp",
+        "srcset": "/images/products/bmx-20-spoke-2-400.webp 400w, /images/products/bmx-20-spoke-2-760.webp 760w, /images/products/bmx-20-spoke-2-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAwAgCdASoOAAsABIB0JYwC7AYsZqZhIF+aAAD+6ptNj8Ek4xqpVd3GWmdfsJkygvu7CwrNt3dK5axQxNWsoXP7sPW7UWD3z4X/u2scVhmel95iBMs17J8MhpcNOxAA"
+      }
+    ],
+    "bmx-24-csk": [
+      {
+        "src": "/images/products/bmx-24-csk-1200.webp",
+        "srcset": "/images/products/bmx-24-csk-400.webp 400w, /images/products/bmx-24-csk-760.webp 760w, /images/products/bmx-24-csk-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoOAAsABIB0JZQAD48JAR4ecFeAAP7G5e/RdrrlRaQ2CBDubb8jRXCs2ORSc26NJ9H2f2XTxaSHIqMyOaarQAaStiof6IE46LpQ9lkAAAA="
+      },
+      {
+        "src": "/images/products/bmx-24-csk-2-1200.webp",
+        "srcset": "/images/products/bmx-24-csk-2-400.webp 400w, /images/products/bmx-24-csk-2-760.webp 760w, /images/products/bmx-24-csk-2-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAQCdASoOAAsABIB0JZwAAbF4u96FAAD+X0YODRejn3dfJAwqBQk44T6IzrVAJLL8W7YXEXxdJ555QrdU2EePzXC8+C4p1VBwH0umAAA="
+      }
+    ],
+    "booster-20-400": [
+      {
+        "src": "/images/products/booster-20-400-1200.webp",
+        "srcset": "/images/products/booster-20-400-400.webp 400w, /images/products/booster-20-400-760.webp 760w, /images/products/booster-20-400-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoOAAsABIB0JZQAD4zHjYDhaAAA/udt1n1tTgjYhFdfRrikrUjZF1pnbOAQ4VXS4Y+GrTh19kSkVMMAD4uELkGQ5lVgngUSRvnwAA=="
+      }
+    ],
+    "cruiser-26-spoke": [
+      {
+        "src": "/images/products/cruiser-26-spoke-1200.webp",
+        "srcset": "/images/products/cruiser-26-spoke-400.webp 400w, /images/products/cruiser-26-spoke-760.webp 760w, /images/products/cruiser-26-spoke-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAQAgCdASoOAAsABIB0JZwAD4rxdHU+ReVAAP7HFws4lBbwXPsOXQY0eDYT1mXONRLSc5ZVe6Y/QEGEoaDmhZivA0buBIKdLkkDCpimAugeK8gx+5pK0HJSvaHwAA=="
+      }
+    ],
+    "magic-26-speed": [
+      {
+        "src": "/images/products/magic-26-speed-1200.webp",
+        "srcset": "/images/products/magic-26-speed-400.webp 400w, /images/products/magic-26-speed-760.webp 760w, /images/products/magic-26-speed-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoOAAsABIB0JZwAD4LvKy0HdDEAAP7t6rCT/sL+lY2aTqAiGaxbZJT1bdR7HGncIHJpuNN6GaPWWGgX58mlgiElUej+2raQCWTOav9o94WYkAAA"
+      },
+      {
+        "src": "/images/products/magic-26-speed-2-1200.webp",
+        "srcset": "/images/products/magic-26-speed-2-400.webp 400w, /images/products/magic-26-speed-2-760.webp 760w, /images/products/magic-26-speed-2-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAwAgCdASoOAAsABIB0JaQAD4uxf/2iV2HjAAD+8EDX4EpILKC0avpXQesjlPa0nHgBxd2i7CjtXd3RJYJrIrUnRsqnSY6AO7w7m0x+BiZdyy4H7YOykgAA"
+      }
+    ],
+    "mtb-26-speed": [
+      {
+        "src": "/images/products/mtb-26-speed-1200.webp",
+        "srcset": "/images/products/mtb-26-speed-400.webp 400w, /images/products/mtb-26-speed-760.webp 760w, /images/products/mtb-26-speed-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAACwAQCdASoOAAsABIB0JZQAAxXiNKKgAP6yBMmTJSuAgqWf2UXqLMPLu+rv95nHtN8OF65r6ifa39tkHTwhJrn/+zp+d6VB3p8y9SA8AAA="
+      },
+      {
+        "src": "/images/products/mtb-26-speed-2-1200.webp",
+        "srcset": "/images/products/mtb-26-speed-2-400.webp 400w, /images/products/mtb-26-speed-2-760.webp 760w, /images/products/mtb-26-speed-2-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAABwAgCdASoOAAsABIB0JZQCw7YsP2ltDuZybv0AAP7T4Dqsgj7rT7aPNjvkQ9bR452NE9aZ/XMk3CR5rM1MEGbk+H9NPU3EBoepboFeDZV8A7N37+55snIAAAA="
+      }
+    ],
+    "mulliner-16-mag": [
+      {
+        "src": "/images/products/mulliner-16-mag-1200.webp",
+        "srcset": "/images/products/mulliner-16-mag-400.webp 400w, /images/products/mulliner-16-mag-760.webp 760w, /images/products/mulliner-16-mag-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAwAgCdASoOAAsABIB0JZwAD4oxARMEVhe0oAD+1ak+Z8R+Bszw8Tv5757649I7/ve7ZGWSabST1sZG/KXkhKETGefKz4nWaBh8MySNmKVeA5VNdwAAAA=="
+      }
+    ],
+    "race-rocket-26": [
+      {
+        "src": "/images/products/race-rocket-26-1200.webp",
+        "srcset": "/images/products/race-rocket-26-400.webp 400w, /images/products/race-rocket-26-760.webp 760w, /images/products/race-rocket-26-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoOAAsABIB0JZwAD4xsrizp+qAA/t75+mda6/a33zS67c03XPmctds9ghysfXI0DNYFh20MIq/24Ahr0cZqGQTlGhwNI+u5RG99ovdaHUBAAA=="
+      }
+    ],
+    "sports-boy-12": [
+      {
+        "src": "/images/products/sports-boy-12-1200.webp",
+        "srcset": "/images/products/sports-boy-12-400.webp 400w, /images/products/sports-boy-12-760.webp 760w, /images/products/sports-boy-12-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADQAQCdASoOAAsABIB0JZwAD5AshvpgEAD+6pa54TwvmIewIPKOo+9BhC2ZzsO/7CjVqjgRBdA8UAjO8gBnF161uLQCt8NFXMcshnwRznrwAA=="
+      }
+    ],
+    "sports-boy-16": [
+      {
+        "src": "/images/products/sports-boy-16-1200.webp",
+        "srcset": "/images/products/sports-boy-16-400.webp 400w, /images/products/sports-boy-16-760.webp 760w, /images/products/sports-boy-16-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoOAAsABIB0JZQAD4Ksjd8D6hZAAP7tTFYLBlWNhPG93ku2Cf1sAEhZ9gcOgrdYo7Iei1lyIUFEeOXX5DhelIWl8957DwqIasnsu2wT/gAzGA8AAAA="
+      }
+    ],
+    "sports-boy-20": [
+      {
+        "src": "/images/products/sports-boy-20-1200.webp",
+        "srcset": "/images/products/sports-boy-20-400.webp 400w, /images/products/sports-boy-20-760.webp 760w, /images/products/sports-boy-20-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADwAQCdASoOAAsABIB0JZwAD4VHJl64MmAA/t+9odc6sTfHXDzQ0p9F2G2qBl5LutrX+VsHiVo/nl4ZxVJHlYAYJ4fUFxb+thvCRzGkp/0n/5JGKAA="
+      }
+    ],
+    "tamax-24-speed": [
+      {
+        "src": "/images/products/tamax-24-speed-1200.webp",
+        "srcset": "/images/products/tamax-24-speed-400.webp 400w, /images/products/tamax-24-speed-760.webp 760w, /images/products/tamax-24-speed-1200.webp 1200w",
+        "w": 1200,
+        "h": 900,
+        "ratio": 1.3333,
+        "lqip": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAABQAgCdASoOAAsABIB0JZwAD4owYBqW4GLEHgAA/t75gFb/1eIKAkSaaW68Ch+D3KLSxj0tVcKO/RoAowCjzFkCsxbMj8GfYtRvJBYq2zVLN/Id/DLEnUZKKqHwoAAA"
       }
     ]
   },

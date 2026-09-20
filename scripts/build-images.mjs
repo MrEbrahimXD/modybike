@@ -158,8 +158,11 @@ async function main() {
       }
       for (const [slug, shots] of bySlug) {
         const list = [];
-        for (const file of shots.filter(Boolean)) {
-          list.push(await emit(group, slug, file, GROUPS.products.ratio));
+        /* Every shot of a product shares one manifest key but needs its own
+           filenames — shot 2 of `rock-26` is written as `rock-26-2-<w>.webp`. */
+        for (const [i, file] of shots.filter(Boolean).entries()) {
+          const outSlug = i === 0 ? slug : `${slug}-${i + 1}`;
+          list.push(await emit(group, outSlug, file, GROUPS.products.ratio));
           count++;
         }
         next.products[slug] = list;

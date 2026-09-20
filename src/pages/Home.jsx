@@ -153,7 +153,14 @@ function Hero() {
       />
       <div className="absolute inset-0 scrim-b" aria-hidden="true" />
 
-      <div className="container-page relative flex min-h-[92svh] flex-col justify-end pb-16 pt-32 text-center sm:pb-24">
+      {/* Deliberately short of a full screen. At 92svh the hero ate the whole
+          first view, so nothing below it hinted that the page continued and
+          the headline sank to the bottom under a tall empty sky. At ~66svh the
+          block rides higher in frame and the age collections break the fold,
+          which is what actually invites the first scroll. Still bottom-
+          weighted, because that is where the scrim is dark enough for white
+          type; the pad is in svh so the lift scales with the viewport. */}
+      <div className="container-page relative flex min-h-[66svh] flex-col justify-end pb-[7svh] pt-32 text-center">
         <h1 className="mx-auto max-w-[14ch] text-display-xl text-white text-balance">
           {t('home.heroTitle')}
         </h1>
@@ -182,7 +189,7 @@ function Hero() {
  */
 function Spotlight() {
   const { t, tr, path, price } = useLocale();
-  const hero = getProduct('apex-29-hydraulic') || featuredProducts(1)[0];
+  const hero = getProduct('alamin-26-400-fat') || featuredProducts(1)[0];
   if (!hero) return null;
 
   return (
@@ -287,7 +294,18 @@ function Range() {
         <Tile cat={second} large />
       </div>
 
-      <ul className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6" role="list">
+      {/* The strip holds whatever categories are left after the two lead tiles.
+          Tailwind needs the column count as a literal, so it is looked up
+          rather than interpolated — otherwise two categories would sit in a
+          six-column row with four empty cells. */}
+      <ul
+        className={`mt-4 grid grid-cols-2 gap-4 ${
+          { 1: 'sm:grid-cols-1', 2: 'sm:grid-cols-2', 3: 'sm:grid-cols-3', 4: 'sm:grid-cols-2 lg:grid-cols-4' }[
+            rest.length
+          ] || 'sm:grid-cols-3 lg:grid-cols-6'
+        }`}
+        role="list"
+      >
         {rest.map((c) => (
           <li key={c.slug}>
             <Tile cat={c} />

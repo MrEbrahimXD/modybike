@@ -22,8 +22,8 @@ export const POST_CATEGORIES = [
 export const AUTHOR = {
   name: { ar: 'فريق مودي بايك', en: 'The ModyBike team' },
   bio: {
-    ar: 'فريق مودي بايك للدراجات ولعب الأطفال في أبو كبير، الشرقية. تواصل معنا للمساعدة في اختيار المقاس ومعرفة الموديلات المتاحة.',
-    en: 'The ModyBike bicycle and children’s toy team in Abu Kabir, Al Sharqia. Contact us for help with sizing and currently available models.',
+    ar: 'فريق مودي بايك للدراجات ولعب الأطفال. تواصل معنا للمساعدة في اختيار المقاس ومعرفة الموديلات المتاحة.',
+    en: 'The ModyBike bicycle and children’s toy team. Contact us for help with sizing and currently available models.',
   },
 };
 

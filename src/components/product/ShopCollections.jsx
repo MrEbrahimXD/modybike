@@ -4,20 +4,23 @@ import { useLocale } from '../../i18n/index.jsx';
 import { paths } from '../../lib/routes.js';
 import Icon from '../ui/Icon.jsx';
 import Media from '../ui/Media.jsx';
-import { categoryImage, productImage } from '../../data/media.js';
+import { productImage } from '../../data/media.js';
 
-// Reuse the responsive placeholder photography from the original catalogue.
+// One real bike from the shop's own stock stands for each age band.
 const AGE_IMAGES = {
-  'ages-3-5': categoryImage('kids'),
-  'ages-5-8': productImage('junior-sport-16'),
-  'ages-7-10': productImage('adventure-20'),
-  'ages-8-12': productImage('teen-trail-24'),
-  'ages-12-plus': categoryImage('mountain'),
+  'ages-3-5': productImage('sports-boy-12'),
+  'ages-5-8': productImage('mulliner-16-mag'),
+  'ages-7-10': productImage('arizon-20-mag'),
+  'ages-8-12': productImage('bmx-20-csk'),
+  'ages-12-plus': productImage('magic-26-speed'),
 };
 
 export default function ShopCollections() {
   const { lang, tr, path } = useLocale();
-  return <section id="shop-by-age" className="bg-paper-sunk py-16 dark:bg-carbon-900 sm:py-24">
+  /* Slightly tighter on top than the bottom: this section is the one that
+     breaks the fold under the hero, so its eyebrow wants to be reachable
+     rather than sitting behind a full measure of padding. */
+  return <section id="shop-by-age" className="bg-paper-sunk pb-16 pt-12 dark:bg-carbon-900 sm:pb-24 sm:pt-16">
     <div className="container-page">
       <p className="label text-signal-600 dark:text-signal-400">{lang === 'ar' ? 'مودي بايك · لكل مرحلة اختيار' : 'ModyBike · A choice for every stage'}</p>
       <h2 className="mt-4 text-display-md">{lang === 'ar' ? 'نبدأ بالعمر. ونختار سوا.' : 'Start with their age. Choose together.'}</h2>

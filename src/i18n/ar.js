@@ -61,13 +61,12 @@ export default {
   },
 
   home: {
-    heroEyebrow: 'معرض دراجات محافظة الشرقية',
+    heroEyebrow: 'معرض دراجات لكل الأعمار',
     heroTitle: "لكل سن، فرحة على عجل.",
-    heroSubtitle:
-      "مودي بايك للدراجات ولعب الأطفال في أبو كبير، الشرقية. دراجات وسكوتر وعربيات أطفال — اختار حسب العمر والنوع، واسألنا عن المتاح.",
+    heroSubtitle: "مودي بايك — من أول عجلة في حياته، لحد مشوارك إنت.",
     heroCtaPrimary: "تصفّح الأقسام",
     heroCtaSecondary: 'اعرف مقاسك المناسب',
-    heroStat1: "موديل توضيحي",
+    heroStat1: "موديل في الكتالوج",
     heroStat2: 'مركز ومدينة نغطيهم',
     heroStat3: "فئات عمرية",
     categoriesTitle: 'اختار نوع الدراجة',
@@ -164,6 +163,10 @@ export default {
     inStockOnly: 'المتوفر فقط',
     clearFilters: 'مسح كل الفلاتر',
     showingResults: 'عرض {count} من {total} منتج',
+    /* Short forms for the one-line summary on a product tile, where the full
+       label does not fit. The long names stay in the spec table. */
+    gearCount: '{count} سرعة',
+    singleSpeed: 'بدون سرعات',
   },
 
   material: {
@@ -171,6 +174,15 @@ export default {
     alloy: 'ألومنيوم',
     carbon: 'كربون فايبر',
     plastic: 'بلاستيك مقوّى',
+  },
+  brakesShort: {
+    'disc-hydraulic': 'ديسك هيدروليك',
+    'disc-mech': 'ديسك',
+    'v-brake': 'كفة',
+    caliper: 'كاليبر',
+    coaster: 'كوستر',
+    'v-brake+coaster': 'كفة + كوستر',
+    none: 'بدون فرامل',
   },
   brakes: {
     'disc-hydraulic': 'قرصية هيدروليك',
