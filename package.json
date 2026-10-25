@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "ModyBike — متجر دراجات محافظة الشرقية | Bike store for Al Sharqia, Egypt",
+  "description": "ModyBike — دراجات أطفال وكبار وإكسسوارات وصيانة",
   "scripts": {
     "dev": "vite",
     "build": "npm run build:client && npm run build:server && npm run prerender",
@@ -14,7 +14,8 @@
     "preview": "vite preview --outDir dist",
     "serve": "node scripts/serve-dist.mjs",
     "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true});require('fs').rmSync('.ssr-build',{recursive:true,force:true})\"",
-    "images": "node scripts/build-images.mjs"
+    "images": "node scripts/build-images.mjs",
+    "ship": "node scripts/ship.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",
