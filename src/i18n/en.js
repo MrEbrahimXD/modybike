@@ -437,6 +437,21 @@ export default {
     products: 'Bikes',
   },
 
+  seo: {
+    aboutTitle: 'About ModyBike — kids and adult bikes',
+    about: 'ModyBike is a bicycle shop in Al Sharqia: kids and adult bikes with prices, accessories, repairs and delivery to your door.',
+    contactTitle: 'Contact ModyBike — phone and WhatsApp',
+    contact: 'Reach ModyBike on WhatsApp {whatsapp} or call {phone}. The shop is in {city}, {region}, open daily {opens}–{closes}.',
+    faq: 'Answers on bike sizes by age and height, home delivery, repairs and warranty at ModyBike.',
+    sizeGuideTitle: 'Bike size by height and age',
+    sizeGuide: 'Find the right bike size by height and age: kids and adult size charts from 12 to 26 inch, plus a quick size calculator.',
+    locationsTitle: 'Bike delivery across Al Sharqia',
+    locations: 'We deliver bikes across Al Sharqia: Zagazig, Belbeis, Minya Al Qamh, Abu Hammad, Hehia, Faqous, 10th of Ramadan and more. Order on WhatsApp.',
+    blogTitle: 'Bike guides: sizing, maintenance and safety',
+    blog: 'Guides to choosing the right bike size for children and adults, maintenance, safety and bike prices in Egypt.',
+    blogTopic: '{topic} guides from ModyBike: {titles}',
+  },
+
   a11y: {
     productImage: 'Image of {name}',
     openProduct: 'View details for {name}',

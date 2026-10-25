@@ -2,7 +2,7 @@
 
 Arabic/English bicycle and children’s toy showroom website.
 
-Client preview: https://mrebrahimxd.github.io/modybike/
+Live: https://modybike.com/ once the domain is connected (see [SEO-LAUNCH.md](SEO-LAUNCH.md)); until then https://mrebrahimxd.github.io/modybike/
 
 ## Development
 
@@ -18,11 +18,11 @@ npm run build
 npm run verify
 ```
 
-`VITE_SITE_URL` controls the public URL, including any subdirectory. Both browser and server routing, responsive images, canonical URLs and the sitemap use the same setting. `.env.example` contains the GitHub Pages address.
+`VITE_SITE_URL` controls the public URL, including any subdirectory. Both browser and server routing, responsive images, canonical URLs and the sitemap use the same setting. `.env.example` contains the production address.
 
 ## Publishing
 
-Push to `main`. The `Deploy GitHub Pages` workflow builds and verifies the static site, then deploys `dist` through GitHub Pages. No custom domain is configured. Each page is prerendered, so direct links and refreshes work without a redirect workaround.
+Push to `main`. The `Deploy GitHub Pages` workflow builds and verifies the static site, then deploys `dist` through GitHub Pages. It builds for whatever address Settings → Pages reports (modybike.com once the custom domain is saved there) and re-checks every six hours, so connecting the domain needs no code change. Each page is prerendered, so direct links and refreshes work without a redirect workaround.
 
 ## Handy commands
 

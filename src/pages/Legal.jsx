@@ -5,7 +5,12 @@ import { useLocale } from '../i18n/index.jsx';
 import { paths } from '../lib/routes.js';
 import { SITE } from '../config/site.js';
 
-const LAST_UPDATED = '2026-09-01';
+const LAST_UPDATED = '2026-10-25';
+
+const TRACKERS = [
+  SITE.analytics.gaMeasurementId && { ar: 'Google Analytics لمعرفة عدد الزيارات والصفحات اللي بتتشاف', en: 'Google Analytics to count visits and the pages viewed' },
+  SITE.analytics.metaPixelId && { ar: 'Meta Pixel لقياس إعلانات فيسبوك وإنستجرام', en: 'the Meta Pixel to measure Facebook and Instagram ads' },
+].filter(Boolean);
 
 /* ============================================================================
  *  ⚠️ TODO للعميل: النصوص دي صيغة مبدئية عامة.
@@ -34,7 +39,7 @@ const CONTENT = {
       { h: 'البيانات اللي بنجمعها', p: 'بنجمع الاسم ورقم الموبايل والعنوان اللي بتدخلهم وقت إتمام الطلب، وده الحد الأدنى اللازم لتنفيذ الطلب والتواصل معك بخصوصه.' },
       { h: 'إزاي البيانات بتتبعت', p: 'الموقع ده مش بيخزّن بياناتك على سيرفر. لما تضغط «إرسال الطلب»، البيانات بتتحوّل لرسالة نصية بتتبعت عن طريق تطبيق واتساب من جهازك مباشرةً — إنت اللي بتضغط إرسال.' },
       { h: 'التخزين المحلي', p: 'محتويات سلة الطلب واختيارك للمظهر (فاتح/داكن) بتتخزن في متصفحك أنت فقط (localStorage)، وما بتتبعتش لأي جهة. تقدر تمسحها في أي وقت من إعدادات المتصفح.' },
-      { h: 'خدمات خارجية', p: 'بنستخدم خطوط جوجل (Google Fonts) لعرض الخطوط، وواتساب لاستقبال الطلبات. لكل خدمة سياسة خصوصية خاصة بها.' },
+      { h: 'خدمات خارجية', p: `بنستخدم خطوط جوجل (Google Fonts) لعرض الخطوط، وواتساب لاستقبال الطلبات${TRACKERS.map((x) => `، و${x.ar}`).join('')}. لكل خدمة سياسة خصوصية خاصة بها.` },
       { h: 'مشاركة البيانات', p: 'ما بنبيعش ولا بنشارك بياناتك مع أي طرف تالت لأغراض تسويقية. بنشارك العنوان ورقم التليفون مع شركة الشحن لتنفيذ التوصيل فقط.' },
       { h: 'حقوقك', p: 'تقدر تطلب منا في أي وقت حذف بياناتك أو الاطلاع عليها عن طريق مراسلتنا على واتساب ' + SITE.contact.whatsappDisplay + '.' },
       { h: 'الأطفال', p: 'الموقع مش موجّه للأطفال تحت ١٦ سنة، وما بنجمعش بيانات منهم عن قصد.' },
@@ -43,7 +48,7 @@ const CONTENT = {
       { h: 'What we collect', p: 'We collect the name, mobile number and address you enter at checkout — the minimum needed to fulfil your order and contact you about it.' },
       { h: 'How data is sent', p: 'This site does not store your data on a server. When you press “Send order”, the details are turned into a text message sent through WhatsApp from your own device — you press send.' },
       { h: 'Local storage', p: 'Your cart contents and theme preference are stored in your own browser (localStorage) and are never transmitted. You can clear them at any time from your browser settings.' },
-      { h: 'Third-party services', p: 'We use Google Fonts to render typefaces and WhatsApp to receive orders. Each has its own privacy policy.' },
+      { h: 'Third-party services', p: `We use Google Fonts to render typefaces and WhatsApp to receive orders${TRACKERS.map((x) => `, and ${x.en}`).join('')}. Each has its own privacy policy.` },
       { h: 'Sharing', p: 'We do not sell or share your data with third parties for marketing. We share your address and phone number with the courier solely to complete delivery.' },
       { h: 'Your rights', p: `You may ask us to delete or disclose your data at any time by writing to ${SITE.contact.whatsappDisplay}.` },
       { h: 'Children', p: 'This site is not directed at children under 16, and we do not knowingly collect data from them.' },

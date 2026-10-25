@@ -6,6 +6,7 @@ export const CATEGORIES = [
   {
     slug: 'kids',
     kind: 'bike',
+    seo: { ar: 'عجل أطفال' },
     name: { ar: 'دراجات أطفال', en: 'Kids bikes' },
     short: { ar: 'من ٢ لـ ١٢ سنة', en: 'Ages 2–12' },
     description: {
@@ -17,6 +18,7 @@ export const CATEGORIES = [
   {
     slug: 'mountain',
     kind: 'bike',
+    seo: { ar: 'عجل جبلي بسرعات' },
     name: { ar: 'دراجات جبلية', en: 'Mountain bikes' },
     short: { ar: 'للطرق الوعرة', en: 'For rough roads' },
     description: {
@@ -28,6 +30,7 @@ export const CATEGORIES = [
   {
     slug: 'city',
     kind: 'bike',
+    seo: { ar: 'عجل مدينة وسيدات' },
     name: { ar: 'دراجات مدينة وسيدات', en: 'City & women’s bikes' },
     short: { ar: 'راحة وأناقة', en: 'Comfort and style' },
     description: {
@@ -39,6 +42,7 @@ export const CATEGORIES = [
   {
     slug: 'bmx',
     kind: 'bike',
+    seo: { ar: 'عجل برامج و BMX' },
     name: { ar: 'دراجات برامج و BMX', en: 'Programme & BMX bikes' },
     short: { ar: 'الشكل اللي الولاد بيطلبوه', en: 'The look kids ask for' },
     description: {

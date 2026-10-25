@@ -335,8 +335,8 @@ export const LOCATIONS = LOCATION_DRAFTS.map((location) => ({
   distanceKm: null,
   etaDays: SITE.shipping.etaDays,
   blurb: {
-    ar: `دراجات أطفال وكبار وسكوتر وإكسسوارات في ${location.name.ar}. اطلب على واتساب ونوصّل لحد البيت في ${location.name.ar} و${location.areas.ar.slice(0, 3).join(' و')}.`,
-    en: `Kids and adult bikes, scooters and accessories in ${location.name.en}. Order on WhatsApp for delivery to your door in ${location.name.en}, ${location.areas.en.slice(0, 3).join(', ')} and nearby.`,
+    ar: `عجل ودراجات أطفال وكبار وإكسسوارات في ${location.name.ar}. اطلب على واتساب ونوصّل لحد البيت في ${location.name.ar} و${location.areas.ar.filter((a) => !a.includes(location.name.ar)).slice(0, 3).join(' و')}.`,
+    en: `Kids and adult bikes and accessories in ${location.name.en}. Order on WhatsApp for delivery to your door in ${location.name.en}, ${location.areas.en.filter((a) => !a.includes(location.name.en)).slice(0, 3).join(', ')} and nearby.`,
   },
 }));
 

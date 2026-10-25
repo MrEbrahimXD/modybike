@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Picks up a newly connected custom domain (Settings → Pages) without
+  # anyone having to push: the run only builds when the live site was built
+  # for a different address.
+  schedule:
+    - cron: '23 */6 * * *'
 
 permissions:
   contents: read
@@ -17,27 +22,58 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.live.outputs.skip }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
+      - name: Work out the public address
+        id: site
+        run: |
+          url="${{ steps.pages.outputs.base_url }}"
+          url="${url%/}"
+          # A custom domain (modybike.com) is always served over HTTPS.
+          case "$url" in
+            *.github.io*) ;;
+            *) url="https://${url#*://}" ;;
+          esac
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Building for $url"
+      - name: Check whether the live site is already up to date
+        id: live
+        if: github.event_name == 'schedule'
+        run: |
+          live="$(curl -fsSL --max-time 20 "${{ steps.site.outputs.url }}/site-url.txt" || true)"
+          if [ "$live" = "${{ steps.site.outputs.url }}" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Live site already built for ${{ steps.site.outputs.url }}"
+          fi
+      - uses: actions/setup-node@v4
+        if: steps.live.outputs.skip != 'true'
+        with:
+          node-version: 22
+          cache: npm
       - run: npm ci
+        if: steps.live.outputs.skip != 'true'
       - name: Build static pages
+        if: steps.live.outputs.skip != 'true'
         run: npm run build
         env:
-          VITE_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          VITE_SITE_URL: ${{ steps.site.outputs.url }}
       - run: npm run verify
+        if: steps.live.outputs.skip != 'true'
+        env:
+          VITE_SITE_URL: ${{ steps.site.outputs.url }}
       - uses: actions/upload-pages-artifact@v3
+        if: steps.live.outputs.skip != 'true'
         with:
           path: dist
 
   deploy:
     needs: build
+    if: needs.build.outputs.skip != 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

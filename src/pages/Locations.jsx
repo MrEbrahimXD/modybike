@@ -9,7 +9,7 @@ import { useLocale } from '../i18n/index.jsx';
 import { paths } from '../lib/routes.js';
 import { locationEnquiryUrl } from '../lib/whatsapp.js';
 import { LOCATIONS, getLocation } from '../data/locations.js';
-import { featuredProducts } from '../data/products.js';
+import { featuredProducts, BIKE_PRODUCTS } from '../data/products.js';
 import { SITE } from '../config/site.js';
 
 /* ==========================================================================
@@ -25,8 +25,8 @@ export default function Locations() {
     <>
       <Seo
         lang={lang}
-        title={`${t('locations.title')} — ${t('common.brand')}`}
-        description={t('locations.subtitle')}
+        title={t('seo.locationsTitle')}
+        description={t('seo.locations')}
         canonicalPath={paths.locations()}
         jsonLd={[
           breadcrumbSchema([
@@ -78,21 +78,26 @@ export default function Locations() {
 
 export function LocationDetail() {
   const { slug } = useParams();
-  const { t, tr, lang, path, num } = useLocale();
+  const { t, tr, lang, path, price } = useLocale();
 
   const loc = getLocation(slug);
   if (!loc) return <NotFound />;
 
-  const others = LOCATIONS.filter((l) => l.slug !== slug).slice(0, 12);
+  const others = LOCATIONS.filter((l) => l.slug !== slug);
   const city = tr(loc.name);
-  const featured = featuredProducts(4);
+  const featured = featuredProducts(8);
+  const from = price(Math.min(...BIKE_PRODUCTS.map((p) => p.price)));
 
   return (
     <>
       <Seo
         lang={lang}
-        title={`${t('locations.pageTitle', { city })} — ${t('common.brand')}`}
-        description={tr(loc.blurb)}
+        title={lang === 'ar' ? `عجل ودراجات أطفال وكبار في ${city} بالأسعار` : `Kids and adult bikes in ${city} with prices`}
+        description={
+          lang === 'ar'
+            ? `عجل ودراجات أطفال وكبار في ${city} بأسعار من ${from}. اطلب على واتساب ${SITE.contact.whatsappDisplay} ونوصّل لحد البيت في ${city} والقرى اللي حواليها.`
+            : `Kids and adult bikes in ${city}, priced from ${from}. Order on WhatsApp ${SITE.contact.whatsappDisplay} for delivery to your door in ${city} and nearby villages.`
+        }
         canonicalPath={paths.location(slug)}
         jsonLd={[
           localAreaSchema(loc, lang),

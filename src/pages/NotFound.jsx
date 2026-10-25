@@ -40,7 +40,7 @@ export default function NotFound() {
                   </span>
                 ) : null}
                 <Link
-                  to={path(paths.productsByCategory(c.slug))}
+                  to={path(paths.byCategory(c.slug))}
                   className="link-underline text-lg font-bold tracking-tight hover:text-signal-600 dark:hover:text-signal-400"
                 >
                   {tr(c.name)}

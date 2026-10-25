@@ -6,7 +6,8 @@
  *  squarely at SEO / GEO / AEO for Al Sharqia, every page ships as real HTML
  *  with its meta tags and JSON-LD already in the markup.
  *
- *  Also emits: sitemap.xml, robots.txt, llms.txt and a 404.html fallback.
+ *  Also emits: sitemap.xml (with product photos), robots.txt, llms.txt,
+ *  a 404.html fallback, link-preview JPEGs and feeds/products.xml.
  * ========================================================================== */
 
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -18,7 +19,8 @@ const root = resolve(__dirname, '..');
 const distDir = join(root, 'dist');
 const ssrEntry = pathToFileURL(join(root, '.ssr-build', 'entry-server.js')).href;
 
-const { render, getRoutes, SITE } = await import(ssrEntry);
+const { render, getRoutes, SITE, getShareSources, getFeedProducts } = await import(ssrEntry);
+const { buildShareImages } = await import('./share-images.mjs');
 
 const BASE_URL = SITE.baseUrl.replace(/\/+$/, '');
 
@@ -45,9 +47,11 @@ const safeJson = (value) =>
     (char) => BACKSLASH + "u" + char.charCodeAt(0).toString(16).padStart(4, "0"),
   );
 
+/** Absolute URL; pages get the trailing slash GitHub Pages serves without a redirect. */
 const abs = (path) => {
   const p = path.startsWith('/') ? path : `/${path}`;
-  return `${BASE_URL}${p === '/' ? '/' : p.replace(/\/+$/, '')}`;
+  if (p === '/' || /\.[a-z0-9]+$/i.test(p)) return `${BASE_URL}${p}`;
+  return `${BASE_URL}${p.replace(/\/+$/, '')}/`;
 };
 
 /** Turns the collected head object into the real tags for <head>. */
@@ -87,6 +91,11 @@ function renderHead(head, { lang, url }) {
   meta('property', 'og:description', head.description || SITE.description[lang]);
   meta('property', 'og:url', canonical);
   meta('property', 'og:image', ogImage);
+  if (/\/images\/share\/|\/og-default\.png$/.test(ogImage)) {
+    meta('property', 'og:image:width', '1200');
+    meta('property', 'og:image:height', '630');
+  }
+  meta('property', 'og:image:alt', head.title);
   meta('property', 'og:locale', lang === 'en' ? 'en_US' : 'ar_EG');
   meta('property', 'og:locale:alternate', lang === 'en' ? 'ar_EG' : 'en_US');
 
@@ -179,11 +188,14 @@ const indexable = results.filter((r) => !r.noindex);
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${indexable
   .map((r) => {
     const arPath = r.lang === 'en' ? r.altOf : r.path;
     const enPath = arPath === '/' ? '/en' : `/en${arPath}`;
+    const images = (r.images || []).map((src) => `
+    <image:image><image:loc>${escapeHtml(abs(src))}</image:loc></image:image>`).join('');
     return `  <url>
     <loc>${escapeHtml(abs(r.url))}</loc>
     <xhtml:link rel="alternate" hreflang="ar" href="${escapeHtml(abs(arPath))}"/>
@@ -192,7 +204,7 @@ ${indexable
       r.lastmod ? `\n    <lastmod>${r.lastmod}</lastmod>` : ''
     }
     <changefreq>${r.changefreq}</changefreq>
-    <priority>${r.priority.toFixed(1)}</priority>
+    <priority>${r.priority.toFixed(1)}</priority>${images}
   </url>`;
   })
   .join('\n')}
@@ -236,6 +248,10 @@ Sitemap: ${BASE_URL}/sitemap.xml
 
 await writeFile(join(distDir, 'robots.txt'), robots, 'utf8');
 
+// The deploy workflow compares this with the address GitHub Pages reports, so
+// a newly connected custom domain gets a fresh build without a push.
+await writeFile(join(distDir, 'site-url.txt'), BASE_URL, 'utf8');
+
 /* ------------------------------------------------------------------ llms.txt */
 
 const llms = `# ${SITE.name.ar} (${SITE.name.en})
@@ -253,22 +269,24 @@ const llms = `# ${SITE.name.ar} (${SITE.name.en})
 - Ordering: customers build an order on the website and send it over WhatsApp
 
 ## Key pages
-- [Shop](${BASE_URL}/products): browse by age and product type
-- [Ages 3–5](${BASE_URL}/shop/age/ages-3-5)
-- [Ages 5–8](${BASE_URL}/shop/age/ages-5-8)
-- [Ages 7–10](${BASE_URL}/shop/age/ages-7-10)
-- [Ages 8–12](${BASE_URL}/shop/age/ages-8-12)
-- [Ages 12+](${BASE_URL}/shop/age/ages-12-plus)
-- [Scooters](${BASE_URL}/shop/type/scooters)
-- [Ride-on cars](${BASE_URL}/shop/type/ride-on-cars)
-- [Walkers](${BASE_URL}/shop/type/walkers)
-- [Accessories](${BASE_URL}/accessories): lights, locks, baskets, helmets, bells, pumps and tools
-- [Size guide](${BASE_URL}/size-guide): wheel and frame sizing by rider height and age, with an interactive calculator
-- [Blog](${BASE_URL}/blog): buying, sizing, maintenance and safety guides
-- [Repairs](${BASE_URL}/maintenance): bike repairs
-- [Delivery areas](${BASE_URL}/locations): city pages across Al Sharqia
-- [FAQ](${BASE_URL}/faq)
-- [Contact](${BASE_URL}/contact)
+- [Shop](${BASE_URL}/products/): browse by age and product type
+- [Ages 3–5](${BASE_URL}/shop/age/ages-3-5/)
+- [Ages 5–8](${BASE_URL}/shop/age/ages-5-8/)
+- [Ages 7–10](${BASE_URL}/shop/age/ages-7-10/)
+- [Ages 8–12](${BASE_URL}/shop/age/ages-8-12/)
+- [Ages 12+](${BASE_URL}/shop/age/ages-12-plus/)
+- [Kids bikes](${BASE_URL}/shop/category/kids/)
+- [Mountain bikes](${BASE_URL}/shop/category/mountain/)
+- [Programme (BMX-style) bikes](${BASE_URL}/shop/category/bmx/)
+- [City and women's bikes](${BASE_URL}/shop/category/city/)
+- Bikes by wheel size: [12"](${BASE_URL}/shop/size/12-inch/), [16"](${BASE_URL}/shop/size/16-inch/), [20"](${BASE_URL}/shop/size/20-inch/), [24"](${BASE_URL}/shop/size/24-inch/), [26"](${BASE_URL}/shop/size/26-inch/)
+- [Accessories](${BASE_URL}/accessories/): lights, locks, baskets, helmets, bells, pumps and tools
+- [Size guide](${BASE_URL}/size-guide/): wheel and frame sizing by rider height and age, with an interactive calculator
+- [Blog](${BASE_URL}/blog/): buying, sizing, maintenance and safety guides
+- [Repairs](${BASE_URL}/maintenance/): bike repairs
+- [Delivery areas](${BASE_URL}/locations/): city pages across Al Sharqia
+- [FAQ](${BASE_URL}/faq/)
+- [Contact](${BASE_URL}/contact/)
 
 ## Frequently cited facts
 - Kids bikes are sized by wheel diameter: 12" for 85–100 cm tall, 16" for 105–120 cm, 20" for 120–135 cm, 24" for 135–150 cm.
@@ -276,8 +294,9 @@ const llms = `# ${SITE.name.ar} (${SITE.name.en})
 - Saddle height (bottom bracket to saddle top) = inseam × 0.883.
 - Wheel sizes by ETRTO rim diameter: 26" = 559 mm, 27.5" = 584 mm, 29"/700C = 622 mm.
 - Warranty terms are confirmed for the selected model before ordering.
-- The shop also offers bike repairs and servicing: ${BASE_URL}/maintenance
-- A PDF catalogue is available in Arabic and English: ${BASE_URL}/catalogue/
+- The shop also offers bike repairs and servicing: ${BASE_URL}/maintenance/
+- A PDF catalogue is available in Arabic and English: ${BASE_URL}/catalogue/modybike-catalogue-ar.pdf and ${BASE_URL}/catalogue/modybike-catalogue-en.pdf
+- Machine-readable product feed (prices and stock): ${BASE_URL}/feeds/products.xml
 - ${SITE.isPlaceholderContent ? 'Product models, photos and prices are demonstration content, not verified stock or offers.' : 'Contact the shop to confirm availability and prices.'}
 
 ## Notes
@@ -287,10 +306,56 @@ const llms = `# ${SITE.name.ar} (${SITE.name.en})
 
 await writeFile(join(distDir, 'llms.txt'), llms, 'utf8');
 
+/* ------------------------------------------------------------ share images */
+
+const { share: shareCount, feed: feedImageCount } = await buildShareImages({ distDir, ...getShareSources() });
+
+/* ------------------------------------------------------------- product feed */
+
+/* RSS 2.0 in Google's product-feed format. Facebook/Instagram/WhatsApp
+   catalogues (Commerce Manager → Data feed → scheduled URL) read the same file. */
+const xml = (value = '') => escapeHtml(value).replace(/'/g, '&apos;');
+const feedItems = getFeedProducts();
+const feed = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+<channel>
+<title>${xml(SITE.name.ar)} — ${xml(SITE.name.en)}</title>
+<link>${xml(abs('/'))}</link>
+<description>${xml(SITE.description.ar)}</description>
+${feedItems
+  .map((p) => {
+    const images = Array.from({ length: p.imageCount }, (_, i) => abs(`/images/feed/${p.slug}-${i + 1}.jpg`));
+    return `<item>
+  <g:id>${xml(p.id)}</g:id>
+  <g:title>${xml(p.title)}</g:title>
+  <g:description>${xml(p.description)}</g:description>
+  <g:link>${xml(abs(`/products/${p.slug}`))}</g:link>
+  ${images[0] ? `<g:image_link>${xml(images[0])}</g:image_link>` : ''}${images
+    .slice(1, 10)
+    .map((img) => `\n  <g:additional_image_link>${xml(img)}</g:additional_image_link>`)
+    .join('')}
+  <g:availability>${p.stock === 'out_of_stock' ? 'out of stock' : 'in stock'}</g:availability>
+  <g:price>${p.price.toFixed(2)} ${SITE.currency.code}</g:price>
+  <g:condition>new</g:condition>
+  <g:brand>${xml(p.brand)}</g:brand>
+  <g:identifier_exists>no</g:identifier_exists>
+  <g:google_product_category>1026</g:google_product_category>
+  <g:product_type>${xml(p.category)}</g:product_type>
+  <g:age_group>${p.ageMax != null && p.ageMax <= 12 ? 'kids' : 'adult'}</g:age_group>
+</item>`;
+  })
+  .join('\n')}
+</channel>
+</rss>
+`;
+await mkdir(join(distDir, 'feeds'), { recursive: true });
+await writeFile(join(distDir, 'feeds', 'products.xml'), feed, 'utf8');
+
 /* ------------------------------------------------------------------ report */
 
 console.log(`\n  Prerendered ${results.length} pages (${indexable.length} in sitemap).`);
 console.log('  Wrote sitemap.xml, robots.txt, llms.txt, 404.html');
+console.log(`  Wrote ${shareCount} share images, ${feedImageCount} catalogue photos and feeds/products.xml (${feedItems.length} products).`);
 if (failures) {
   console.error(`\n  ${failures} route(s) failed to render.`);
   process.exit(1);

@@ -13,6 +13,38 @@ export function useMediaQuery(query) {
   return matches;
 }
 
+/**
+ * Whether any of the elements `collect()` returns is at least partly on screen.
+ * Re-collects when `key` changes (e.g. the route) and once more shortly after,
+ * for content that renders after its data arrives.
+ */
+export function useAnyOnScreen(collect, key, initial = false) {
+  const [onScreen, setOnScreen] = useState(initial);
+  useEffect(() => {
+    if (typeof IntersectionObserver === 'undefined') return undefined;
+    const visible = new Set();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)));
+      setOnScreen(visible.size > 0);
+    });
+    const watch = () => {
+      const targets = [...collect()].filter(Boolean);
+      // Nothing to watch on this page: do not keep the previous page's answer.
+      if (!targets.length && !visible.size) setOnScreen(false);
+      targets.forEach((el) => io.observe(el));
+    };
+    watch();
+    const late = window.setTimeout(watch, 600);
+    return () => {
+      window.clearTimeout(late);
+      io.disconnect();
+    };
+    // `collect` is recreated every render; `key` says when to look again.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key]);
+  return onScreen;
+}
+
 export function usePrefersReducedMotion() {
   return useMediaQuery('(prefers-reduced-motion: reduce)');
 }

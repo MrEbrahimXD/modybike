@@ -17,8 +17,8 @@ export default function About() {
     <>
       <Seo
         lang={lang}
-        title={`${t('about.title')} — ${t('common.brand')}`}
-        description={t('footer.about')}
+        title={t('seo.aboutTitle')}
+        description={t('seo.about')}
         canonicalPath={paths.about()}
         jsonLd={[
           organizationSchema(lang),

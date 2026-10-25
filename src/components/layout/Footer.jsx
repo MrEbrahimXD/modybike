@@ -5,9 +5,9 @@ import { useLocale } from '../../i18n/index.jsx';
 import { paths } from '../../lib/routes.js';
 import { CATEGORIES } from '../../data/categories.js';
 import { AGE_GROUPS } from '../../data/collections.js';
-import { LIVE_PRODUCT_TYPES } from '../../data/products.js';
+import { LIVE_PRODUCT_TYPES, WHEEL_SIZES } from '../../data/products.js';
 import { LOCATIONS } from '../../data/locations.js';
-import { SITE, WHATSAPP_LINK } from '../../config/site.js';
+import { SITE } from '../../config/site.js';
 
 /* Footer: contact details, hours, sections and city pages. */
 
@@ -61,30 +61,6 @@ export default function Footer() {
 
   return (
     <footer className="mt-auto bg-carbon-950 text-carbon-200">
-      {/* ------------------------------------------------ closing statement */}
-      <div className="container-page border-b border-carbon-800 py-16 sm:py-20">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <p className="max-w-[16ch] text-display-md text-white">{t('home.ctaTitle')}</p>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <a
-              href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-14 items-center justify-center gap-2.5 bg-whatsapp px-8 text-[15px] font-semibold text-white transition-colors hover:bg-whatsapp-ink"
-            >
-              <Icon name="whatsapp" className="h-5 w-5" />
-              {t('home.ctaButton')}
-            </a>
-            <Link
-              to={path(paths.contact())}
-              className="inline-flex h-14 items-center justify-center gap-2.5 border border-white/40 px-8 text-[15px] font-semibold text-white transition-colors hover:bg-white hover:text-carbon-950"
-            >
-              {t('nav.contact')}
-            </Link>
-          </div>
-        </div>
-      </div>
-
       {/* ----------------------------------------------------------- columns */}
       <nav aria-label={t('nav.footerNav')} className="container-page py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
@@ -151,11 +127,19 @@ export default function Footer() {
                 <FooterLink key={c.slug} to={path(paths.byAge(c.slug))}>{tr(c.label)}</FooterLink>
               ))}
               {CATEGORIES.filter((c) => c.kind === 'bike').map((c) => (
-                <FooterLink key={c.slug} to={path(paths.productsByCategory(c.slug))}>{tr(c.name)}</FooterLink>
+                <FooterLink key={c.slug} to={path(paths.byCategory(c.slug))}>{tr(c.name)}</FooterLink>
               ))}
               {LIVE_PRODUCT_TYPES.filter((c) => c.slug !== 'bikes').map((c) => (
                 <FooterLink key={c.slug} to={path(paths.byType(c.slug))}>{tr(c.label)}</FooterLink>
               ))}
+              <li className="flex flex-wrap items-baseline gap-x-3 gap-y-1 pt-1 text-sm text-carbon-300">
+                <span>{lang === 'ar' ? 'مقاس' : 'Size'}</span>
+                {WHEEL_SIZES.map((inches) => (
+                  <Link key={inches} to={path(paths.bySize(inches))} className="link-underline tnum transition-colors hover:text-white" dir="ltr">
+                    {`${inches}"`}
+                  </Link>
+                ))}
+              </li>
             </Column>
           </div>
 

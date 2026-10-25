@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useMemo } from 'react';
 import { SITE } from '../config/site.js';
-import { stripLocale } from '../i18n/index.jsx';
+import { localizedPath, stripLocale, withTrailingSlash } from '../i18n/index.jsx';
+import { BIKE_PRODUCTS } from '../data/products.js';
+import { CATEGORIES } from '../data/categories.js';
 
 /**
  * A tiny head manager — ~100 lines instead of a dependency.
@@ -20,9 +22,23 @@ export function HeadCollectorProvider({ collector, children }) {
 
 export function absoluteUrl(path = '/') {
   const base = SITE.baseUrl.replace(/\/+$/, '');
-  const p = path.startsWith('/') ? path : `/${path}`;
-  return `${base}${p === '/' ? '/' : p.replace(/\/+$/, '')}`;
+  return `${base}${withTrailingSlash(path.startsWith('/') ? path : `/${path}`)}`;
 }
+
+/** Absolute URL of a page in the given language (`/products` → `…/en/products`). */
+export function pageUrl(path = '/', lang = 'ar') {
+  return absoluteUrl(localizedPath(lang, stripLocale(path)));
+}
+
+/** Absolute URL for a file in /public or a generated asset (og:image, Product.image). */
+export function assetUrl(src) {
+  if (!src) return src;
+  if (/^https?:\/\//.test(src)) return src;
+  return `${SITE.baseUrl.replace(/\/+$/, '')}${src.startsWith('/') ? src : `/${src}`}`;
+}
+
+/** Share card generated at build time by scripts/share-images.mjs (1200×630 JPEG). */
+export const shareImage = (kind, slug) => `/images/share/${kind}/${slug}.jpg`;
 
 /** Both language versions of a page, for hreflang. */
 export function alternatesFor(pathname) {
@@ -122,14 +138,14 @@ export function Seo({
     return {
       title: fullTitle,
       description,
-      canonical: absoluteUrl(lang === 'en' ? (stripLocale(canonicalPath) === '/' ? '/en' : `/en${stripLocale(canonicalPath)}`) : stripLocale(canonicalPath)),
+      canonical: pageUrl(canonicalPath, lang),
       alternates: alternatesFor(canonicalPath),
-      image,
+      image: assetUrl(image),
       type,
       noindex,
       keywords,
       lang,
-      jsonLd,
+      jsonLd: jsonLd.filter(Boolean).map((block) => localiseBreadcrumbs(block, lang)),
     };
     // jsonLd is recreated each render by callers; stringify keeps the dep stable.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -149,20 +165,37 @@ export function Seo({
 /*  Structured data builders (JSON-LD)                                        */
 /* -------------------------------------------------------------------------- */
 
+const bikePrices = BIKE_PRODUCTS.map((p) => p.price);
+
+/** "+20 10 1512 0515" — the international form Google expects in telephone. */
+export function intlPhone(local = '') {
+  const digits = String(local).replace(/[^\d]/g, '');
+  return digits.startsWith('0') ? `+20${digits.slice(1)}` : `+${digits}`;
+}
+
 export function organizationSchema(lang = 'ar') {
   return {
     '@context': 'https://schema.org',
     '@type': 'BikeStore',
     '@id': `${SITE.baseUrl}/#organization`,
     name: SITE.name[lang],
-    alternateName: lang === 'ar' ? SITE.name.en : SITE.name.ar,
+    alternateName: [...new Set([SITE.name.ar, SITE.name.en, ...(SITE.alternateNames || [])])].filter((n) => n !== SITE.name[lang]),
     description: SITE.description[lang],
-    url: SITE.baseUrl,
+    url: pageUrl('/', lang),
     ...(SITE.contact.email ? { email: SITE.contact.email } : {}),
-    telephone: SITE.contact.phones[0],
+    telephone: intlPhone(SITE.contact.phones[0]),
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        telephone: intlPhone(SITE.contact.whatsapp),
+        availableLanguage: ['ar', 'en'],
+        areaServed: SITE.address.countryCode,
+      },
+    ],
     image: absoluteUrl('/og-default.png'),
-    logo: absoluteUrl('/icon-512.png'),
-    priceRange: 'EGP',
+    logo: { '@type': 'ImageObject', url: absoluteUrl('/icon-512.png'), width: 512, height: 512 },
+    priceRange: `${Math.min(...bikePrices)}–${Math.max(...bikePrices)} EGP`,
     currenciesAccepted: 'EGP',
     address: {
       '@type': 'PostalAddress',
@@ -177,6 +210,9 @@ export function organizationSchema(lang = 'ar') {
       latitude: SITE.address.geo.lat,
       longitude: SITE.address.geo.lng,
     } } : {}),
+    ...(SITE.address.mapsUrl?.startsWith('https://maps.') || SITE.address.mapsUrl?.includes('google.com/maps') || SITE.address.mapsUrl?.includes('goo.gl')
+      ? { hasMap: SITE.address.mapsUrl }
+      : {}),
     openingHoursSpecification: SITE.openingHours.map((h) => ({
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: h.days,
@@ -200,8 +236,9 @@ export function websiteSchema(lang = 'ar') {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     '@id': `${SITE.baseUrl}/#website`,
-    url: SITE.baseUrl,
+    url: pageUrl('/', lang),
     name: SITE.name[lang],
+    alternateName: [...new Set([SITE.name.ar, SITE.name.en, ...(SITE.alternateNames || [])])].filter((n) => n !== SITE.name[lang]),
     description: SITE.description[lang],
     inLanguage: lang === 'ar' ? 'ar-EG' : 'en',
     publisher: { '@id': `${SITE.baseUrl}/#organization` },
@@ -209,14 +246,14 @@ export function websiteSchema(lang = 'ar') {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: `${SITE.baseUrl}${lang === 'en' ? '/en' : ''}/products?q={search_term_string}`,
+        urlTemplate: `${SITE.baseUrl}${lang === 'en' ? '/en' : ''}/products/?q={search_term_string}`,
       },
       'query-input': 'required name=search_term_string',
     },
   };
 }
 
-export function breadcrumbSchema(items = []) {
+export function breadcrumbSchema(items = [], lang = 'ar') {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -224,8 +261,22 @@ export function breadcrumbSchema(items = []) {
       '@type': 'ListItem',
       position: i + 1,
       name: item.name,
-      item: absoluteUrl(item.path),
+      item: pageUrl(item.path, lang),
     })),
+  };
+}
+
+/** English pages get English breadcrumb URLs even when a caller passed bare paths. */
+function localiseBreadcrumbs(block, lang) {
+  if (lang !== 'en' || block?.['@type'] !== 'BreadcrumbList') return block;
+  const base = SITE.baseUrl.replace(/\/+$/, '');
+  return {
+    ...block,
+    itemListElement: block.itemListElement.map((entry) =>
+      typeof entry.item === 'string' && entry.item.startsWith(base)
+        ? { ...entry, item: pageUrl(entry.item.slice(base.length) || '/', 'en') }
+        : entry,
+    ),
   };
 }
 
@@ -235,8 +286,12 @@ const AVAILABILITY = {
   out_of_stock: 'https://schema.org/OutOfStock',
 };
 
-export function productSchema(product, { lang = 'ar', path } = {}) {
-  if (!product || SITE.isPlaceholderContent) return null;
+/**
+ * Product + Offer. `images` are the product's photos (absolute or site paths).
+ * Placeholder items (stock photos, prices not from the shop) get no markup.
+ */
+export function productSchema(product, { lang = 'ar', path, images = [] } = {}) {
+  if (!product || SITE.isPlaceholderContent || product.placeholder) return null;
   const specs = product.specs || {};
   const props = [];
   const push = (name, value) => value != null && value !== '' && props.push({ '@type': 'PropertyValue', name, value: String(value) });
@@ -254,9 +309,11 @@ export function productSchema(product, { lang = 'ar', path } = {}) {
   if (product.fit?.ageMin) {
     push(
       lang === 'ar' ? 'الفئة العمرية' : 'Age range',
-      `${product.fit.ageMin}–${product.fit.ageMax}`,
+      product.fit.ageMax && product.fit.ageMax < 99 ? `${product.fit.ageMin}–${product.fit.ageMax}` : `${product.fit.ageMin}+`,
     );
   }
+  const category = CATEGORIES.find((c) => c.slug === product.category);
+  const photos = images.map(assetUrl).filter(Boolean);
 
   return {
     '@context': 'https://schema.org',
@@ -264,12 +321,9 @@ export function productSchema(product, { lang = 'ar', path } = {}) {
     name: product.name[lang],
     description: product.description[lang],
     sku: product.sku,
-    mpn: product.sku,
-    category: product.category,
-    brand: { '@type': 'Brand', name: SITE.name[lang] },
-    image: product.images?.length
-      ? product.images.map((src) => absoluteUrl(src))
-      : [absoluteUrl('/og-default.png')],
+    ...(category ? { category: category.name[lang] } : {}),
+    ...(product.brand ? { brand: { '@type': 'Brand', name: product.brand } } : {}),
+    image: photos.length ? photos : [absoluteUrl('/og-default.png')],
     ...(specs.weightKg
       ? { weight: { '@type': 'QuantitativeValue', value: specs.weightKg, unitCode: 'KGM' } }
       : {}),
@@ -283,7 +337,7 @@ export function productSchema(product, { lang = 'ar', path } = {}) {
     additionalProperty: props,
     offers: {
       '@type': 'Offer',
-      url: absoluteUrl(path),
+      url: pageUrl(path, lang),
       priceCurrency: SITE.currency.code,
       price: product.price,
       availability: AVAILABILITY[product.stock] || AVAILABILITY.in_stock,
@@ -314,7 +368,7 @@ export function faqSchema(items = [], lang = 'ar') {
   };
 }
 
-export function articleSchema(meta, { lang = 'ar', path } = {}) {
+export function articleSchema(meta, { lang = 'ar', path, image } = {}) {
   if (!meta) return null;
   return {
     '@context': 'https://schema.org',
@@ -324,10 +378,10 @@ export function articleSchema(meta, { lang = 'ar', path } = {}) {
     datePublished: meta.date,
     dateModified: meta.updated || meta.date,
     inLanguage: lang === 'ar' ? 'ar-EG' : 'en',
-    mainEntityOfPage: { '@type': 'WebPage', '@id': absoluteUrl(path) },
-    author: { '@type': 'Organization', name: SITE.name[lang], url: SITE.baseUrl },
-    publisher: { '@id': `${SITE.baseUrl}/#organization` },
-    image: absoluteUrl('/og-default.png'),
+    mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl(path, lang) },
+    author: { '@type': 'Organization', name: SITE.name[lang], url: pageUrl('/', lang) },
+    publisher: { '@type': 'Organization', '@id': `${SITE.baseUrl}/#organization`, name: SITE.name[lang], logo: { '@type': 'ImageObject', url: absoluteUrl('/icon-512.png') } },
+    image: assetUrl(image) || absoluteUrl('/og-default.png'),
     keywords: (meta.keywords?.[lang] || []).join(', '),
   };
 }
@@ -341,7 +395,7 @@ export function itemListSchema(products, { lang = 'ar', name } = {}) {
     itemListElement: products.slice(0, 30).map((p, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      url: absoluteUrl(`${lang === 'en' ? '/en' : ''}/products/${p.slug}`),
+      url: pageUrl(`/products/${p.slug}`, lang),
       name: p.name[lang],
     })),
   };
@@ -357,7 +411,7 @@ export function localAreaSchema(location, lang = 'ar') {
       lang === 'ar'
         ? `توصيل دراجات وإكسسوارات إلى ${location.name.ar} وكل القرى التابعة لها في محافظة الشرقية.`
         : `Bicycle and accessory delivery to ${location.name.en} and its villages in Al Sharqia governorate.`,
-    url: absoluteUrl(`${lang === 'en' ? '/en' : ''}/locations/${location.slug}`),
+    url: pageUrl(`/locations/${location.slug}`, lang),
     provider: organizationSchema(lang),
     areaServed: [
       { '@type': 'City', name: location.name[lang] },

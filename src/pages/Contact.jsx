@@ -46,8 +46,15 @@ export default function Contact() {
     <>
       <Seo
         lang={lang}
-        title={`${t('contact.title')} — ${t('common.brand')}`}
-        description={t('contact.subtitle')}
+        title={t('seo.contactTitle')}
+        description={t('seo.contact', {
+          whatsapp: SITE.contact.whatsappDisplay,
+          phone: SITE.contact.phones[0],
+          city: tr(SITE.address.city),
+          region: tr(SITE.address.region),
+          opens: SITE.openingHours[0].opens,
+          closes: SITE.openingHours[0].closes,
+        })}
         canonicalPath={paths.contact()}
         jsonLd={[
           organizationSchema(lang),

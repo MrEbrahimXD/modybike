@@ -6,7 +6,7 @@ import PostBody, { TableOfContents } from '../components/blog/PostBody.jsx';
 import Media from '../components/ui/Media.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import { Button, Section, SectionHead } from '../components/ui/primitives.jsx';
-import { Seo, articleSchema, breadcrumbSchema, faqSchema, absoluteUrl } from '../lib/seo.jsx';
+import { Seo, articleSchema, breadcrumbSchema, faqSchema, absoluteUrl, shareImage } from '../lib/seo.jsx';
 import { useLocale } from '../i18n/index.jsx';
 import { useCopyToClipboard } from '../lib/hooks.js';
 import { paths } from '../lib/routes.js';
@@ -61,10 +61,10 @@ export default function BlogPost() {
         title={`${tr(meta.title)} — ${t('common.brand')}`}
         description={tr(meta.excerpt)}
         canonicalPath={paths.blogPost(slug)}
-        image={journalImage(slug)?.src}
+        image={journalImage(slug) ? shareImage('blog', slug) : undefined}
         keywords={(meta.keywords?.[lang] || []).join(', ')}
         jsonLd={[
-          articleSchema(meta, { lang, path: paths.blogPost(slug) }),
+          articleSchema(meta, { lang, path: paths.blogPost(slug), image: journalImage(slug)?.src }),
           breadcrumbSchema([
             { name: t('nav.home'), path: '/' },
             { name: t('blog.title'), path: paths.blog() },

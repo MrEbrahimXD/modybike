@@ -11,6 +11,8 @@ const siteUrl = (import.meta.env?.VITE_SITE_URL || 'http://localhost:5173').repl
 export const SITE = {
   /** اسم البراند كما يظهر في كل مكان */
   name: { ar: 'مودي بايك', en: 'ModyBike' },
+  /** Other spellings people type into Google — used in structured data only. */
+  alternateNames: ['Mody Bike', 'مودى بايك', 'مودي بيك'],
   legalName: { ar: 'مودي بايك لتجارة الدراجات', en: 'ModyBike Cycles' },
 
   /** TODO: غيّرها للدومين النهائي — بدون / في الآخر */
@@ -20,12 +22,12 @@ export const SITE = {
   basePath: new URL(siteUrl).pathname.replace(/\/+$/, ''),
 
   tagline: {
-    ar: 'دراجات أطفال وشباب وكبار — من ١٢ لـ ٢٦ بوصة',
-    en: 'Bikes for children, teens and adults — 12 to 26 inch',
+    ar: 'عجل ودراجات أطفال وكبار بالأسعار',
+    en: 'Kids and adult bikes with prices',
   },
 
   description: {
-    ar: 'مودي بايك: دراجات أطفال وكبار مقاس ١٢ و١٦ و٢٠ و٢٤ و٢٦ بوصة بالأسعار، إكسسوارات، وصيانة دراجات. اطلب على واتساب والتوصيل لحد البيت.',
+    ar: 'مودي بايك: عجل ودراجات أطفال وكبار مقاس 12 و16 و20 و24 و26 بوصة بالأسعار، إكسسوارات، وصيانة. اطلب على واتساب والتوصيل لحد البيت.',
     en: 'ModyBike: kids and adult bikes in 12, 16, 20, 24 and 26 inch with prices, accessories and bike repairs. Order on WhatsApp for delivery to your door.',
   },
 
@@ -97,9 +99,17 @@ export const SITE = {
   },
 
   /* --------------------------------------------------------------- ANALYTICS */
-  /** TODO: كود Google Analytics / Search Console لو موجود */
+  /**
+   * قياس الزيارات — سيبهم فاضيين لحد ما تعمل الحسابات:
+   *  gaMeasurementId: من Google Analytics → Admin → Data streams (شكله G-XXXXXXX)
+   *  metaPixelId: من Meta Events Manager → Pixel (رقم طويل)
+   *  googleSiteVerification: كود التحقق من Search Console (لو مش هتستخدم DNS)
+   *  facebookDomainVerification: من Meta Business Settings → Domains
+   * كل ضغطة على واتساب أو رقم التليفون بتتسجل كـ lead.
+   */
   analytics: {
     gaMeasurementId: '',
+    metaPixelId: '',
     googleSiteVerification: '',
     facebookDomainVerification: '',
   },
@@ -107,6 +117,10 @@ export const SITE = {
   /** علامة للمحتوى المؤقت — اتقفلت بعد ما وصلت بيانات الدراجات الحقيقية (٢٠ سبتمبر ٢٠٢٦) */
   isPlaceholderContent: false,
 };
+
+/** Router basename. The trailing slash makes the home link "/modybike/" rather
+    than "/modybike", which GitHub Pages would answer with a redirect. */
+export const ROUTER_BASENAME = SITE.basePath ? `${SITE.basePath}/` : '/';
 
 /** رقم الواتساب جاهز للاستخدام في لينك wa.me */
 export const WHATSAPP_LINK = `https://wa.me/${SITE.contact.whatsapp}`;

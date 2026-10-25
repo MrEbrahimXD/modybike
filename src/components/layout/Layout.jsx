@@ -8,6 +8,7 @@ import Media from '../ui/Media.jsx';
 import AccessoryUpsell from '../product/AccessoryUpsell.jsx';
 import { useLocale } from '../../i18n/index.jsx';
 import { useCart } from '../../lib/cart.jsx';
+import { useAnyOnScreen } from '../../lib/hooks.js';
 import { SITE, WHATSAPP_LINK } from '../../config/site.js';
 
 /** Scrolls to top on navigation, but leaves in-page anchors alone. */
@@ -37,26 +38,36 @@ function CartAnnouncer() {
   );
 }
 
+/** Pages whose first screen already has its own WhatsApp button. */
+const OWN_WHATSAPP = /^\/(maintenance|contact|checkout)\/?$|^\/locations\/[^/]+/;
+
 /**
- * The floating WhatsApp action, for phones and tablets only.
- *
- * It used to hide its label below 640px, which left a bare 52×48 green block
- * floating over the content — unreadable as a button and unclear as an action.
- * The label is always on now, and the whole thing disappears at `lg`, where the
- * header carries its own WhatsApp button instead.
+ * The floating WhatsApp action, for phones and tablets only (the header has
+ * one from `lg`). One WhatsApp button on screen at a time: it steps aside
+ * while the page's own WhatsApp button is visible.
  */
 function WhatsAppFab() {
   const { t } = useLocale();
   const { pathname } = useLocation();
+  const bare = stripLocale(pathname);
+  const pageButtonVisible = useAnyOnScreen(
+    () => document.querySelectorAll('main .bg-whatsapp'),
+    pathname,
+    OWN_WHATSAPP.test(bare),
+  );
   // Product pages carry their own bottom buy bar.
-  if (/^\/products\/[^/]+/.test(stripLocale(pathname))) return null;
+  if (/^\/products\/[^/]+/.test(bare)) return null;
   return (
     <a
       href={WHATSAPP_LINK}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${t('a11y.chatWhatsapp')} ${t('a11y.externalLink')}`}
-      className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] end-4 z-40 inline-flex h-14 items-center gap-2.5 bg-whatsapp px-5 text-[15px] font-semibold text-white shadow-sheet transition-colors duration-200 hover:bg-whatsapp-ink lg:hidden print:hidden"
+      aria-hidden={pageButtonVisible || undefined}
+      tabIndex={pageButtonVisible ? -1 : undefined}
+      className={`fixed bottom-[max(1rem,env(safe-area-inset-bottom))] end-4 z-40 inline-flex h-14 items-center gap-2.5 bg-whatsapp px-5 text-[15px] font-semibold text-white shadow-sheet transition-[transform,opacity,background-color] duration-200 hover:bg-whatsapp-ink lg:hidden print:hidden ${
+        pageButtonVisible ? 'pointer-events-none translate-y-24 opacity-0' : ''
+      }`}
     >
       <Icon name="whatsapp" className="h-5 w-5 shrink-0" />
       {t('home.ctaButton')}

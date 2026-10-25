@@ -69,8 +69,8 @@ export default function SizeGuide() {
     <>
       <Seo
         lang={lang}
-        title={`${t('sizeGuide.title')} — ${t('common.brand')}`}
-        description={t('sizeGuide.subtitle')}
+        title={t('seo.sizeGuideTitle')}
+        description={t('seo.sizeGuide')}
         canonicalPath={paths.sizeGuide()}
         jsonLd={[
           breadcrumbSchema([

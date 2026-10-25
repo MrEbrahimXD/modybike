@@ -85,8 +85,12 @@ export default function Blog({ variant }) {
     <>
       <Seo
         lang={lang}
-        title={`${title} — ${t('common.brand')}`}
-        description={t('blog.subtitle')}
+        title={activeCat ? `${title} — ${t('blog.title')}` : t('seo.blogTitle')}
+        description={
+          activeCat
+            ? t('seo.blogTopic', { topic: title, titles: posts.slice(0, 3).map((p) => tr(p.title)).join('، ') }).slice(0, 300)
+            : t('seo.blog')
+        }
         canonicalPath={canonical}
         jsonLd={[
           breadcrumbSchema(

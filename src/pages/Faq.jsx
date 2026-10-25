@@ -14,8 +14,8 @@ export default function Faq() {
     <>
       <Seo
         lang={lang}
-        title={`${t('faq.title')} — ${t('common.brand')}`}
-        description={t('faq.subtitle')}
+        title={t('faq.title')}
+        description={t('seo.faq')}
         canonicalPath={paths.faq()}
         jsonLd={[
           faqSchema(ALL_FAQS, lang),

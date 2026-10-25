@@ -3,7 +3,8 @@ import { LOCATIONS } from '../data/locations.js';
 import { POSTS, POST_CATEGORIES } from '../content/posts/index.js';
 import { CATEGORIES } from '../data/categories.js';
 import { AGE_GROUPS } from '../data/collections.js';
-import { LIVE_PRODUCT_TYPES } from '../data/products.js';
+import { LIVE_PRODUCT_TYPES, WHEEL_SIZES } from '../data/products.js';
+import { productImages } from '../data/media.js';
 
 /**
  * Single source of truth for every URL on the site.
@@ -17,6 +18,8 @@ export const ROUTE_IDS = {
   products: 'products',
   ageCollection: 'ageCollection',
   typeCollection: 'typeCollection',
+  categoryCollection: 'categoryCollection',
+  sizeCollection: 'sizeCollection',
   product: 'product',
   accessories: 'accessories',
   sizeGuide: 'sizeGuide',
@@ -43,6 +46,8 @@ export const ROUTE_PATTERNS = [
   { id: ROUTE_IDS.products, pattern: 'products' },
   { id: ROUTE_IDS.ageCollection, pattern: 'shop/age/:ageSlug' },
   { id: ROUTE_IDS.typeCollection, pattern: 'shop/type/:typeSlug' },
+  { id: ROUTE_IDS.categoryCollection, pattern: 'shop/category/:categorySlug' },
+  { id: ROUTE_IDS.sizeCollection, pattern: 'shop/size/:sizeSlug' },
   { id: ROUTE_IDS.product, pattern: 'products/:slug' },
   { id: ROUTE_IDS.accessories, pattern: 'accessories' },
   { id: ROUTE_IDS.sizeGuide, pattern: 'size-guide' },
@@ -68,6 +73,8 @@ export const paths = {
   products: (query) => (query ? `/products?${query}` : '/products'),
   byAge: (slug) => `/shop/age/${slug}`,
   byType: (slug) => `/shop/type/${slug}`,
+  byCategory: (slug) => `/shop/category/${slug}`,
+  bySize: (inches) => `/shop/size/${inches}-inch`,
   productsByCategory: (cat) => `/products?category=${encodeURIComponent(cat)}`,
   product: (slug) => `/products/${slug}`,
   accessories: () => '/accessories',
@@ -92,23 +99,34 @@ export const paths = {
  * Every concrete, prerenderable path (locale-less), with sitemap hints.
  * @returns {{path:string, changefreq:string, priority:number, lastmod?:string}[]}
  */
+/** Latest date among a set of products, for sitemap lastmod. */
+const newest = (list) => list.map((p) => p.updatedAt || p.createdAt).filter(Boolean).sort().pop();
+
+/**
+ * Every concrete, prerenderable path (locale-less), with sitemap hints.
+ * `lastmod` is only given where a real date exists (product, article or the
+ * newest product in a collection) — a date that changes on every build
+ * teaches Google to ignore it.
+ * @returns {{path:string, changefreq:string, priority:number, lastmod?:string, images?:string[], noindex?:boolean}[]}
+ */
 export function getStaticPaths() {
-  const today = new Date().toISOString().slice(0, 10);
+  const bikes = PRODUCTS.filter((p) => p.category !== 'accessories');
+  const catalogueDate = newest(bikes);
 
   const core = [
-    { path: '/', changefreq: 'weekly', priority: 1.0, lastmod: today },
-    { path: '/products', changefreq: 'daily', priority: 0.9, lastmod: today },
-    { path: '/accessories', changefreq: 'weekly', priority: 0.8, lastmod: today },
-    { path: '/size-guide', changefreq: 'monthly', priority: 0.9, lastmod: today },
-    { path: '/maintenance', changefreq: 'monthly', priority: 0.8, lastmod: today },
-    { path: '/blog', changefreq: 'weekly', priority: 0.8, lastmod: today },
-    { path: '/locations', changefreq: 'monthly', priority: 0.8, lastmod: today },
-    { path: '/about', changefreq: 'yearly', priority: 0.5, lastmod: today },
-    { path: '/contact', changefreq: 'yearly', priority: 0.7, lastmod: today },
-    { path: '/faq', changefreq: 'monthly', priority: 0.7, lastmod: today },
-    { path: '/shipping', changefreq: 'yearly', priority: 0.4, lastmod: today },
-    { path: '/privacy', changefreq: 'yearly', priority: 0.2, lastmod: today },
-    { path: '/terms', changefreq: 'yearly', priority: 0.2, lastmod: today },
+    { path: '/', changefreq: 'weekly', priority: 1.0, lastmod: catalogueDate },
+    { path: '/products', changefreq: 'weekly', priority: 0.9, lastmod: catalogueDate },
+    { path: '/accessories', changefreq: 'weekly', priority: 0.6 },
+    { path: '/size-guide', changefreq: 'monthly', priority: 0.7 },
+    { path: '/maintenance', changefreq: 'monthly', priority: 0.7 },
+    { path: '/blog', changefreq: 'weekly', priority: 0.6, lastmod: newest(POSTS.map((p) => ({ updatedAt: p.updated || p.date }))) },
+    { path: '/locations', changefreq: 'monthly', priority: 0.6 },
+    { path: '/about', changefreq: 'yearly', priority: 0.4 },
+    { path: '/contact', changefreq: 'yearly', priority: 0.7 },
+    { path: '/faq', changefreq: 'monthly', priority: 0.5 },
+    { path: '/shipping', changefreq: 'yearly', priority: 0.3 },
+    { path: '/privacy', changefreq: 'yearly', priority: 0.2 },
+    { path: '/terms', changefreq: 'yearly', priority: 0.2 },
     // Cart and checkout are prerendered so a direct hit works, but kept out of the sitemap.
     { path: '/cart', changefreq: 'never', priority: 0.1, noindex: true },
     { path: '/checkout', changefreq: 'never', priority: 0.1, noindex: true },
@@ -117,33 +135,40 @@ export function getStaticPaths() {
   const productPaths = PRODUCTS.map((p) => ({
     path: paths.product(p.slug),
     changefreq: 'weekly',
-    priority: 0.7,
-    lastmod: today,
+    priority: p.placeholder ? 0.1 : 0.8,
+    lastmod: p.updatedAt || p.createdAt,
+    images: productImages(p.slug).map((img) => img.src),
+    ...(p.placeholder ? { noindex: true } : {}),
   }));
 
   const locationPaths = LOCATIONS.map((l) => ({
     path: paths.location(l.slug),
     changefreq: 'monthly',
-    priority: 0.75,
-    lastmod: today,
+    priority: 0.6,
+    lastmod: catalogueDate,
   }));
 
   const postPaths = POSTS.map((p) => ({
     path: paths.blogPost(p.slug),
     changefreq: 'monthly',
-    priority: 0.6,
+    priority: 0.5,
     lastmod: p.updated || p.date,
   }));
 
   const blogCategoryPaths = POST_CATEGORIES.map((c) => ({
     path: paths.blogCategory(c.slug),
     changefreq: 'monthly',
-    priority: 0.5,
-    lastmod: today,
+    priority: 0.3,
   }));
 
   const collectionPaths = [
-    ...AGE_GROUPS.map((group) => ({ path: paths.byAge(group.slug), changefreq: 'weekly', priority: 0.9 })),
+    ...AGE_GROUPS.map((group) => ({ path: paths.byAge(group.slug), changefreq: 'weekly', priority: 0.9, lastmod: catalogueDate })),
+    ...CATEGORIES.filter((c) => c.kind === 'bike' && bikes.some((p) => p.category === c.slug)).map((c) => ({
+      path: paths.byCategory(c.slug), changefreq: 'weekly', priority: 0.9, lastmod: newest(bikes.filter((p) => p.category === c.slug)),
+    })),
+    ...WHEEL_SIZES.map((inches) => ({
+      path: paths.bySize(inches), changefreq: 'weekly', priority: 0.9, lastmod: newest(bikes.filter((p) => p.specs?.wheelSize === inches)),
+    })),
     ...LIVE_PRODUCT_TYPES.filter((type) => type.slug !== 'bikes').map((type) => ({ path: paths.byType(type.slug), changefreq: 'weekly', priority: 0.8 })),
   ];
   return [...core, ...collectionPaths, ...productPaths, ...locationPaths, ...postPaths, ...blogCategoryPaths];
@@ -153,7 +178,7 @@ export function getStaticPaths() {
 export const CATEGORY_LINKS = CATEGORIES.map((c) => ({
   slug: c.slug,
   name: c.name,
-  href: paths.productsByCategory(c.slug),
+  href: paths.byCategory(c.slug),
 }));
 
 export default paths;

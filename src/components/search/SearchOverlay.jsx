@@ -61,7 +61,7 @@ export default function SearchOverlay({ open, onClose }) {
         item: c,
         to: path(
           c.kind === 'age' ? paths.byAge(c.slug) : c.kind === 'type' ? paths.byType(c.slug) : c.kind === 'bike'
-            ? paths.productsByCategory(c.slug)
+            ? paths.byCategory(c.slug)
             : c.kind === 'group'
               ? `${paths.accessories()}?sub=${c.slug}`
               : paths.accessories(),

@@ -58,6 +58,9 @@ export default {
           800: '#6E200B',
           900: '#4B170A',
         },
+        /* The logo's yellow. Used for brand moments (shop-by-age tiles), never
+           for text on paper — it fails contrast there. */
+        sun: { DEFAULT: '#FCC609', soft: '#FFF3C4' },
         /* Darker than WhatsApp's own #25D366, which only reaches 2:1 against
            the white label on it. This clears 5.2:1 and still reads as WhatsApp
            green next to the glyph. */

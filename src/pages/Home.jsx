@@ -8,7 +8,7 @@ import ShopCollections from '../components/product/ShopCollections.jsx';
 import { Seo, organizationSchema, websiteSchema } from '../lib/seo.jsx';
 import { useLocale } from '../i18n/index.jsx';
 import { paths } from '../lib/routes.js';
-import { featuredProducts, featuredAccessories } from '../data/products.js';
+import { featuredProducts, featuredAccessories, BIKE_PRODUCTS } from '../data/products.js';
 import { LOCATIONS } from '../data/locations.js';
 import { POSTS_SORTED } from '../content/posts/index.js';
 import { editorialImage, journalImage } from '../data/media.js';
@@ -150,18 +150,23 @@ function Journal() {
 }
 
 export default function Home() {
-  const { lang } = useLocale();
+  const { lang, price } = useLocale();
+  const from = price(Math.min(...BIKE_PRODUCTS.map((p) => p.price)));
   return (
     <>
       <Seo
         lang={lang}
-        title={`${SITE.name[lang]} — ${SITE.tagline[lang]}`}
-        description={SITE.description[lang]}
+        title={lang === 'ar' ? `${SITE.name.ar} — ${SITE.tagline.ar} في الشرقية` : `${SITE.name.en} — ${SITE.tagline.en} in Sharqia, Egypt`}
+        description={
+          lang === 'ar'
+            ? `عجل ودراجات أطفال وكبار مقاس 12 لـ 26 بوصة بأسعار من ${from}، إكسسوارات وصيانة. اطلب على واتساب ${SITE.contact.whatsappDisplay} والتوصيل لحد البيت.`
+            : `Kids and adult bikes from 12 to 26 inch, priced from ${from}, plus accessories and repairs. Order on WhatsApp ${SITE.contact.whatsappDisplay} for delivery to your door.`
+        }
         canonicalPath={lang === 'en' ? '/en' : '/'}
         keywords={
           lang === 'ar'
-            ? 'دراجات, عجل, عجل أطفال, دراجات بالأسعار, دراجات أطفال, دراجات جبلية, صيانة دراجات, إكسسوارات دراجات, دراجات الشرقية, عجل الزقازيق, دراجات أبو كبير'
-            : 'bicycles, kids bikes, bike prices Egypt, mountain bikes, bike repair, bike accessories, Sharqia, Zagazig'
+            ? 'عجل, عجلة, عجل أطفال, عجلة أطفال, دراجات, دراجات أطفال, أسعار العجل, عجل جبلي, عجل برامج, صيانة عجل, إكسسوارات عجل, عجل الشرقية, عجل الزقازيق'
+            : 'bicycles, kids bikes, bike prices Egypt, mountain bikes, BMX, bike repair, bike accessories, Sharqia, Zagazig'
         }
         jsonLd={[organizationSchema(lang), websiteSchema(lang)].filter(Boolean)}
       />

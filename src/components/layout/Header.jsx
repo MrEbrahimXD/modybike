@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo.jsx';
 import Icon from '../ui/Icon.jsx';
 import { Button } from '../ui/primitives.jsx';
-import { useLocale, stripLocale } from '../../i18n/index.jsx';
+import { useLocale, stripLocale, localizedPath } from '../../i18n/index.jsx';
 import { useTheme } from '../../lib/theme.jsx';
 import { useCart } from '../../lib/cart.jsx';
 import { useLockBodyScroll, useMediaQuery } from '../../lib/hooks.js';
@@ -16,7 +16,7 @@ import { SITE, WHATSAPP_LINK } from '../../config/site.js';
 
 const SHOP_LINKS = [
   ...AGE_GROUPS.map((group) => ({ ...group, name: group.label, href: paths.byAge(group.slug), icon: 'kids' })),
-  ...CATEGORIES.filter((c) => c.kind === 'bike').map((c) => ({ ...c, href: paths.productsByCategory(c.slug) })),
+  ...CATEGORIES.filter((c) => c.kind === 'bike').map((c) => ({ ...c, href: paths.byCategory(c.slug) })),
   ...LIVE_PRODUCT_TYPES.filter((type) => type.slug !== 'bikes').map((type) => ({ ...type, name: type.label, href: paths.byType(type.slug) })),
 ];
 
@@ -199,7 +199,7 @@ function MobileNav({ open, onClose }) {
           type="button"
           onClick={() => {
             onClose();
-            navigate(otherLang === 'ar' ? bare : `/en${bare === '/' ? '' : bare}`);
+            navigate(localizedPath(otherLang, bare));
           }}
           className="label mt-4 flex w-full items-center justify-center gap-2 py-2"
         >
@@ -274,7 +274,7 @@ export default function Header() {
 
   const switchLang = () => {
     const other = lang === 'ar' ? 'en' : 'ar';
-    navigate(other === 'ar' ? bare : `/en${bare === '/' ? '' : bare}`);
+    navigate(localizedPath(other, bare));
   };
 
   /* Light accent over the photograph, dark accent on the solid bar. */

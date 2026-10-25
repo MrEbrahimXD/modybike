@@ -23,13 +23,27 @@ function interpolate(str, vars) {
 }
 
 /**
+ * Adds the trailing slash a page URL needs. Every page is a folder with an
+ * index.html, and static hosts (GitHub Pages, Cloudflare) answer the
+ * slash-less form with a redirect — links and canonicals must not point at one.
+ * Files (`/catalogue/x.pdf`) and query strings are left alone.
+ */
+export function withTrailingSlash(href = '/') {
+  const [, pathname = '/', rest = ''] = String(href).match(/^([^?#]*)(.*)$/) || [];
+  if (pathname === '' || pathname === '/') return `/${rest}`;
+  if (/\.[a-z0-9]+$/i.test(pathname)) return pathname + rest;
+  return `${pathname.replace(/\/+$/, '')}/${rest}`;
+}
+
+/**
  * Builds a localised href.
- * Arabic lives at the root (`/products`), English under `/en` (`/en/products`).
+ * Arabic lives at the root (`/products/`), English under `/en` (`/en/products/`).
  */
 export function localizedPath(lang, to = '/') {
-  const clean = to === '/' ? '' : to.replace(/\/+$/, '');
+  const [, pathname = '/', rest = ''] = String(to).match(/^([^?#]*)(.*)$/) || [];
+  const clean = pathname === '/' ? '' : pathname.replace(/\/+$/, '');
   const withLang = lang === DEFAULT_LOCALE ? clean : `/en${clean}`;
-  return withLang === '' ? '/' : withLang;
+  return withTrailingSlash(`${withLang || '/'}${rest}`);
 }
 
 /** Strips the locale prefix so we can swap languages while staying on the same page. */

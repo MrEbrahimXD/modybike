@@ -3,7 +3,8 @@ import { createRoot, hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import { seedContentCache } from './lib/content.js';
-import { SITE } from './config/site.js';
+import { ROUTER_BASENAME } from './config/site.js';
+import { startAnalytics } from './lib/analytics.js';
 import './styles/index.css';
 
 /**
@@ -31,7 +32,7 @@ const container = document.getElementById('root');
 
 const tree = (
   <StrictMode>
-    <BrowserRouter basename={SITE.basePath || '/'}>
+    <BrowserRouter basename={ROUTER_BASENAME}>
       <App />
     </BrowserRouter>
   </StrictMode>
@@ -43,3 +44,8 @@ if (container.hasChildNodes()) {
 } else {
   createRoot(container).render(tree);
 }
+
+// Tracking waits for the page to finish loading; it is a no-op until an ID is set.
+const startLater = () => window.setTimeout(startAnalytics, 1500);
+if (document.readyState === 'complete') startLater();
+else window.addEventListener('load', startLater, { once: true });

@@ -45,6 +45,8 @@ function localeRoutes(lang, basePath) {
       <Route path="products" element={<Products />} />
       <Route path="shop/age/:ageSlug" element={<Products />} />
       <Route path="shop/type/:typeSlug" element={<Products />} />
+      <Route path="shop/category/:categorySlug" element={<Products />} />
+      <Route path="shop/size/:sizeSlug" element={<Products />} />
       <Route path="products/:slug" element={<ProductDetail />} />
       <Route path="accessories" element={<Products variant="accessories" />} />
       <Route path="size-guide" element={<SizeGuide />} />

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import NotFound from './NotFound.jsx';
 import { Breadcrumbs } from '../components/layout/Layout.jsx';
@@ -7,9 +7,11 @@ import Icon from '../components/ui/Icon.jsx';
 import { Button, Eyebrow, Price, Section, SectionHead, SpecRow, StockPill, Tag } from '../components/ui/primitives.jsx';
 import { QtyStepper } from '../components/ui/form.jsx';
 import { ProductGrid } from '../components/product/ProductCard.jsx';
-import { Seo, breadcrumbSchema, productSchema } from '../lib/seo.jsx';
+import { Seo, breadcrumbSchema, productSchema, shareImage } from '../lib/seo.jsx';
+import { productSeoDescription, productSeoTitle } from '../lib/productSeo.js';
 import { useLocale } from '../i18n/index.jsx';
 import { useCart } from '../lib/cart.jsx';
+import { useAnyOnScreen } from '../lib/hooks.js';
 import { paths } from '../lib/routes.js';
 import { productEnquiryUrl } from '../lib/whatsapp.js';
 import { getProduct, getRelatedProducts, isAccessory, getSuggestedAccessories } from '../data/products.js';
@@ -75,6 +77,9 @@ export default function ProductDetail() {
   const [qty, setQty] = useState(1);
   const [color, setColor] = useState(null);
   const [added, setAdded] = useState(false);
+  const buyRef = useRef(null);
+  // The phone buy bar repeats the two buttons, so it waits until they scroll away.
+  const buyButtonsVisible = useAnyOnScreen(() => [buyRef.current], slug);
 
   if (!product) return <NotFound />;
 
@@ -101,19 +106,22 @@ export default function ProductDetail() {
   return (
     <>
       <Seo
-        noindex={SITE.isPlaceholderContent}
+        noindex={SITE.isPlaceholderContent || Boolean(product.placeholder)}
         lang={lang}
-        title={`${name} — ${t('common.brand')}`}
-        description={tr(product.description).slice(0, 160)}
+        title={productSeoTitle(product, lang)}
+        description={productSeoDescription(product, lang)}
         canonicalPath={paths.product(product.slug)}
-        image={images[0]?.src}
+        image={images.length ? shareImage('products', product.slug) : undefined}
         jsonLd={[
-          productSchema(product, { lang, path: paths.product(product.slug) }),
+          productSchema(product, { lang, path: paths.product(product.slug), images: images.map((img) => img.src) }),
           breadcrumbSchema([
             { name: t('nav.home'), path: '/' },
-            { name: accessory ? t('product.accessories') : t('product.products'), path: accessory ? paths.accessories() : paths.products() },
+            accessory
+              ? { name: t('product.accessories'), path: paths.accessories() }
+              : { name: t('product.products'), path: paths.products() },
+            ...(category ? [{ name: tr(category.name), path: paths.byCategory(category.slug) }] : []),
             { name, path: paths.product(product.slug) },
-          ]),
+          ], lang),
         ].filter(Boolean)}
       />
 
@@ -124,7 +132,7 @@ export default function ProductDetail() {
               label: accessory ? t('product.accessories') : t('product.products'),
               to: path(accessory ? paths.accessories() : paths.products()),
             },
-            ...(category ? [{ label: tr(category.name), to: path(paths.productsByCategory(category.slug)) }] : []),
+            ...(category ? [{ label: tr(category.name), to: path(paths.byCategory(category.slug)) }] : []),
             { label: name },
           ]}
         />
@@ -141,7 +149,7 @@ export default function ProductDetail() {
                 <Tag tone="outline">{lang === 'ar' ? 'الأكثر مبيعًا' : 'Bestseller'}</Tag>
               ) : null}
               {category ? (
-                <Link to={path(paths.productsByCategory(category.slug))} className="label link-underline muted">
+                <Link to={path(paths.byCategory(category.slug))} className="label link-underline muted">
                   {tr(category.name)}
                 </Link>
               ) : null}
@@ -161,7 +169,7 @@ export default function ProductDetail() {
             {!accessory ? (
               <dl className="mt-6 grid grid-cols-2 gap-x-6 sm:grid-cols-4">
                 {[
-                  [t('product.wheelSize'), specs.wheelSize ? `${specs.wheelSize}"` : null],
+                  [t('product.wheelSize'), specs.wheelSize ? <Link to={path(paths.bySize(specs.wheelSize))} className="underline decoration-carbon-300 underline-offset-4 hover:decoration-current">{`${specs.wheelSize}"`}</Link> : null],
                   [t('product.gears'), specs.gears || null],
                   [t('product.brakes'), specs.brakes ? t(`brakes.${specs.brakes}`) : null],
                   [t('product.weight'), specs.weightKg ? `${num(specs.weightKg)} ${t('product.kg')}` : null],
@@ -205,6 +213,7 @@ export default function ProductDetail() {
             ) : null}
 
             {/* buy */}
+            <div ref={buyRef}>
             <div className="mt-8 flex flex-wrap items-stretch gap-3">
               <QtyStepper value={qty} onChange={setQty} label={t('product.quantity')} />
               <Button
@@ -228,6 +237,7 @@ export default function ProductDetail() {
             >
               {t('product.buyNow')}
             </Button>
+            </div>
 
             <ul className="mt-6 space-y-2.5 text-sm">
               <li>
@@ -366,7 +376,12 @@ export default function ProductDetail() {
       ) : null}
 
       {/* Phone buy bar: price and the two actions stay in reach while reading. */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t bg-paper/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur rule dark:bg-carbon-950/95 lg:hidden print:hidden">
+      <div
+        aria-hidden={buyButtonsVisible || undefined}
+        className={`fixed inset-x-0 bottom-0 z-40 border-t bg-paper/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur transition-transform duration-200 rule dark:bg-carbon-950/95 lg:hidden print:hidden ${
+          buyButtonsVisible ? 'pointer-events-none translate-y-full' : ''
+        }`}
+      >
         <div className="flex items-center gap-3">
           <div className="min-w-0 flex-1">
             <p className="truncate text-xs muted">{name}</p>
