@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams, useParams, useNavigate } from 'react-router-dom';
 import { Breadcrumbs } from '../components/layout/Layout.jsx';
 import { ProductGrid } from '../components/product/ProductCard.jsx';
@@ -79,10 +79,19 @@ function ShortcutRail({ current }) {
     ...LIVE_PRODUCT_TYPES.filter((type) => type.slug !== 'bikes').map((type) => ({ key: `type:${type.slug}`, label: tr(type.label), to: paths.byType(type.slug) })),
     { key: 'accessories', label: t('nav.accessories'), to: paths.accessories() },
   ];
+  const listRef = useRef(null);
+
+  // Bring the current section's chip into view on phones, where the row scrolls.
+  useEffect(() => {
+    const list = listRef.current;
+    const el = list?.querySelector('[aria-current="page"]');
+    if (!list || !el) return;
+    list.scrollLeft += el.getBoundingClientRect().left - list.getBoundingClientRect().left - 20;
+  }, [current]);
 
   return (
     <nav aria-label={lang === 'ar' ? 'الأقسام' : 'Sections'} className="border-b rule">
-      <ul className="no-scrollbar container-page flex gap-2 overflow-x-auto py-3" role="list">
+      <ul ref={listRef} className="no-scrollbar container-page flex gap-2 overflow-x-auto py-3" role="list">
         {items.map((item) => {
           const active = item.key === current;
           return (

@@ -196,7 +196,7 @@ export function FilterToolbar({ shown, total, sort, onSort, onOpenFilters, activ
 
   return (
     <div className="sticky top-[68px] z-40 -mx-5 border-b bg-paper/95 px-5 backdrop-blur-md rule dark:bg-carbon-950/95 sm:-mx-8 sm:px-8 lg:mx-0 lg:px-0">
-      <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 py-3">
+      <div className="flex items-center justify-between gap-3 py-2.5">
         <div className="flex items-center gap-4">
           <button
             type="button"
@@ -210,17 +210,18 @@ export function FilterToolbar({ shown, total, sort, onSort, onOpenFilters, activ
             ) : null}
           </button>
 
-          <p className="label tnum whitespace-nowrap muted">
+          <p className="label tnum hidden whitespace-nowrap muted lg:block">
             {t('product.showingResults', { count: shown, total })}
           </p>
         </div>
 
-        <label className="flex items-center gap-3">
-          <span className="label shrink-0 muted">{t('common.sort')}</span>
+        <label className="flex min-w-0 items-center gap-3">
+          <span className="label hidden shrink-0 muted sm:inline">{t('common.sort')}</span>
           <Select
             value={sort}
             onChange={(e) => onSort(e.target.value)}
-            className="w-auto min-w-[10.5rem] py-2 text-sm"
+            aria-label={t('common.sort')}
+            className="w-auto min-w-0 max-w-[11rem] py-2 text-sm"
           >
             {Object.entries(sortOptions).map(([k, label]) => (
               <option key={k} value={k}>

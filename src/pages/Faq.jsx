@@ -27,7 +27,6 @@ export default function Faq() {
       />
 
       <PageHeader
-        eyebrow={`${ALL_FAQS.length} ${lang === 'ar' ? 'سؤال' : 'questions'}`}
         title={t('faq.title')}
         lede={t('faq.subtitle')}
         breadcrumbs={[{ label: t('faq.title') }]}

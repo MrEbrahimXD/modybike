@@ -4,7 +4,6 @@ import { Eyebrow, Section } from '../components/ui/primitives.jsx';
 import { Seo, breadcrumbSchema } from '../lib/seo.jsx';
 import { useLocale } from '../i18n/index.jsx';
 import { paths } from '../lib/routes.js';
-import { editorialImage } from '../data/media.js';
 import {
   KIDS_SIZES,
   ADULT_MTB_SIZES,
@@ -82,10 +81,8 @@ export default function SizeGuide() {
       />
 
       <PageHeader
-        eyebrow={t('nav.sizeGuide')}
         title={t('sizeGuide.title')}
         lede={t('sizeGuide.subtitle')}
-        image={editorialImage('hero-fit')}
         breadcrumbs={[{ label: t('sizeGuide.title') }]}
       />
 

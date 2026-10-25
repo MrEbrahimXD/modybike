@@ -24,4 +24,10 @@ npm run verify
 
 Push to `main`. The `Deploy GitHub Pages` workflow builds and verifies the static site, then deploys `dist` through GitHub Pages. No custom domain is configured. Each page is prerendered, so direct links and refreshes work without a redirect workaround.
 
-Product models, prices and photographs are still illustrative. See [SEO-LAUNCH.md](SEO-LAUNCH.md) for remaining client content and SEO launch tasks.
+## Handy commands
+
+- `npm run ship -- "message"` (or double-click `ship.cmd`): commit everything and push; GitHub Pages redeploys.
+- `npm run catalogue`: rebuild the Arabic and English PDF catalogues in `public/catalogue/` from the product data (needs Chromium: `npx playwright install chromium`, or set `CHROME_PATH`).
+- Logo source: `assets-src/brand/icon.jpeg`; traced files are `public/logo-light.svg`, `public/logo-dark.svg`, `public/favicon.svg`.
+
+See [SEO-LAUNCH.md](SEO-LAUNCH.md) for remaining client content and SEO launch tasks.

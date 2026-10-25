@@ -24,17 +24,19 @@ Owner's requirements (all must hold when you finish):
 
 ## Task list (update the checkboxes as you finish)
 
-- [ ] 1. Copy cleanup (AI slop)
-- [ ] 2. Performance / responsive pass
-- [ ] 3. Location wording + areaServed Egypt
-- [ ] 4. Delivery prices removed everywhere
-- [ ] 5. Amazon-style collection + product pages
-- [ ] 6. Spec line font
-- [ ] 7. Navigation simplification
-- [ ] 8. "ليه تشتري" section removed
-- [ ] 9. Maintenance page
-- [ ] 10. Icon from icon.jpeg
-- [ ] 11. PDF catalogue AR + EN
-- [ ] 12. Build + verify pass, pushed
+All twelve were completed on 2026-10-25 (see git log). Use this prompt for follow-up polish: re-check each requirement above against the live pages, fix anything that slipped, and keep `npm run build && npm run verify` green. To refresh the PDFs after a price change run `npx playwright install chromium && npm run catalogue`.
+
+- [x] 1. Copy cleanup (AI slop)
+- [x] 2. Performance / responsive pass
+- [x] 3. Location wording + areaServed Egypt
+- [x] 4. Delivery prices removed everywhere
+- [x] 5. Amazon-style collection + product pages
+- [x] 6. Spec line font
+- [x] 7. Navigation simplification
+- [x] 8. "ليه تشتري" section removed
+- [x] 9. Maintenance page
+- [x] 10. Icon from icon.jpeg
+- [x] 11. PDF catalogue AR + EN
+- [x] 12. Build + verify pass, pushed
 
 ---

@@ -7,7 +7,6 @@ import { Seo, breadcrumbSchema, organizationSchema } from '../lib/seo.jsx';
 import { useLocale } from '../i18n/index.jsx';
 import { paths } from '../lib/routes.js';
 import { contactEnquiryUrl } from '../lib/whatsapp.js';
-import { editorialImage } from '../data/media.js';
 import { SITE, WHATSAPP_LINK } from '../config/site.js';
 
 /** One contact route, presented as an editorial row rather than a card. */
@@ -60,10 +59,8 @@ export default function Contact() {
       />
 
       <PageHeader
-        eyebrow={tr(addr.city)}
         title={t('contact.title')}
         lede={t('contact.subtitle')}
-        image={editorialImage('hero-contact')}
         breadcrumbs={[{ label: t('contact.title') }]}
       />
 

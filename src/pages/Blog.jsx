@@ -6,7 +6,7 @@ import { Seo, breadcrumbSchema } from '../lib/seo.jsx';
 import { useLocale } from '../i18n/index.jsx';
 import { paths } from '../lib/routes.js';
 import { POSTS_SORTED, POST_CATEGORIES, postsByCategory } from '../content/posts/index.js';
-import { journalImage, editorialImage } from '../data/media.js';
+import { journalImage } from '../data/media.js';
 
 /* ==========================================================================
    Journal index
@@ -103,7 +103,6 @@ export default function Blog({ variant }) {
         eyebrow={t('blog.postsCount', { count: posts.length })}
         title={title}
         lede={t('blog.subtitle')}
-        image={editorialImage('hero-journal')}
         breadcrumbs={isCategory ? [{ label: t('blog.title'), to: path(paths.blog()) }, { label: title }] : [{ label: t('blog.title') }]}
       />
 

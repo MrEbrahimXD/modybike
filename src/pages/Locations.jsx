@@ -8,7 +8,7 @@ import { Seo, breadcrumbSchema, localAreaSchema } from '../lib/seo.jsx';
 import { useLocale } from '../i18n/index.jsx';
 import { paths } from '../lib/routes.js';
 import { locationEnquiryUrl } from '../lib/whatsapp.js';
-import { LOCATIONS, GOVERNORATE, getLocation } from '../data/locations.js';
+import { LOCATIONS, getLocation } from '../data/locations.js';
 import { featuredProducts } from '../data/products.js';
 import { SITE } from '../config/site.js';
 
@@ -37,7 +37,6 @@ export default function Locations() {
       />
 
       <PageHeader
-        eyebrow={tr(GOVERNORATE.name)}
         title={t('locations.title')}
         lede={t('locations.subtitle')}
         breadcrumbs={[{ label: t('locations.title') }]}
@@ -106,7 +105,6 @@ export function LocationDetail() {
       />
 
       <PageHeader
-        eyebrow={tr(GOVERNORATE.name)}
         title={t('locations.pageTitle', { city })}
         lede={tr(loc.blurb)}
         breadcrumbs={[{ label: t('locations.title'), to: path(paths.locations()) }, { label: city }]}

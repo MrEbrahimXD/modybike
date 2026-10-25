@@ -65,7 +65,7 @@ export default {
   home: {
     heroEyebrow: 'معرض دراجات لكل الأعمار',
     heroTitle: "دراجات لكل الأعمار",
-    heroSubtitle: "من ١٢ لـ ٢٦ بوصة، والسعر مكتوب على كل موديل.",
+    heroSubtitle: "مقاسات من 12 لـ 26 بوصة، والسعر مكتوب على كل موديل.",
     heroCtaPrimary: "شوف كل الدراجات",
     heroCtaSecondary: 'اعرف مقاسك المناسب',
     heroStat1: "موديل في الكتالوج",

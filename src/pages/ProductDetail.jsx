@@ -359,8 +359,8 @@ export default function ProductDetail() {
       {suggested.length ? (
         <Section className="border-t bg-paper-sunk rule dark:bg-carbon-900/50">
           <div className="container-page">
-            <SectionHead eyebrow={t('nav.accessories')} title={t('product.recommendedAccessories')} />
-            <ProductGrid products={suggested} className="mt-12" cols="grid-cols-2 lg:grid-cols-4" />
+            <SectionHead title={t('product.recommendedAccessories')} />
+            <ProductGrid products={suggested} className="mt-6" cols="grid-cols-2 lg:grid-cols-4" />
           </div>
         </Section>
       ) : null}
@@ -383,8 +383,8 @@ export default function ProductDetail() {
       {related.length ? (
         <Section className="border-t rule">
           <div className="container-page">
-            <SectionHead eyebrow={t('product.related')} title={tr(category?.name) || t('product.related')} />
-            <ProductGrid products={related} className="mt-12" cols="grid-cols-2 lg:grid-cols-4" />
+            <SectionHead title={t('product.related')} />
+            <ProductGrid products={related} className="mt-6" cols="grid-cols-2 lg:grid-cols-4" />
           </div>
         </Section>
       ) : null}
