@@ -7,13 +7,11 @@ import { useLocale } from '../../i18n/index.jsx';
 import { useCart } from '../../lib/cart.jsx';
 import { paths } from '../../lib/routes.js';
 import { productImage } from '../../data/media.js';
-import { isAccessory } from '../../data/products.js';
 
 /**
  * Wheel size, brake type and gear count — what separates one listing from the next.
  */
 function specLine(product, t) {
-  if (isAccessory(product)) return null;
   const s = product.specs || {};
   const bits = [
     s.wheelSize ? `${s.wheelSize}"` : null,
@@ -104,29 +102,7 @@ export function ProductGrid({ products = [], priorityCount = 0, className = '', 
   );
 }
 
-/**
- * Horizontally scrolling row. On a phone this is how people browse a shop
- * shelf; the row keeps snap points so it never stops between items.
- */
-export function ProductRow({ products = [], label, className = '' }) {
-  if (!products.length) return null;
-  return (
-    <ul
-      className={`no-scrollbar -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-2 sm:-mx-8 sm:px-8 lg:mx-0 lg:px-0 ${className}`}
-      role="list"
-      aria-label={label}
-      tabIndex={0}
-    >
-      {products.map((p) => (
-        <li key={p.id} className="w-[62vw] shrink-0 snap-start xs:w-[46vw] sm:w-[32vw] lg:w-[23%]">
-          <ProductCard product={p} sizes="(max-width: 640px) 62vw, (max-width: 1024px) 32vw, 300px" />
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-/** Compact horizontal line item — used in the cart and the upsell sheet. */
+/** Compact horizontal line item — used in the cart. */
 export function ProductLine({ product, children, className = '' }) {
   const { tr, path, price } = useLocale();
   return (

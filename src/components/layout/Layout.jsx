@@ -5,7 +5,6 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Icon from '../ui/Icon.jsx';
 import Media from '../ui/Media.jsx';
-import AccessoryUpsell from '../product/AccessoryUpsell.jsx';
 import { useLocale } from '../../i18n/index.jsx';
 import { useCart } from '../../lib/cart.jsx';
 import { useAnyOnScreen } from '../../lib/hooks.js';
@@ -101,7 +100,6 @@ export default function Layout() {
 
       <Footer />
       <WhatsAppFab />
-      <AccessoryUpsell />
     </div>
   );
 }

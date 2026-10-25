@@ -17,7 +17,7 @@ import { useLocale } from '../i18n/index.jsx';
 import { useMediaQuery } from '../lib/hooks.js';
 import { paths } from '../lib/routes.js';
 import { CATEGORIES } from '../data/categories.js';
-import { queryProducts, ACCESSORY_PRODUCTS, BIKE_PRODUCTS, LIVE_PRODUCT_TYPES, WHEEL_SIZES } from '../data/products.js';
+import { queryProducts, BIKE_PRODUCTS, LIVE_PRODUCT_TYPES, WHEEL_SIZES } from '../data/products.js';
 import { searchProducts } from '../lib/search.js';
 import { AGE_GROUPS, getAgeGroup, getProductType } from '../data/collections.js';
 import { SITE } from '../config/site.js';
@@ -70,7 +70,7 @@ function writeParams(filters, sort) {
   return sp;
 }
 
-/** One scrollable row of shortcuts: all bikes, each age band, each bike style, accessories. */
+/** One scrollable row of shortcuts: all bikes, each age band, each bike style. */
 function ShortcutRail({ current }) {
   const { t, tr, path, lang } = useLocale();
   const items = [
@@ -78,7 +78,6 @@ function ShortcutRail({ current }) {
     ...AGE_GROUPS.map((g) => ({ key: `age:${g.slug}`, label: tr(g.label), to: paths.byAge(g.slug) })),
     ...CATEGORIES.filter((c) => c.kind === 'bike').map((c) => ({ key: `cat:${c.slug}`, label: tr(c.name), to: paths.byCategory(c.slug) })),
     ...LIVE_PRODUCT_TYPES.filter((type) => type.slug !== 'bikes').map((type) => ({ key: `type:${type.slug}`, label: tr(type.label), to: paths.byType(type.slug) })),
-    { key: 'accessories', label: t('nav.accessories'), to: paths.accessories() },
   ];
   const listRef = useRef(null);
 
@@ -123,7 +122,7 @@ function sizeAdvice(inches, lang) {
   return (lang === 'ar' ? ar : en)[inches] || '';
 }
 
-export default function Products({ variant }) {
+export default function Products() {
   const { t, tr, lang, path, price } = useLocale();
   const [sp, setSp] = useSearchParams();
   const { ageSlug, typeSlug, categorySlug, sizeSlug } = useParams();
@@ -133,7 +132,6 @@ export default function Products({ variant }) {
   const categoryCollection = categorySlug ? CATEGORIES.find((c) => c.slug === categorySlug && c.kind === 'bike') : null;
   const sizeCollection = sizeSlug ? WHEEL_SIZES.find((inches) => `${inches}-inch` === sizeSlug) : null;
   const isDesktop = useMediaQuery('(min-width: 1024px)');
-  const isAccessories = variant === 'accessories';
 
   const filters = {
     ...EMPTY_FILTERS,
@@ -167,7 +165,7 @@ export default function Products({ variant }) {
     }
   };
 
-  const pool = isAccessories ? ACCESSORY_PRODUCTS : BIKE_PRODUCTS;
+  const pool = BIKE_PRODUCTS;
 
   const results = useMemo(() => {
     // Search goes through the search index (it handles دراجه / دراجة);
@@ -175,19 +173,19 @@ export default function Products({ variant }) {
     const found = queryProducts({
       ...filters,
       search: '',
-      category: isAccessories ? 'accessories' : filters.category,
+      category: filters.category,
       sort,
       lang,
     });
-    const scoped = isAccessories ? found : found.filter((p) => p.category !== 'accessories');
+    const scoped = found;
     if (!filters.search) return scoped;
     const allowed = new Set(scoped.map((p) => p.id));
     return (searchProducts(filters.search) || []).filter((p) => allowed.has(p.id));
-  }, [sp, ageSlug, typeSlug, categorySlug, sizeSlug, lang, isAccessories]);
+  }, [sp, ageSlug, typeSlug, categorySlug, sizeSlug, lang]);
 
   if ((ageSlug && !ageCollection) || (typeSlug && !typeCollection) || (categorySlug && !categoryCollection) || (sizeSlug && !sizeCollection)) return <NotFound />;
 
-  const activeCategory = !isAccessories && filters.category ? CATEGORIES.find((c) => c.slug === filters.category) : null;
+  const activeCategory = filters.category ? CATEGORIES.find((c) => c.slug === filters.category) : null;
   const collection = ageCollection || typeCollection;
 
   const title = ageCollection
@@ -198,11 +196,9 @@ export default function Products({ variant }) {
       ? tr(typeCollection.label)
       : sizeCollection
         ? lang === 'ar' ? `عجل مقاس ${sizeCollection} بوصة` : `${sizeCollection}-inch bikes`
-        : isAccessories
-          ? t('product.accessories')
-          : activeCategory
-            ? tr(activeCategory.name)
-            : t('product.allProducts');
+        : activeCategory
+          ? tr(activeCategory.name)
+          : t('product.allProducts');
 
   const prices = results.map((p) => p.price);
   const low = Math.min(...prices);
@@ -213,9 +209,7 @@ export default function Products({ variant }) {
       ? `${modelCount(results.length, lang)} ${lang === 'ar' ? 'بسعر' : 'at'} ${price(low)}`
       : `${modelCount(results.length, lang)} ${lang === 'ar' ? `من ${price(low)} لـ ${price(high)}` : `from ${price(low)} to ${price(high)}`}`;
 
-  const about = collection ? tr(collection.description) : isAccessories
-    ? t('home.accessoriesSubtitle')
-    : sizeCollection
+  const about = collection ? tr(collection.description) : sizeCollection
       ? lang === 'ar'
         ? `كل العجل مقاس ${sizeCollection} بوصة في ${t('common.brand')} بالأسعار والصور. ${sizeAdvice(sizeCollection, lang)}`
         : `Every ${sizeCollection}-inch bike at ${t('common.brand')}, with prices and photos. ${sizeAdvice(sizeCollection, lang)}`
@@ -231,11 +225,9 @@ export default function Products({ variant }) {
       ? `type:${typeSlug}`
       : sizeCollection
         ? `size:${sizeCollection}`
-        : isAccessories
-          ? 'accessories'
-          : activeCategory
-            ? `cat:${activeCategory.slug}`
-            : 'all';
+        : activeCategory
+          ? `cat:${activeCategory.slug}`
+          : 'all';
 
   const activeCount = countActive(filters);
   const canonicalPath = ageCollection
@@ -244,21 +236,17 @@ export default function Products({ variant }) {
       ? paths.byType(typeSlug)
       : sizeCollection
         ? paths.bySize(sizeCollection)
-        : isAccessories
-          ? paths.accessories()
-          : activeCategory && (categoryCollection || [...sp.keys()].every((k) => k === 'category'))
-            ? paths.byCategory(activeCategory.slug)
-            : paths.products();
+        : activeCategory && (categoryCollection || [...sp.keys()].every((k) => k === 'category'))
+          ? paths.byCategory(activeCategory.slug)
+          : paths.products();
   const emptyType = typeCollection && !LIVE_PRODUCT_TYPES.some((type) => type.slug === typeSlug);
   const countLabel = modelCount(results.length, lang);
-  const seoTitle = isAccessories
-    ? (lang === 'ar' ? 'إكسسوارات العجل والدراجات' : 'Bike accessories')
-    : canonicalPath === paths.products()
+  const seoTitle = canonicalPath === paths.products()
       ? (lang === 'ar' ? 'كل العجل والدراجات بالأسعار' : 'All bikes with prices')
       : lang === 'ar'
         ? `${latinDigits(activeCategory?.seo?.ar || title.replace(/^دراجات/, 'عجل ودراجات'))} بالأسعار`
         : `${title} with prices`;
-  const allSeoDescription = isAccessories || !priceSpan
+  const allSeoDescription = !priceSpan
     ? about
     : lang === 'ar'
       ? `${latinDigits(title)}: ${priceSpan}. اطلب على واتساب ${SITE.contact.whatsappDisplay} والتوصيل لحد البيت.`
@@ -271,15 +259,15 @@ export default function Products({ variant }) {
         title={seoTitle}
         description={allSeoDescription}
         canonicalPath={canonicalPath}
-        image={canonicalPath === paths.products() || !results.length || isAccessories ? undefined : shareImage('products', results[0].slug)}
+        image={canonicalPath === paths.products() || !results.length ? undefined : shareImage('products', results[0].slug)}
         noindex={sp.size > 0 || emptyType}
         jsonLd={[
           breadcrumbSchema([
             { name: t('nav.home'), path: '/' },
-            ...(canonicalPath !== paths.products() && !isAccessories ? [{ name: t('product.products'), path: paths.products() }] : []),
+            ...(canonicalPath !== paths.products() ? [{ name: t('product.products'), path: paths.products() }] : []),
             { name: title, path: canonicalPath },
           ], lang),
-          !SITE.isPlaceholderContent && !isAccessories && results.length ? itemListSchema(results.slice(0, 24), { lang, name: title }) : null,
+          !SITE.isPlaceholderContent && results.length ? itemListSchema(results.slice(0, 24), { lang, name: title }) : null,
         ].filter(Boolean)}
       />
 
@@ -296,7 +284,7 @@ export default function Products({ variant }) {
       <div className="container-page pb-12 pt-2 lg:pb-16">
         <div className="lg:grid lg:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] lg:gap-10">
           <aside className="lg:sticky lg:top-[84px] lg:h-max lg:pt-4">
-            <FilterSidebar value={filters} onChange={(f) => apply(f)} onClear={() => apply({ ...EMPTY_FILTERS })} showCategory={!isAccessories} />
+            <FilterSidebar value={filters} onChange={(f) => apply(f)} onClear={() => apply({ ...EMPTY_FILTERS })} showCategory />
           </aside>
 
           <div className="min-w-0">
@@ -355,23 +343,19 @@ export default function Products({ variant }) {
           <div className="max-w-prose">
             <h2 className="text-lg font-bold">{title}</h2>
             <p className="mt-2 text-[15px] leading-relaxed muted">{about}</p>
-            {!isAccessories ? (
-              <>
-                <p className="mt-2 text-[15px] leading-relaxed muted">
-                  {lang === 'ar'
-                    ? 'العمر للتسهيل بس؛ المقاس الصح بيتحدد بالطول. شوف دليل المقاسات لو محتار.'
-                    : 'Age is a guide; the right size depends on height. See the size guide if unsure.'}
-                </p>
-                <p className="mt-4 flex flex-wrap items-baseline gap-x-4 gap-y-2 text-[15px]">
-                  <span className="font-semibold">{lang === 'ar' ? 'تسوّق حسب المقاس:' : 'Shop by wheel size:'}</span>
-                  {WHEEL_SIZES.map((inches) => (
-                    <Link key={inches} to={path(paths.bySize(inches))} className="link-underline font-semibold text-signal-700 dark:text-signal-400">
-                      {lang === 'ar' ? `عجل ${inches}` : `${inches}"`}
-                    </Link>
-                  ))}
-                </p>
-              </>
-            ) : null}
+            <p className="mt-2 text-[15px] leading-relaxed muted">
+              {lang === 'ar'
+                ? 'العمر للتسهيل بس؛ المقاس الصح بيتحدد بالطول. شوف دليل المقاسات لو محتار.'
+                : 'Age is a guide; the right size depends on height. See the size guide if unsure.'}
+            </p>
+            <p className="mt-4 flex flex-wrap items-baseline gap-x-4 gap-y-2 text-[15px]">
+              <span className="font-semibold">{lang === 'ar' ? 'تسوّق حسب المقاس:' : 'Shop by wheel size:'}</span>
+              {WHEEL_SIZES.map((inches) => (
+                <Link key={inches} to={path(paths.bySize(inches))} className="link-underline font-semibold text-signal-700 dark:text-signal-400">
+                  {lang === 'ar' ? `عجل ${inches}` : `${inches}"`}
+                </Link>
+              ))}
+            </p>
           </div>
           <div className="flex flex-wrap gap-3">
             <Button as={Link} to={path(paths.sizeGuide())} variant="outline" size="md" icon="ruler">
@@ -390,7 +374,7 @@ export default function Products({ variant }) {
         value={filters}
         onChange={(f) => apply(f)}
         onClear={() => apply({ ...EMPTY_FILTERS })}
-        showCategory={!isAccessories}
+        showCategory
         shown={results.length}
         total={pool.length}
       />

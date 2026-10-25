@@ -7,7 +7,7 @@ import {
   useReducer,
   useState,
 } from 'react';
-import { getProductById, isAccessory } from '../data/products.js';
+import { getProductById } from '../data/products.js';
 import { SITE } from '../config/site.js';
 
 const STORAGE_KEY = 'modybike:cart:v1';
@@ -71,8 +71,6 @@ function reducer(state, action) {
 export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, { items: [], ready: false });
 
-  /** Product that was just added — drives the accessory upsell sheet. */
-  const [upsellFor, setUpsellFor] = useState(null);
   /** Short message pushed to an aria-live region so screen readers hear cart changes. */
   const [announcement, setAnnouncement] = useState('');
 
@@ -111,12 +109,10 @@ export function CartProvider({ children }) {
     }
   }, [state.items, state.ready]);
 
-  const add = useCallback((product, qty = 1, { color = null, showUpsell = true } = {}) => {
+  const add = useCallback((product, qty = 1, { color = null } = {}) => {
     if (!product) return;
     dispatch({ type: 'add', productId: product.id, qty, color });
     setAnnouncement(`${product.name.ar} — ${qty}`);
-    // Only bikes trigger the accessory sheet; adding a light should not offer more lights.
-    if (showUpsell && !isAccessory(product)) setUpsellFor(product);
   }, []);
 
   const setQty = useCallback((key, qty) => dispatch({ type: 'setQty', key, qty }), []);
@@ -125,7 +121,6 @@ export function CartProvider({ children }) {
     dispatch({ type: 'clear' });
     setAnnouncement('cleared');
   }, []);
-  const closeUpsell = useCallback(() => setUpsellFor(null), []);
 
   /** Cart lines joined with live product data — never trust stale prices from storage. */
   const lines = useMemo(
@@ -145,7 +140,7 @@ export function CartProvider({ children }) {
   const qualifiesForFreeShipping = SITE.shipping.freeOver != null && subtotal >= SITE.shipping.freeOver;
   const amountToFreeShipping = SITE.shipping.freeOver == null ? 0 : Math.max(0, SITE.shipping.freeOver - subtotal);
 
-  const hasBike = useMemo(() => lines.some((l) => !isAccessory(l.product)), [lines]);
+  const hasBike = lines.length > 0;
 
   const value = useMemo(
     () => ({
@@ -160,8 +155,6 @@ export function CartProvider({ children }) {
       setQty,
       remove,
       clear,
-      upsellFor,
-      closeUpsell,
       announcement,
     }),
     [
@@ -176,8 +169,6 @@ export function CartProvider({ children }) {
       setQty,
       remove,
       clear,
-      upsellFor,
-      closeUpsell,
       announcement,
     ],
   );

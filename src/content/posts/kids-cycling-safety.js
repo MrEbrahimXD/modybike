@@ -154,8 +154,8 @@ export default {
     },
     {
       type: 'cta',
-      ar: 'عندنا خوذ أطفال وواقيات وعجل مساعد وكراسي أطفال خلفية. ابعت لنا سن وطول طفلك وهنساعدك تختار الطقم المناسب.',
-      en: 'We stock kids helmets, pads, training wheels and rear child seats. Send us your child’s age and height and we will help you pick the right set.',
+      ar: 'ابعت لنا سن وطول طفلك على واتساب، وهنرشّح لك مقاس العجلة المناسب.',
+      en: 'Send us your child’s age and height on WhatsApp and we will recommend the right bike size.',
     },
   ],
 };

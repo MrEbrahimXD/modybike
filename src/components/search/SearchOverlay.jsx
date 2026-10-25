@@ -8,7 +8,6 @@ import { useLockBodyScroll } from '../../lib/hooks.js';
 import { paths } from '../../lib/routes.js';
 import { searchAll, SUGGESTED_QUERIES } from '../../lib/search.js';
 import { productImage } from '../../data/media.js';
-import { isAccessory } from '../../data/products.js';
 
 /* ==========================================================================
    Search
@@ -60,11 +59,7 @@ export default function SearchOverlay({ open, onClose }) {
         key: `c-${c.slug}`,
         item: c,
         to: path(
-          c.kind === 'age' ? paths.byAge(c.slug) : c.kind === 'type' ? paths.byType(c.slug) : c.kind === 'bike'
-            ? paths.byCategory(c.slug)
-            : c.kind === 'group'
-              ? `${paths.accessories()}?sub=${c.slug}`
-              : paths.accessories(),
+          c.kind === 'age' ? paths.byAge(c.slug) : c.kind === 'type' ? paths.byType(c.slug) : paths.byCategory(c.slug),
         ),
       }),
     );
@@ -246,9 +241,7 @@ export default function SearchOverlay({ open, onClose }) {
                                 isActive ? 'opacity-70' : 'muted'
                               }`}
                             >
-                              {isAccessory(p)
-                                ? t('product.accessories')
-                                : `${p.specs?.wheelSize ?? ''}" · ${t(`brakes.${p.specs?.brakes}`)}`}
+                              {`${p.specs?.wheelSize ?? ''}" · ${t(`brakes.${p.specs?.brakes}`)}`}
                             </span>
                           </span>
                           <span className="tnum shrink-0 text-sm font-bold">{price(p.price)}</span>

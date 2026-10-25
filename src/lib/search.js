@@ -1,5 +1,5 @@
 import { PRODUCTS } from '../data/products.js';
-import { ALL_CATEGORIES, ACCESSORY_GROUPS } from '../data/categories.js';
+import { CATEGORIES } from '../data/categories.js';
 import { AGE_GROUPS, PRODUCT_TYPES } from '../data/collections.js';
 import { POSTS_SORTED } from '../content/posts/index.js';
 
@@ -102,13 +102,12 @@ function productHaystack(p) {
 
 const PRODUCT_INDEX = PRODUCTS.map((p) => ({ item: p, ...productHaystack(p) }));
 
-/* Bike categories, the accessories category, and each accessory group — so
-   "أقفال" or "helmets" lands on a browsable page and not just a single item. */
+/* Ages, types and bike categories — so "برامج" or "جبلي" lands on a
+   browsable page and not just a single item. */
 const CATEGORY_INDEX = [
   ...AGE_GROUPS.map((group) => ({ item: { ...group, name: group.label }, kind: 'age' })),
   ...PRODUCT_TYPES.map((type) => ({ item: { ...type, name: type.label }, kind: 'type' })),
-  ...ALL_CATEGORIES.map((c) => ({ item: c, kind: c.kind === 'accessory' ? 'accessory' : 'bike' })),
-  ...ACCESSORY_GROUPS.map((g) => ({ item: g, kind: 'group' })),
+  ...CATEGORIES.map((c) => ({ item: c, kind: 'bike' })),
 ].map(({ item, kind }) => ({
   item,
   kind,

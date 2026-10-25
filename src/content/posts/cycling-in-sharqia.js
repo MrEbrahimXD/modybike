@@ -135,8 +135,8 @@ export default {
         {
           q: { ar: 'فين أقدر أصلّح دراجتي في الشرقية؟', en: 'Where can I get my bike repaired in Sharqia?' },
           a: {
-            ar: 'أغلب المراكز فيها محلات دراجات بتعمل إصلاحات أساسية زي البنشر وضبط الفرامل. للصيانة المتخصصة (تظبيط جنوط، معايرة سرعات، فرامل هيدروليك) ورشتنا في الزقازيق بتستقبل أي دراجة حتى لو مش متشترية من عندنا.',
-            en: 'Most districts have shops that handle basics like punctures and brake adjustment. For specialist work — wheel truing, gear indexing, hydraulic brakes — our Zagazig workshop takes any bike, even one bought elsewhere.',
+            ar: 'أغلب المراكز فيها محلات دراجات بتعمل إصلاحات أساسية زي البنشر وضبط الفرامل. وللصيانة الأكبر (تظبيط جنوط، معايرة سرعات، فرامل) عندنا صيانة لأي عجلة حتى لو مش متشترية من عندنا.',
+            en: 'Most districts have shops that handle basics like punctures and brake adjustment. For bigger jobs — wheel truing, gear indexing, brakes — we repair any bike, even one bought elsewhere.',
           },
         },
         {

@@ -13,7 +13,7 @@
 - `sitemap.xml` lists product photos and only gives `lastmod` where a real date exists.
 - Link previews: each product and article gets a 1200×630 JPEG at build time (`scripts/share-images.mjs`), so a link sent on WhatsApp or Facebook shows the bike.
 - Product feed: `/feeds/products.xml` (Google product-feed format, read by Facebook/Instagram/WhatsApp catalogues) with square JPEG photos.
-- Accessories are still placeholder items (names, prices, stock photos not from the shop). They show on the site but are `noindex`, carry no Product markup and stay out of the sitemap and feed. Send the real list and prices, then delete `placeholder: true` in `src/data/products.accessories.js`.
+- The shop sells bikes only for now: no accessories section, products or wording anywhere (`npm run verify` checks the home page). When accessories arrive with real names, prices and photos, add them to the product data as a new category.
 
 ## 1. Connect modybike.com (owner, once)
 

@@ -1,12 +1,10 @@
 import BIKES from './products.bikes.js';
-import ACCESSORIES from './products.accessories.js';
 import { matchesAgeGroup, productTypeOf, PRODUCT_TYPES } from './collections.js';
 
-/** الكتالوج الكامل — دراجات + إكسسوارات. */
-export const PRODUCTS = [...BIKES, ...ACCESSORIES];
+/** الكتالوج الكامل — دراجات بس (المحل مش بيبيع إكسسوارات حاليًا). */
+export const PRODUCTS = [...BIKES];
 
 export const BIKE_PRODUCTS = BIKES;
-export const ACCESSORY_PRODUCTS = ACCESSORIES;
 
 const BY_SLUG = new Map(PRODUCTS.map((p) => [p.slug, p]));
 const BY_ID = new Map(PRODUCTS.map((p) => [p.id, p]));
@@ -21,10 +19,6 @@ export function getProductById(id) {
 
 export function getProductsByIds(ids = []) {
   return ids.map((id) => BY_ID.get(id)).filter(Boolean);
-}
-
-export function isAccessory(product) {
-  return product?.category === 'accessories';
 }
 
 /** أقل وأعلى سعر في الكتالوج — يُستخدم في فلتر السعر. */
@@ -137,19 +131,6 @@ export function getRelatedProducts(product, limit = 4) {
     .slice(0, limit);
 }
 
-/**
- * الإكسسوارات المقترحة بعد إضافة دراجة للسلة.
- * بنبدأ باللي المنتج نفسه مرشّحه، وبنكمّل بأكثر الإكسسوارات مبيعًا.
- */
-export function getSuggestedAccessories(product, limit = 6) {
-  const picked = getProductsByIds(product?.accessories || []);
-  if (picked.length >= limit) return picked.slice(0, limit);
-  const fill = ACCESSORIES.filter(
-    (a) => !picked.some((p) => p.id === a.id) && a.stock !== 'out_of_stock',
-  ).sort((a, b) => Number(b.featured) - Number(a.featured));
-  return [...picked, ...fill].slice(0, limit);
-}
-
 /** الدراجات المناسبة لمقاس معيّن — تُستخدم بعد حاسبة المقاسات. */
 export function getProductsForSize(recommendation) {
   if (!recommendation) return [];
@@ -165,10 +146,6 @@ export function featuredProducts(limit = 8) {
   return queryProducts({ sort: 'featured' })
     .filter((p) => p.featured)
     .slice(0, limit);
-}
-
-export function featuredAccessories(limit = 6) {
-  return ACCESSORIES.filter((a) => a.featured).slice(0, limit);
 }
 
 export default PRODUCTS;

@@ -81,7 +81,7 @@ export function getShareSources() {
   };
 }
 
-/** Real stock only — placeholder accessories never go into a shopping feed. */
+/** Real stock only — anything marked placeholder never goes into a shopping feed. */
 export function getFeedProducts() {
   return PRODUCTS.filter((p) => !p.placeholder && !SITE.isPlaceholderContent).map((p) => ({
     id: p.sku,

@@ -409,8 +409,8 @@ export function localAreaSchema(location, lang = 'ar') {
     name: `${SITE.name[lang]} — ${location.name[lang]}`,
     description:
       lang === 'ar'
-        ? `توصيل دراجات وإكسسوارات إلى ${location.name.ar} وكل القرى التابعة لها في محافظة الشرقية.`
-        : `Bicycle and accessory delivery to ${location.name.en} and its villages in Al Sharqia governorate.`,
+        ? `توصيل عجل ودراجات إلى ${location.name.ar} وكل القرى التابعة لها في محافظة الشرقية.`
+        : `Bicycle delivery to ${location.name.en} and its villages in Al Sharqia governorate.`,
     url: pageUrl(`/locations/${location.slug}`, lang),
     provider: organizationSchema(lang),
     areaServed: [

@@ -86,9 +86,6 @@ function BikesMenu({ open, onClose }) {
           <Link to={path(paths.sizeGuide())} onClick={onClose} className="label link-underline">
             {t('nav.sizeGuide')}
           </Link>
-          <Link to={path(paths.accessories())} onClick={onClose} className="label link-underline">
-            {t('nav.accessories')}
-          </Link>
           <Link to={path(paths.maintenance())} onClick={onClose} className="label link-underline">
             {t('nav.maintenance')}
           </Link>
@@ -122,7 +119,6 @@ function MobileNav({ open, onClose }) {
 
   const links = [
     [t('nav.products'), paths.products(), 'bike'],
-    [t('nav.accessories'), paths.accessories(), 'accessories'],
     [t('nav.maintenance'), paths.maintenance(), 'wrench'],
     [t('nav.sizeGuide'), paths.sizeGuide(), 'ruler'],
     [t('nav.contact'), paths.contact(), 'phone'],
@@ -266,7 +262,6 @@ export default function Header() {
   }, [location.pathname]);
 
   const navLinks = [
-    { label: t('nav.accessories'), to: paths.accessories() },
     { label: t('nav.maintenance'), to: paths.maintenance() },
     { label: t('nav.sizeGuide'), to: paths.sizeGuide() },
     { label: t('nav.contact'), to: paths.contact() },

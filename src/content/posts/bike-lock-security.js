@@ -128,8 +128,8 @@ export default {
     },
     {
       type: 'cta',
-      ar: 'عندنا أقفال U وجنازير ثقيلة وكابلات برقم سري بمستويات أمان مختلفة. اسألنا نرشّح لك حسب سعر دراجتك ومكان وقوفها.',
-      en: 'We stock U-locks, heavy chains and combination cables at different security levels. Ask us and we will recommend one based on your bike’s value and where you park.',
+      ar: 'محتار في نوع القفل؟ اسألنا على واتساب ونقولك الأنسب لسعر عجلتك ومكان وقوفها.',
+      en: 'Not sure which lock to get? Ask us on WhatsApp and we will tell you what suits your bike’s value and where you park.',
     },
   ],
 };

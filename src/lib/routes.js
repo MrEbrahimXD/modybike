@@ -21,7 +21,6 @@ export const ROUTE_IDS = {
   categoryCollection: 'categoryCollection',
   sizeCollection: 'sizeCollection',
   product: 'product',
-  accessories: 'accessories',
   sizeGuide: 'sizeGuide',
   maintenance: 'maintenance',
   blog: 'blog',
@@ -49,7 +48,6 @@ export const ROUTE_PATTERNS = [
   { id: ROUTE_IDS.categoryCollection, pattern: 'shop/category/:categorySlug' },
   { id: ROUTE_IDS.sizeCollection, pattern: 'shop/size/:sizeSlug' },
   { id: ROUTE_IDS.product, pattern: 'products/:slug' },
-  { id: ROUTE_IDS.accessories, pattern: 'accessories' },
   { id: ROUTE_IDS.sizeGuide, pattern: 'size-guide' },
   { id: ROUTE_IDS.maintenance, pattern: 'maintenance' },
   { id: ROUTE_IDS.blog, pattern: 'blog' },
@@ -77,7 +75,6 @@ export const paths = {
   bySize: (inches) => `/shop/size/${inches}-inch`,
   productsByCategory: (cat) => `/products?category=${encodeURIComponent(cat)}`,
   product: (slug) => `/products/${slug}`,
-  accessories: () => '/accessories',
   sizeGuide: () => '/size-guide',
   maintenance: () => '/maintenance',
   blog: () => '/blog',
@@ -110,13 +107,12 @@ const newest = (list) => list.map((p) => p.updatedAt || p.createdAt).filter(Bool
  * @returns {{path:string, changefreq:string, priority:number, lastmod?:string, images?:string[], noindex?:boolean}[]}
  */
 export function getStaticPaths() {
-  const bikes = PRODUCTS.filter((p) => p.category !== 'accessories');
+  const bikes = PRODUCTS;
   const catalogueDate = newest(bikes);
 
   const core = [
     { path: '/', changefreq: 'weekly', priority: 1.0, lastmod: catalogueDate },
     { path: '/products', changefreq: 'weekly', priority: 0.9, lastmod: catalogueDate },
-    { path: '/accessories', changefreq: 'weekly', priority: 0.6 },
     { path: '/size-guide', changefreq: 'monthly', priority: 0.7 },
     { path: '/maintenance', changefreq: 'monthly', priority: 0.7 },
     { path: '/blog', changefreq: 'weekly', priority: 0.6, lastmod: newest(POSTS.map((p) => ({ updatedAt: p.updated || p.date }))) },

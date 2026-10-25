@@ -53,36 +53,6 @@ export const CATEGORIES = [
   },
 ];
 
-/** Accessory sub-categories (all live under the `accessories` product category). */
-export const ACCESSORY_GROUPS = [
-  { slug: 'lighting', name: { ar: 'أنوار وعواكس', en: 'Lights & reflectors' }, icon: 'light' },
-  { slug: 'security', name: { ar: 'أقفال وجنازير', en: 'Locks & chains' }, icon: 'lock' },
-  { slug: 'carrying', name: { ar: 'سلال وحوامل وشنط', en: 'Baskets, racks & bags' }, icon: 'basket' },
-  { slug: 'safety', name: { ar: 'خوذ وواقيات', en: 'Helmets & protection' }, icon: 'helmet' },
-  { slug: 'bells', name: { ar: 'زمّارات وجرس', en: 'Bells & horns' }, icon: 'bell' },
-  { slug: 'maintenance', name: { ar: 'صيانة وإصلاح', en: 'Maintenance & repair' }, icon: 'tool' },
-  { slug: 'comfort', name: { ar: 'راحة وإضافات', en: 'Comfort & extras' }, icon: 'comfort' },
-  { slug: 'kids-extras', name: { ar: 'مستلزمات الأطفال', en: 'Kids extras' }, icon: 'kids' },
-];
-
-export const ACCESSORIES_CATEGORY = {
-  slug: 'accessories',
-  kind: 'accessory',
-  name: { ar: 'إكسسوارات الدراجات', en: 'Bike accessories' },
-  short: { ar: 'كل مستلزمات العجلة', en: 'Everything for your bike' },
-  description: {
-    ar: 'أنوار، زمّارة، سلة، قفل جنزير، خوذة، مضخة هواء، حامل موبايل وكل اللي الدراجة محتاجاه.',
-    en: 'Lights, horn, basket, chain lock, helmet, pump, phone mount and everything else your bike needs.',
-  },
-  icon: 'accessories',
-};
-
-export const ALL_CATEGORIES = [...CATEGORIES, ACCESSORIES_CATEGORY];
-
 export function getCategory(slug) {
-  return ALL_CATEGORIES.find((c) => c.slug === slug) || null;
-}
-
-export function getAccessoryGroup(slug) {
-  return ACCESSORY_GROUPS.find((g) => g.slug === slug) || null;
+  return CATEGORIES.find((c) => c.slug === slug) || null;
 }

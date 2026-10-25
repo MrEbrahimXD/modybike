@@ -69,7 +69,6 @@ const MATCHABLE = [
   { path: '/shop/age/:ageSlug', id: 'products' },
   { path: '/shop/type/:typeSlug', id: 'products' },
   { path: '/products/:slug', id: 'product' },
-  { path: '/accessories', id: 'products' },
   { path: '/size-guide', id: 'sizeGuide' },
   { path: '/blog', id: 'blog' },
   { path: '/blog/topic/:category', id: 'blog' },

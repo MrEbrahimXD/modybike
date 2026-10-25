@@ -146,7 +146,6 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <Column title={t('footer.quickLinks')}>
               <FooterLink to={path(paths.products())}>{t('nav.products')}</FooterLink>
-              <FooterLink to={path(paths.accessories())}>{t('nav.accessories')}</FooterLink>
               <FooterLink to={path(paths.maintenance())}>{t('nav.maintenance')}</FooterLink>
               <FooterLink href={`${import.meta.env.BASE_URL}catalogue/modybike-catalogue-${lang}.pdf`}>{t('nav.catalogue')}</FooterLink>
               <FooterLink to={path(paths.sizeGuide())}>{t('nav.sizeGuide')}</FooterLink>

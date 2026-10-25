@@ -27,8 +27,8 @@ export const SITE = {
   },
 
   description: {
-    ar: 'مودي بايك: عجل ودراجات أطفال وكبار مقاس 12 و16 و20 و24 و26 بوصة بالأسعار، إكسسوارات، وصيانة. اطلب على واتساب والتوصيل لحد البيت.',
-    en: 'ModyBike: kids and adult bikes in 12, 16, 20, 24 and 26 inch with prices, accessories and bike repairs. Order on WhatsApp for delivery to your door.',
+    ar: 'مودي بايك: عجل ودراجات أطفال وكبار مقاس 12 و16 و20 و24 و26 بوصة بالأسعار، وعندنا صيانة. اطلب على واتساب والتوصيل لحد البيت.',
+    en: 'ModyBike: kids and adult bikes in 12, 16, 20, 24 and 26 inch with prices, plus bike repairs. Order on WhatsApp for delivery to your door.',
   },
 
   /* ---------------------------------------------------------------- CONTACT */

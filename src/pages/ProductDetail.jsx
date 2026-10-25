@@ -14,7 +14,7 @@ import { useCart } from '../lib/cart.jsx';
 import { useAnyOnScreen } from '../lib/hooks.js';
 import { paths } from '../lib/routes.js';
 import { productEnquiryUrl } from '../lib/whatsapp.js';
-import { getProduct, getRelatedProducts, isAccessory, getSuggestedAccessories } from '../data/products.js';
+import { getProduct, getRelatedProducts } from '../data/products.js';
 import { productImages } from '../data/media.js';
 import { CATEGORIES } from '../data/categories.js';
 import { COLORS } from '../data/colors.js';
@@ -84,12 +84,10 @@ export default function ProductDetail() {
   if (!product) return <NotFound />;
 
   const images = productImages(product.slug);
-  const accessory = isAccessory(product);
   const out = product.stock === 'out_of_stock';
   const specs = product.specs || {};
   const category = CATEGORIES.find((c) => c.slug === product.category);
   const related = getRelatedProducts(product, 4);
-  const suggested = accessory ? [] : getSuggestedAccessories(product, 4);
   const name = tr(product.name);
 
   const onAdd = () => {
@@ -116,9 +114,7 @@ export default function ProductDetail() {
           productSchema(product, { lang, path: paths.product(product.slug), images: images.map((img) => img.src) }),
           breadcrumbSchema([
             { name: t('nav.home'), path: '/' },
-            accessory
-              ? { name: t('product.accessories'), path: paths.accessories() }
-              : { name: t('product.products'), path: paths.products() },
+            { name: t('product.products'), path: paths.products() },
             ...(category ? [{ name: tr(category.name), path: paths.byCategory(category.slug) }] : []),
             { name, path: paths.product(product.slug) },
           ], lang),
@@ -129,8 +125,8 @@ export default function ProductDetail() {
         <Breadcrumbs
           items={[
             {
-              label: accessory ? t('product.accessories') : t('product.products'),
-              to: path(accessory ? paths.accessories() : paths.products()),
+              label: t('product.products'),
+              to: path(paths.products()),
             },
             ...(category ? [{ label: tr(category.name), to: path(paths.byCategory(category.slug)) }] : []),
             { label: name },
@@ -166,23 +162,21 @@ export default function ProductDetail() {
             </div>
 
             {/* headline specs — the four numbers a buyer scans for */}
-            {!accessory ? (
-              <dl className="mt-6 grid grid-cols-2 gap-x-6 sm:grid-cols-4">
-                {[
-                  [t('product.wheelSize'), specs.wheelSize ? <Link to={path(paths.bySize(specs.wheelSize))} className="underline decoration-carbon-300 underline-offset-4 hover:decoration-current">{`${specs.wheelSize}"`}</Link> : null],
-                  [t('product.gears'), specs.gears || null],
-                  [t('product.brakes'), specs.brakes ? t(`brakes.${specs.brakes}`) : null],
-                  [t('product.weight'), specs.weightKg ? `${num(specs.weightKg)} ${t('product.kg')}` : null],
-                ]
-                  .filter(([, v]) => v)
-                  .map(([k, v]) => (
-                    <div key={k} className="border-t py-3 rule">
-                      <dt className="label muted">{k}</dt>
-                      <dd className="tnum mt-1.5 text-sm font-bold">{v}</dd>
-                    </div>
-                  ))}
-              </dl>
-            ) : null}
+            <dl className="mt-6 grid grid-cols-2 gap-x-6 sm:grid-cols-4">
+              {[
+                [t('product.wheelSize'), specs.wheelSize ? <Link to={path(paths.bySize(specs.wheelSize))} className="underline decoration-carbon-300 underline-offset-4 hover:decoration-current">{`${specs.wheelSize}"`}</Link> : null],
+                [t('product.gears'), specs.gears || null],
+                [t('product.brakes'), specs.brakes ? t(`brakes.${specs.brakes}`) : null],
+                [t('product.weight'), specs.weightKg ? `${num(specs.weightKg)} ${t('product.kg')}` : null],
+              ]
+                .filter(([, v]) => v)
+                .map(([k, v]) => (
+                  <div key={k} className="border-t py-3 rule">
+                    <dt className="label muted">{k}</dt>
+                    <dd className="tnum mt-1.5 text-sm font-bold">{v}</dd>
+                  </div>
+                ))}
+            </dl>
 
             {/* The plain-words gloss on brakes and frame lives in the spec
                 table below, where the term it explains is actually sitting —
@@ -365,15 +359,6 @@ export default function ProductDetail() {
         </div>
       </Section>
 
-      {/* --------------------------------------------------------- upsells */}
-      {suggested.length ? (
-        <Section className="border-t bg-paper-sunk rule dark:bg-carbon-900/50">
-          <div className="container-page">
-            <SectionHead title={t('product.recommendedAccessories')} />
-            <ProductGrid products={suggested} className="mt-6" cols="grid-cols-2 lg:grid-cols-4" />
-          </div>
-        </Section>
-      ) : null}
 
       {/* Phone buy bar: price and the two actions stay in reach while reading. */}
       <div

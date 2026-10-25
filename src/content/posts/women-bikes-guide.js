@@ -126,8 +126,8 @@ export default {
     },
     {
       type: 'cta',
-      ar: 'عندنا دراجات سيدات ومدينة وجبلي بمقاسات صغيرة. ابعتي لنا طولك واستخدامك وهنرشّح لك الأنسب.',
-      en: 'We carry women’s, city and small-size mountain bikes. Send us your height and how you plan to ride and we will recommend the right one.',
+      ar: 'ابعتي لنا طولك واستخدامك على واتساب، وهنرشّح لك الأنسب من الموديلات المتاحة.',
+      en: 'Send us your height and how you plan to ride on WhatsApp, and we will recommend the best fit from the models available.',
     },
   ],
 };

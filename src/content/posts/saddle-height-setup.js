@@ -150,8 +150,8 @@ export default {
     },
     {
       type: 'cta',
-      ar: 'بنظبط ارتفاع الكرسي والمقود لأي دراجة مشتراة من عندنا مجانًا، ولأي دراجة تانية بسعر رمزي في ورشتنا بالزقازيق.',
-      en: 'We set saddle and bar height free on any bike bought from us, and for a nominal fee on any other bike at our Zagazig workshop.',
+      ar: 'لو مش عارف تظبط الكرسي والمقود بنفسك، هات العجلة المحل أو ابعت لنا على واتساب.',
+      en: 'If you would rather not set the saddle and bars yourself, bring the bike to the shop or message us on WhatsApp.',
     },
   ],
 };

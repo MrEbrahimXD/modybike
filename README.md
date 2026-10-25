@@ -27,7 +27,7 @@ Push to `main`. The `Deploy GitHub Pages` workflow builds and verifies the stati
 ## Handy commands
 
 - `npm run ship -- "message"` (or double-click `ship.cmd`): commit everything and push; GitHub Pages redeploys.
-- `npm run catalogue`: rebuild the Arabic and English PDF catalogues in `public/catalogue/` from the product data (needs Chromium: `npx playwright install chromium`, or set `CHROME_PATH`).
+- `npm run catalogue`: rebuild the Arabic and English PDF catalogues in `public/catalogue/` from the product data. It is its own brochure design (cover, size chart, bikes by wheel size with price stickers, a WhatsApp QR code per bike), using the Alexandria and Lalezar fonts from `node_modules`. Needs Chromium: `npx playwright install chromium`, or set `CHROME_PATH`. Run it again after any price or product change.
 - Logo source: `assets-src/brand/icon.jpeg`; traced files are `public/logo-light.svg`, `public/logo-dark.svg`, `public/favicon.svg`.
 
 See [SEO-LAUNCH.md](SEO-LAUNCH.md) for remaining client content and SEO launch tasks.

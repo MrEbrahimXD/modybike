@@ -14,7 +14,6 @@ export const POST_CATEGORIES = [
   { slug: 'buying', name: { ar: 'دليل الشراء', en: 'Buying guides' } },
   { slug: 'maintenance', name: { ar: 'الصيانة', en: 'Maintenance' } },
   { slug: 'safety', name: { ar: 'الأمان', en: 'Safety' } },
-  { slug: 'accessories', name: { ar: 'الإكسسوارات', en: 'Accessories' } },
   { slug: 'health', name: { ar: 'الصحة واللياقة', en: 'Health & fitness' } },
   { slug: 'local', name: { ar: 'الشرقية', en: 'Al Sharqia' } },
 ];
@@ -134,7 +133,7 @@ export const POSTS = [
   },
   {
     slug: 'essential-accessories',
-    category: 'accessories',
+    category: 'safety',
     date: '2026-03-11',
     updated: '2026-08-20',
     readingMin: 9,

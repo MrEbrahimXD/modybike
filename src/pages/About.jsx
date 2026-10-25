@@ -33,10 +33,9 @@ export default function About() {
 
       <Section className="!py-10 sm:!py-14">
         <div className="container-page">
-          <ul className="grid gap-px border bg-[var(--rule)] rule sm:grid-cols-2 lg:grid-cols-4" role="list">
+          <ul className="grid gap-px border bg-[var(--rule)] rule sm:grid-cols-3" role="list">
             {[
               ['bike', t('nav.products'), lang === 'ar' ? 'أطفال وشباب وكبار، من ١٢ لـ ٢٦ بوصة.' : 'Kids, teens and adults, 12 to 26 inch.', paths.products()],
-              ['accessories', t('nav.accessories'), t('home.accessoriesSubtitle'), paths.accessories()],
               ['wrench', t('nav.maintenance'), t('why.support.d'), paths.maintenance()],
               ['truck', t('why.delivery.t'), t('why.delivery.d'), paths.shipping()],
             ].map(([icon, title, body, to]) => (

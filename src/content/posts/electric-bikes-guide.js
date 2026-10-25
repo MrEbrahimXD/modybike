@@ -149,8 +149,8 @@ export default {
     },
     {
       type: 'cta',
-      ar: 'عندنا دراجات كهربائية بمواصفات مختلفة. قول لنا مسافة مشوارك اليومي ووزنك، وهنحسب لك المدى المتوقع والموديل المناسب.',
-      en: 'We carry e-bikes in several specifications. Tell us your daily distance and your weight and we will work out the realistic range and the right model.',
+      ar: 'محتار بين دراجة عادية وكهربائية؟ قول لنا مسافة مشوارك اليومي على واتساب ونساعدك تختار.',
+      en: 'Torn between a regular bike and an e-bike? Tell us your daily distance on WhatsApp and we will help you decide.',
     },
   ],
 };

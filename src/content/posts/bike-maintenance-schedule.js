@@ -185,8 +185,8 @@ export default {
     },
     {
       type: 'cta',
-      ar: 'ورشتنا في الزقازيق بتستقبل أي دراجة حتى لو مش متشترية من عندنا. صيانة شاملة، ضبط فرامل وسرعات، وتظبيط جنوط.',
-      en: 'Our Zagazig workshop takes any bike, even one you bought elsewhere: full services, brake and gear adjustment, and wheel truing.',
+      ar: 'عندنا صيانة لأي عجلة، حتى لو مش متشترية من عندنا. ابعت لنا على واتساب.',
+      en: 'We repair any bike, even one bought elsewhere. Message us on WhatsApp.',
     },
   ],
 };

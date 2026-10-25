@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 import Media from '../components/ui/Media.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import { Button } from '../components/ui/primitives.jsx';
-import { ProductGrid, ProductRow } from '../components/product/ProductCard.jsx';
+import { ProductGrid } from '../components/product/ProductCard.jsx';
 import SizeCalculator from '../components/product/SizeCalculator.jsx';
 import ShopCollections from '../components/product/ShopCollections.jsx';
 import { Seo, organizationSchema, websiteSchema } from '../lib/seo.jsx';
 import { useLocale } from '../i18n/index.jsx';
 import { paths } from '../lib/routes.js';
-import { featuredProducts, featuredAccessories, BIKE_PRODUCTS } from '../data/products.js';
+import { featuredProducts, BIKE_PRODUCTS } from '../data/products.js';
 import { LOCATIONS } from '../data/locations.js';
 import { POSTS_SORTED } from '../content/posts/index.js';
 import { editorialImage, journalImage } from '../data/media.js';
@@ -16,7 +16,7 @@ import { SITE } from '../config/site.js';
 
 /* ==========================================================================
    Home — a shop front: short banner, shop by age, the bikes themselves,
-   repairs, accessories, sizing, delivery cities, guides.
+   repairs, sizing, delivery cities, guides.
    ========================================================================== */
 
 /** Section heading with an optional "see all" link on the far side. */
@@ -77,16 +77,6 @@ function Repairs() {
           {t('nav.maintenance')}
         </Button>
       </div>
-    </section>
-  );
-}
-
-function Accessories() {
-  const { t, path } = useLocale();
-  return (
-    <section className="container-page py-12 sm:py-16">
-      <Head title={t('home.accessoriesTitle')} to={path(paths.accessories())} linkLabel={t('common.viewAll')} />
-      <ProductRow products={featuredAccessories(8)} label={t('home.accessoriesTitle')} className="mt-5" />
     </section>
   );
 }
@@ -159,14 +149,14 @@ export default function Home() {
         title={lang === 'ar' ? `${SITE.name.ar} — ${SITE.tagline.ar} في الشرقية` : `${SITE.name.en} — ${SITE.tagline.en} in Sharqia, Egypt`}
         description={
           lang === 'ar'
-            ? `عجل ودراجات أطفال وكبار مقاس 12 لـ 26 بوصة بأسعار من ${from}، إكسسوارات وصيانة. اطلب على واتساب ${SITE.contact.whatsappDisplay} والتوصيل لحد البيت.`
-            : `Kids and adult bikes from 12 to 26 inch, priced from ${from}, plus accessories and repairs. Order on WhatsApp ${SITE.contact.whatsappDisplay} for delivery to your door.`
+            ? `عجل ودراجات أطفال وكبار مقاس 12 لـ 26 بوصة بأسعار من ${from}، وعندنا صيانة. اطلب على واتساب ${SITE.contact.whatsappDisplay} والتوصيل لحد البيت.`
+            : `Kids and adult bikes from 12 to 26 inch, priced from ${from}, plus repairs. Order on WhatsApp ${SITE.contact.whatsappDisplay} for delivery to your door.`
         }
         canonicalPath={lang === 'en' ? '/en' : '/'}
         keywords={
           lang === 'ar'
-            ? 'عجل, عجلة, عجل أطفال, عجلة أطفال, دراجات, دراجات أطفال, أسعار العجل, عجل جبلي, عجل برامج, صيانة عجل, إكسسوارات عجل, عجل الشرقية, عجل الزقازيق'
-            : 'bicycles, kids bikes, bike prices Egypt, mountain bikes, BMX, bike repair, bike accessories, Sharqia, Zagazig'
+            ? 'عجل, عجلة, عجل أطفال, عجلة أطفال, دراجات, دراجات أطفال, أسعار العجل, عجل جبلي, عجل برامج, صيانة عجل, عجل الشرقية, عجل الزقازيق'
+            : 'bicycles, kids bikes, bike prices Egypt, mountain bikes, BMX, bike repair, Sharqia, Zagazig'
         }
         jsonLd={[organizationSchema(lang), websiteSchema(lang)].filter(Boolean)}
       />
@@ -174,7 +164,6 @@ export default function Home() {
       <ShopCollections />
       <Bikes />
       <Repairs />
-      <Accessories />
       <Fit />
       <Areas />
       <Journal />

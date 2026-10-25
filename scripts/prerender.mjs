@@ -261,7 +261,7 @@ const llms = `# ${SITE.name.ar} (${SITE.name.en})
 > ${SITE.description.en}
 
 ## About
-- Business type: bicycle and accessory retailer (BikeStore)
+- Business type: bicycle shop with repairs (BikeStore)
 - Location: ${SITE.address.city.en}, ${SITE.address.region.en}, Egypt
 - Service area: delivery across Egypt; local pages cover Al Sharqia Governorate, including Zagazig, Belbeis, Minya Al Qamh, Abu Hammad, Hehia, Abu Kabir, Faqous, El Husseiniya, Kafr Saqr, Awlad Saqr, El Ibrahimiya, Deyerb Negm, Mashtoul El Souk, El Qanayat, El Qurein, New Salhia, Menshat Abu Omar, San El Hagar and 10th of Ramadan City
 - Languages: Arabic (primary), English
@@ -280,7 +280,6 @@ const llms = `# ${SITE.name.ar} (${SITE.name.en})
 - [Programme (BMX-style) bikes](${BASE_URL}/shop/category/bmx/)
 - [City and women's bikes](${BASE_URL}/shop/category/city/)
 - Bikes by wheel size: [12"](${BASE_URL}/shop/size/12-inch/), [16"](${BASE_URL}/shop/size/16-inch/), [20"](${BASE_URL}/shop/size/20-inch/), [24"](${BASE_URL}/shop/size/24-inch/), [26"](${BASE_URL}/shop/size/26-inch/)
-- [Accessories](${BASE_URL}/accessories/): lights, locks, baskets, helmets, bells, pumps and tools
 - [Size guide](${BASE_URL}/size-guide/): wheel and frame sizing by rider height and age, with an interactive calculator
 - [Blog](${BASE_URL}/blog/): buying, sizing, maintenance and safety guides
 - [Repairs](${BASE_URL}/maintenance/): bike repairs

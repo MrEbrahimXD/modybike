@@ -164,8 +164,8 @@ export default {
     },
     {
       type: 'cta',
-      ar: 'كل الإكسسوارات دي متوفرة عندنا وبنركّبها لك مجانًا مع أي دراجة. شوف قسم الإكسسوارات أو اسألنا على واتساب.',
-      en: 'We stock all of these and fit them free with any bike. Browse the accessories section or ask us on WhatsApp.',
+      ar: 'محتاج مساعدة في اختيار العجلة المناسبة؟ ابعت لنا على واتساب.',
+      en: 'Need help choosing the right bike? Message us on WhatsApp.',
     },
   ],
 };

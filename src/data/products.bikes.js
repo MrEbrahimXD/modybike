@@ -69,7 +69,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-bell-classic', 'acc-helmet-kids', 'acc-training-wheels', 'acc-light-set'],
     createdAt: '2026-09-20',
   },
   {
@@ -121,7 +120,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-bell-classic', 'acc-helmet-kids', 'acc-training-wheels', 'acc-light-set'],
     createdAt: '2026-09-20',
   },
   {
@@ -173,7 +171,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-bell-classic', 'acc-helmet-kids', 'acc-training-wheels', 'acc-light-set'],
     createdAt: '2026-09-20',
   },
   {
@@ -223,7 +220,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-bell-classic', 'acc-helmet-kids', 'acc-light-set', 'acc-chain-lock'],
     createdAt: '2026-09-20',
   },
   {
@@ -271,7 +267,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-bell-classic', 'acc-helmet-kids', 'acc-light-set', 'acc-chain-lock'],
     createdAt: '2026-09-20',
   },
 
@@ -324,7 +319,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-helmet-kids', 'acc-light-set', 'acc-chain-lock', 'acc-pump-floor'],
     createdAt: '2026-09-20',
   },
   {
@@ -374,7 +368,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-helmet-kids', 'acc-light-set', 'acc-chain-lock', 'acc-pump-floor'],
     createdAt: '2026-09-20',
   },
   {
@@ -428,7 +421,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-helmet-kids', 'acc-light-set', 'acc-chain-lock', 'acc-pump-floor'],
     createdAt: '2026-09-20',
   },
   {
@@ -478,7 +470,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-light-set', 'acc-chain-lock', 'acc-pump-floor', 'acc-bottle-cage'],
     createdAt: '2026-09-20',
   },
 
@@ -530,7 +521,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-light-set', 'acc-chain-lock', 'acc-pump-floor', 'acc-bottle-cage'],
     createdAt: '2026-09-20',
   },
   {
@@ -584,7 +574,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-light-set', 'acc-chain-lock', 'acc-pump-floor', 'acc-bottle-cage'],
     createdAt: '2026-09-20',
   },
   {
@@ -636,7 +625,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-light-set', 'acc-chain-lock', 'acc-pump-floor', 'acc-bottle-cage'],
     createdAt: '2026-09-20',
   },
   {
@@ -685,7 +673,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-light-set', 'acc-chain-lock', 'acc-pump-floor', 'acc-front-basket'],
     createdAt: '2026-09-20',
   },
   {
@@ -734,7 +721,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-light-set', 'acc-chain-lock', 'acc-pump-floor', 'acc-bottle-cage'],
     createdAt: '2026-09-20',
   },
   {
@@ -784,7 +770,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-light-set', 'acc-chain-lock', 'acc-pump-floor', 'acc-bottle-cage'],
     createdAt: '2026-09-20',
   },
   {
@@ -834,7 +819,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-light-set', 'acc-chain-lock', 'acc-pump-floor', 'acc-bottle-cage'],
     createdAt: '2026-09-20',
   },
   {
@@ -886,7 +870,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-light-set', 'acc-chain-lock', 'acc-pump-floor', 'acc-bottle-cage'],
     createdAt: '2026-09-20',
   },
   {
@@ -936,7 +919,6 @@ export const BIKES = [
       ],
     },
     images: [],
-    accessories: ['acc-light-set', 'acc-chain-lock', 'acc-pump-floor', 'acc-bottle-cage'],
     createdAt: '2026-09-20',
   },
 ];

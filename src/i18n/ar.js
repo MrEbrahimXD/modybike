@@ -8,7 +8,7 @@ export default {
     close: 'إغلاق',
     open: 'فتح',
     search: 'بحث',
-    searchPlaceholder: 'دوّر على دراجة أو إكسسوار…',
+    searchPlaceholder: 'دوّر على عجلة…',
     loading: 'جارٍ التحميل…',
     more: 'المزيد',
     all: 'الكل',
@@ -44,7 +44,6 @@ export default {
   nav: {
     home: 'الرئيسية',
     products: 'الدراجات',
-    accessories: 'الإكسسوارات',
     maintenance: 'الصيانة',
     catalogue: 'الكتالوج PDF',
     sizeGuide: 'دليل المقاسات',
@@ -75,8 +74,6 @@ export default {
     categoriesSubtitle: 'اختار سن الراكب وهنعرض لك المقاسات المناسبة.',
     featuredTitle: "وصل حديثًا",
     featuredSubtitle: "موديلات توضيحية لحين إضافة كتالوج المعرض.",
-    accessoriesTitle: 'إكسسوارات',
-    accessoriesSubtitle: 'أنوار، جرس، سلة، قفل، خوذة، وعجل مساعد.',
     sizeTeaserTitle: 'مش عارف المقاس المناسب؟',
     sizeTeaserBody:
       'اكتب الطول وهنقولك مقاس الجنط المناسب والموديلات اللي تنفع.',
@@ -98,7 +95,6 @@ export default {
 
   product: {
     products: 'الدراجات',
-    accessories: 'الإكسسوارات',
     allProducts: 'كل الدراجات',
     price: 'السعر',
     save: 'وفّر',
@@ -139,7 +135,6 @@ export default {
     warranty: 'الضمان',
     months: 'شهر',
     related: 'منتجات مشابهة',
-    recommendedAccessories: 'إكسسوارات مقترحة مع الدراجة دي',
     gallery: 'صور المنتج',
     placeholderImage: 'صورة توضيحية مؤقتة',
     shareProduct: 'شارك المنتج',
@@ -243,14 +238,6 @@ export default {
     clearCart: 'تفريغ السلة',
     confirmClear: 'متأكد إنك عايز تفرّغ السلة؟',
     updateQty: 'تعديل كمية {name}',
-  },
-
-  upsell: {
-    title: 'كمّل تجهيز عجلتك',
-    subtitle:
-      'اتضافت {name} للسلة. ممكن تضيف معاها:',
-    skip: 'لا شكرًا، كمّل',
-    goToCart: 'روح للسلة',
   },
 
   checkout: {
@@ -412,7 +399,7 @@ export default {
 
   footer: {
     about:
-      'مودي بايك — دراجات أطفال وكبار، إكسسوارات، وصيانة.',
+      'مودي بايك — عجل ودراجات أطفال وكبار، وصيانة.',
     quickLinks: 'روابط سريعة',
     categories: 'الأقسام',
     contactUs: 'تواصل معنا',
@@ -431,7 +418,7 @@ export default {
 
   seo: {
     aboutTitle: 'من نحن — مودي بايك للعجل والدراجات',
-    about: 'مودي بايك محل عجل ودراجات في الشرقية: عجل أطفال وكبار بالأسعار، إكسسوارات، صيانة، وتوصيل لحد البيت.',
+    about: 'مودي بايك محل عجل ودراجات في الشرقية: عجل أطفال وكبار بالأسعار، صيانة، وتوصيل لحد البيت.',
     contactTitle: 'رقم مودي بايك وواتساب — اتصل بنا',
     contact: 'كلّم مودي بايك على واتساب {whatsapp} أو اتصل {phone}. المحل في {city}، {region} — مفتوح يوميًا من {opens} لـ {closes}.',
     faq: 'إجابات عن مقاسات العجل حسب السن والطول، التوصيل لحد البيت، الصيانة والضمان في مودي بايك.',

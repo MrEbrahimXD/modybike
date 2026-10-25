@@ -113,8 +113,8 @@ export default {
     },
     {
       type: 'cta',
-      ar: 'عندنا أطقم أنوار ببطارية وبالشحن وعاكسات للجنوط بأسعار مناسبة، وبنركّبها لك في المعرض مجانًا.',
-      en: 'We stock battery and rechargeable light sets and spoke reflectors at sensible prices, and we fit them free in the showroom.',
+      ar: 'محتاج عجلة للمشاوير اليومية؟ ابعت لنا على واتساب وهنرشّح لك المناسب.',
+      en: 'Need a bike for everyday trips? Message us on WhatsApp and we will suggest the right one.',
     },
   ],
 };

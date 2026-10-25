@@ -144,8 +144,8 @@ export default {
     },
     {
       type: 'cta',
-      ar: 'مضخات أرضية بعداد ومضخات صغيرة للشاسيه متوفرة عندنا، وبنضبط لك الضغط الصح مجانًا وقت الاستلام.',
-      en: 'We stock floor pumps with gauges and mini frame pumps, and we set your pressure correctly free of charge on handover.',
+      ar: 'الكاوتش بيفضى بسرعة؟ عندنا صيانة لأي عجلة — ابعت لنا على واتساب.',
+      en: 'Tyres keep going flat? We repair any bike — message us on WhatsApp.',
     },
   ],
 };

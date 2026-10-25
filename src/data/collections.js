@@ -17,7 +17,7 @@ export const PRODUCT_TYPES = [
 
 export const getAgeGroup = (slug) => AGE_GROUPS.find((group) => group.slug === slug);
 export const getProductType = (slug) => PRODUCT_TYPES.find((type) => type.slug === slug);
-export const productTypeOf = (product) => product.productType || (product.category === 'accessories' ? 'accessories' : 'bikes');
+export const productTypeOf = (product) => product.productType || 'bikes';
 export function matchesAgeGroup(product, slug) {
   const group = getAgeGroup(slug);
   if (!group) return !slug;

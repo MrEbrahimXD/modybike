@@ -88,14 +88,18 @@ for (const prefix of ['', '/en']) {
   assert.equal((await render(`${prefix}/products?category=kids`)).head.canonical, `${SITE.baseUrl}${prefix}/shop/category/kids/`);
 }
 
-// Placeholder accessories stay out of Google: noindex, no Product markup, not in the feed.
+// Every product is indexable, carries Product markup and is in the feed.
 const feed = await readFile('dist/feeds/products.xml', 'utf8');
 for (const product of PRODUCTS) {
   const { head } = await render(`/products/${product.slug}`);
-  assert.equal(head.noindex, Boolean(product.placeholder), `Product indexing: ${product.slug}`);
-  assert.equal(head.jsonLd.some((s) => s['@type'] === 'Product'), !product.placeholder, `Product markup: ${product.slug}`);
-  assert.equal(feed.includes(`<g:id>${product.sku}</g:id>`), !product.placeholder, `Feed entry: ${product.slug}`);
+  assert.equal(head.noindex, false, `Product indexing: ${product.slug}`);
+  assert.ok(head.jsonLd.some((s) => s['@type'] === 'Product'), `Product markup: ${product.slug}`);
+  assert.ok(feed.includes(`<g:id>${product.sku}</g:id>`), `Feed entry: ${product.slug}`);
 }
+// The shop sells bikes only: no accessories page, links or wording.
+const home = await readFile('dist/index.html', 'utf8');
+assert.ok(!/accessories|إكسسوار/i.test(home), 'Accessories mentioned on the home page');
+assert.equal((await render('/accessories')).head.noindex, true, '/accessories must be a 404');
 assert.equal((await readFile('dist/site-url.txt', 'utf8')).trim(), SITE.baseUrl);
 
 console.log(`Verified ${checked} prerendered pages, age/type filtering, bilingual canonicals, sitemap and structured data.`);

@@ -135,8 +135,8 @@ export default {
     },
     {
       type: 'cta',
-      ar: 'عندنا موديلات بكل أنواع الفرامل. قول لنا بتركب فين وإيه وزنك التقريبي، وهنرشّح لك النوع اللي فعلًا محتاجه.',
-      en: 'We carry models with every brake type. Tell us where you ride and your rough weight, and we will recommend the type you genuinely need.',
+      ar: 'عندنا موديلات بفرامل كفة وموديلات بفرامل ديسك. قول لنا بتركب فين ووزنك التقريبي، وهنرشّح لك المناسب.',
+      en: 'We have models with V-brakes and models with disc brakes. Tell us where you ride and your rough weight, and we will recommend the right one.',
     },
   ],
 };

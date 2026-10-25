@@ -3,6 +3,7 @@ import { AGE_GROUPS } from '../../data/collections.js';
 import { queryProducts } from '../../data/products.js';
 import { useLocale } from '../../i18n/index.jsx';
 import { paths } from '../../lib/routes.js';
+import { BIKE_ART_VIEWBOX, bikeArtShapes } from '../../lib/bikeArt.js';
 
 /** What each age tile draws: the bike grows from tile to tile. */
 const AGE_ART = {
@@ -13,81 +14,24 @@ const AGE_ART = {
   'ages-12-plus': { wheel: 26, mtb: true },
 };
 
-const f = (n) => n.toFixed(1);
-const pt = (a) => `${f(a.x)} ${f(a.y)}`;
-const add = (a, dx, dy) => ({ x: a.x + dx, y: a.y + dy });
-const lerp = (a, b, t) => ({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
+/** Brand-yellow parts take a Tailwind class so dark mode can keep them yellow. */
+const paint = (role) => (role === 'ink' ? 'currentColor' : 'none');
 
-/**
- * Side view of a bike standing on the bottom edge of a 200×116 box. Every
- * tile shares the box, so a 12" bike really is drawn smaller than a 26" one.
- */
-function BikeArt({ wheel, training = false, basket = false, mtb = false, className = '' }) {
-  const G = 112;
-  const R = wheel * 1.42;
-  const W = 3 * R;
-  const rx = 100 - (W + 2 * R) / 2 + R;
-  const fx = rx + W;
-  const ay = G - R;
-  const rear = { x: rx, y: ay };
-  const front = { x: fx, y: ay };
-  const bb = { x: rx + 0.42 * W, y: ay + 0.1 * R };
-  const seatTop = add(bb, -0.12 * W, (mtb ? -1.28 : -1.12) * R);
-  const headTop = { x: fx - 0.2 * W, y: ay - (mtb ? 1.12 : 1.08) * R };
-  const headBottom = { x: fx - 0.15 * W, y: ay - 0.6 * R };
-  const stays = lerp(bb, seatTop, mtb ? 0.86 : 0.5);
-  const saddle = add(seatTop, -0.04 * W, -0.26 * R);
-  const bar = mtb ? add(headTop, 0.05 * W, -0.12 * R) : add(headTop, -0.04 * W, -0.46 * R);
-  const line = (points, width, stroke = 'currentColor') => (
-    <path d={`M${points.map(pt).join(' L')}`} fill="none" stroke={stroke} strokeWidth={width} strokeLinecap="round" strokeLinejoin="round" />
-  );
-  const trainer = Math.max(7, 0.42 * R);
-  const trainerAt = { x: rx - 0.56 * R, y: G - trainer };
-  const basketTop = bar.y + 0.16 * R;
-  const basketX = headTop.x + 0.08 * R;
-
+/** A bike drawn to scale for its wheel size (shared with the PDF catalogue). */
+function BikeArt({ className = '', ...options }) {
   return (
-    <svg viewBox="0 0 200 116" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false" className={className}>
-      {training ? (
-        <>
-          {line([rear, trainerAt], 2.2)}
-          <circle cx={f(trainerAt.x)} cy={f(trainerAt.y)} r={f(trainer - 1.2)} className="fill-sun" stroke="currentColor" strokeWidth="2.2" />
-        </>
-      ) : null}
-      {[rear, front].map((c) => (
-        <g key={c.x}>
-          <circle cx={f(c.x)} cy={f(c.y)} r={f(R - 2.2)} fill="none" stroke="currentColor" strokeWidth={mtb ? 5 : 4.4} />
-          <circle cx={f(c.x)} cy={f(c.y)} r={f(R - 6.4)} fill="none" className="stroke-sun" strokeWidth="2" />
-          <circle cx={f(c.x)} cy={f(c.y)} r="2" fill="currentColor" />
-        </g>
-      ))}
-      {line([rear, bb], 3)}
-      {line([rear, stays], 3)}
-      {line([bb, seatTop], 3.4)}
-      {line([headTop, mtb ? lerp(bb, seatTop, 0.92) : stays], 3.6)}
-      {line([headBottom, bb], 3.8)}
-      {line([headTop, headBottom], 4.2)}
-      {line([headBottom, front], mtb ? 4.6 : 3.2)}
-      {line([seatTop, saddle], 2.8)}
-      <path d={`M${pt(add(saddle, -0.34 * R, 0))} L${pt(add(saddle, 0.22 * R, 0.02 * R))}`} className="stroke-sun" strokeWidth="5.2" strokeLinecap="round" />
-      {mtb
-        ? line([headTop, bar, add(bar, 0.06 * R, -0.01 * R)], 3)
-        : line([headTop, bar, add(bar, -0.4 * R, 0.03 * R)], 3)}
-      <circle cx={f(bb.x)} cy={f(bb.y)} r={f(0.18 * R + 1.6)} fill="none" stroke="currentColor" strokeWidth="2.2" />
-      {line([bb, add(bb, 0.16 * R, 0.32 * R)], 2.6)}
-      {line([add(bb, 0.04 * R, 0.32 * R), add(bb, 0.3 * R, 0.32 * R)], 2.6)}
-      {basket ? (
-        <>
-          {line([add(bar, 0, 0.04 * R), { x: basketX + 0.04 * R, y: basketTop }], 2)}
-          <path
-            d={`M${f(basketX)} ${f(basketTop)} L${f(basketX + 0.66 * R)} ${f(basketTop)} L${f(basketX + 0.59 * R)} ${f(basketTop + 0.44 * R)} L${f(basketX + 0.05 * R)} ${f(basketTop + 0.44 * R)} Z`}
-            className="fill-sun"
-            stroke="currentColor"
-            strokeWidth="2.2"
-            strokeLinejoin="round"
-          />
-        </>
-      ) : null}
+    <svg viewBox={BIKE_ART_VIEWBOX} preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false" className={className}>
+      {bikeArtShapes(options).map((s, i) => {
+        const props = {
+          fill: paint(s.fill),
+          stroke: paint(s.stroke),
+          strokeWidth: s.width,
+          strokeLinecap: 'round',
+          strokeLinejoin: 'round',
+          className: [s.fill === 'sun' && 'fill-sun', s.stroke === 'sun' && 'stroke-sun'].filter(Boolean).join(' ') || undefined,
+        };
+        return s.kind === 'circle' ? <circle key={i} cx={s.cx} cy={s.cy} r={s.r} {...props} /> : <path key={i} d={s.d} {...props} />;
+      })}
     </svg>
   );
 }

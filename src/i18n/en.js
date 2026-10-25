@@ -8,7 +8,7 @@ export default {
     close: 'Close',
     open: 'Open',
     search: 'Search',
-    searchPlaceholder: 'Search bikes and accessories…',
+    searchPlaceholder: 'Search bikes…',
     loading: 'Loading…',
     more: 'More',
     all: 'All',
@@ -44,7 +44,6 @@ export default {
   nav: {
     home: 'Home',
     products: 'Bikes',
-    accessories: 'Accessories',
     maintenance: 'Repairs',
     catalogue: 'PDF catalogue',
     sizeGuide: 'Size guide',
@@ -75,8 +74,6 @@ export default {
     categoriesSubtitle: 'Pick the rider’s age to see the sizes that fit.',
     featuredTitle: "Explore the bikes",
     featuredSubtitle: "Illustrative models while the shop catalogue is being prepared.",
-    accessoriesTitle: 'Accessories',
-    accessoriesSubtitle: 'Lights, bells, baskets, locks, helmets and training wheels.',
     sizeTeaserTitle: 'Not sure which size fits?',
     sizeTeaserBody:
       'Enter your height (or your child’s) and we will tell you the right wheel and frame size, then show the models that actually fit.',
@@ -99,7 +96,6 @@ export default {
 
   product: {
     products: 'Bikes',
-    accessories: 'Accessories',
     allProducts: 'All bikes',
     price: 'Price',
     save: 'Save',
@@ -140,7 +136,6 @@ export default {
     warranty: 'Warranty',
     months: 'months',
     related: 'Similar products',
-    recommendedAccessories: 'Recommended accessories for this bike',
     gallery: 'Product images',
     placeholderImage: 'Temporary placeholder image',
     shareProduct: 'Share product',
@@ -248,14 +243,6 @@ export default {
     clearCart: 'Empty cart',
     confirmClear: 'Are you sure you want to empty the cart?',
     updateQty: 'Update quantity for {name}',
-  },
-
-  upsell: {
-    title: 'Finish kitting out your bike',
-    subtitle:
-      'We added {name} to your cart. Customers usually add these accessories with the bike — safer and more comfortable.',
-    skip: 'No thanks, continue',
-    goToCart: 'Go to cart',
   },
 
   checkout: {
@@ -420,7 +407,7 @@ export default {
 
   footer: {
     about:
-      'ModyBike — a bicycle and accessory showroom in Al Sharqia. Quality worth paying for, and the right size for everyone in the family.',
+      'ModyBike — kids and adult bikes, and repairs.',
     quickLinks: 'Quick links',
     categories: 'Categories',
     contactUs: 'Contact us',
@@ -439,7 +426,7 @@ export default {
 
   seo: {
     aboutTitle: 'About ModyBike — kids and adult bikes',
-    about: 'ModyBike is a bicycle shop in Al Sharqia: kids and adult bikes with prices, accessories, repairs and delivery to your door.',
+    about: 'ModyBike is a bicycle shop in Al Sharqia: kids and adult bikes with prices, repairs and delivery to your door.',
     contactTitle: 'Contact ModyBike — phone and WhatsApp',
     contact: 'Reach ModyBike on WhatsApp {whatsapp} or call {phone}. The shop is in {city}, {region}, open daily {opens}–{closes}.',
     faq: 'Answers on bike sizes by age and height, home delivery, repairs and warranty at ModyBike.',
