@@ -68,24 +68,13 @@ function Bikes() {
 }
 
 function Repairs() {
-  const { t, path, lang } = useLocale();
-  const items = lang === 'ar'
-    ? ['فرامل', 'سرعات', 'كاوتش وشمبر', 'جنزير', 'ظبط جنط', 'تركيب']
-    : ['Brakes', 'Gears', 'Tyres and tubes', 'Chains', 'Wheel truing', 'Assembly'];
+  const { t, path } = useLocale();
   return (
     <section className="bg-carbon-950 text-paper">
-      <div className="container-page grid gap-6 py-12 sm:py-16 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
-        <div>
-          <h2 className="text-2xl font-bold text-white sm:text-3xl">{lang === 'ar' ? 'صيانة الدراجات' : 'Bike repairs'}</h2>
-          <p className="mt-2 max-w-xl text-carbon-300">{t('why.support.d')}</p>
-          <ul className="mt-4 flex flex-wrap gap-2" role="list">
-            {items.map((x) => (
-              <li key={x} className="border border-carbon-700 px-3 py-1.5 text-sm text-carbon-200">{x}</li>
-            ))}
-          </ul>
-        </div>
-        <Button as={Link} to={path(paths.maintenance())} variant="signal" size="lg" iconEnd="arrowRight">
-          {lang === 'ar' ? 'تفاصيل الصيانة' : 'Repair details'}
+      <div className="container-page flex flex-wrap items-center justify-between gap-4 py-8">
+        <p className="text-xl font-bold text-white sm:text-2xl">{t('why.support.d')}</p>
+        <Button as={Link} to={path(paths.maintenance())} variant="signal" size="md" icon="wrench">
+          {t('nav.maintenance')}
         </Button>
       </div>
     </section>

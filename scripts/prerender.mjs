@@ -265,7 +265,7 @@ const llms = `# ${SITE.name.ar} (${SITE.name.en})
 - [Accessories](${BASE_URL}/accessories): lights, locks, baskets, helmets, bells, pumps and tools
 - [Size guide](${BASE_URL}/size-guide): wheel and frame sizing by rider height and age, with an interactive calculator
 - [Blog](${BASE_URL}/blog): buying, sizing, maintenance and safety guides
-- [Repairs](${BASE_URL}/maintenance): bike servicing, brakes, gears, tyres, chains, assembly
+- [Repairs](${BASE_URL}/maintenance): bike repairs
 - [Delivery areas](${BASE_URL}/locations): city pages across Al Sharqia
 - [FAQ](${BASE_URL}/faq)
 - [Contact](${BASE_URL}/contact)

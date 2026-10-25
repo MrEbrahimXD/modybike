@@ -94,7 +94,7 @@ export default {
 
   why: {
     delivery: { t: 'Delivery', d: 'Delivered to your door — we agree the time on WhatsApp.' },
-    support: { t: 'Repairs', d: 'Tune-ups, repairs and assembly at the shop.' },
+    support: { t: 'Repairs', d: 'We repair all kinds of bikes.' },
   },
 
   product: {

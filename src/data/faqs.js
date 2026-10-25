@@ -13,7 +13,7 @@ export const FAQ_GROUPS = [
   ] },
   { id: 'shipping', title: { ar: 'التوصيل والصيانة والضمان', en: 'Delivery, repairs and warranty' }, items: [
     { q: { ar: 'بتوصّلوا لحد البيت؟', en: 'Do you deliver?' }, a: { ar: 'أيوه. ابعت العنوان على واتساب ونأكد معاك التفاصيل ومعاد التوصيل.', en: 'Yes. Send your address on WhatsApp and we confirm the details and delivery time.' } },
-    { q: { ar: 'عندكم صيانة؟', en: 'Do you repair bikes?' }, a: { ar: 'أيوه: ظبط فرامل وسرعات، تغيير كاوتش وجنزير، وتركيب دراجات جديدة. هات الدراجة المعرض أو ابعت لنا على واتساب.', en: 'Yes — brake and gear adjustment, tyre and chain replacement, and assembly of new bikes. Bring the bike to the shop or message us on WhatsApp.' } },
+    { q: { ar: 'عندكم صيانة؟', en: 'Do you repair bikes?' }, a: { ar: 'أيوه، عندنا صيانة لكل أنواع الدراجات.', en: 'Yes, we repair all kinds of bikes.' } },
     { q: { ar: 'إيه شروط الضمان؟', en: 'What are the warranty terms?' }, a: SITE.warranty.note },
   ] },
 ];
