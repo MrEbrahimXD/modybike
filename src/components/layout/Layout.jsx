@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
+import { stripLocale } from '../../i18n/index.jsx';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Icon from '../ui/Icon.jsx';
@@ -46,6 +47,9 @@ function CartAnnouncer() {
  */
 function WhatsAppFab() {
   const { t } = useLocale();
+  const { pathname } = useLocation();
+  // Product pages carry their own bottom buy bar.
+  if (/^\/products\/[^/]+/.test(stripLocale(pathname))) return null;
   return (
     <a
       href={WHATSAPP_LINK}

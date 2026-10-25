@@ -25,8 +25,8 @@ export const SITE = {
   },
 
   description: {
-    ar: 'مودي بايك للدراجات ولعب الأطفال. دراجات بمقاسات ١٢ و١٦ و٢٠ و٢٤ و٢٦ بوصة بأسعار معلنة — اختار حسب العمر: ٣–٥، ٥–٨، ٧–١٠، ٨–١٢، و١٢ سنة فأكثر، وتواصل معنا لمعرفة المتاح.',
-    en: 'ModyBike for bicycles and children’s toys. Bikes in 12, 16, 20, 24 and 26 inch with prices listed — shop by age: 3–5, 5–8, 7–10, 8–12 and 12+. Contact us to check what is in stock.',
+    ar: 'مودي بايك: دراجات أطفال وكبار مقاس ١٢ و١٦ و٢٠ و٢٤ و٢٦ بوصة بالأسعار، إكسسوارات، وصيانة دراجات. اطلب على واتساب والتوصيل لحد البيت.',
+    en: 'ModyBike: kids and adult bikes in 12, 16, 20, 24 and 26 inch with prices, accessories and bike repairs. Order on WhatsApp for delivery to your door.',
   },
 
   /* ---------------------------------------------------------------- CONTACT */
@@ -82,13 +82,10 @@ export const SITE = {
     symbol: { ar: 'ج.م', en: 'EGP' },
   },
 
-  /** TODO: سياسة الشحن — القيم دي بتظهر في صفحة الشحن وفي رسالة الواتساب */
+  /** الشحن — ممنوع كتابة أي سعر توصيل في الموقع. الموعد والتكلفة بيتأكدوا على واتساب. */
   shipping: {
     freeOver: null,
-    flatRateAbuKabir: 0,
-    flatRateSharqia: 150,
-    flatRateOutside: null,
-    etaDays: { ar: 'يتم الاتفاق على موعد التوصيل عند تأكيد الطلب', en: 'Delivery timing is agreed when confirming the order' },
+    etaDays: { ar: 'بنتفق على معاد التوصيل على واتساب', en: 'Delivery time is agreed on WhatsApp' },
   },
 
   warranty: {

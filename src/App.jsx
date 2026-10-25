@@ -8,6 +8,7 @@ import Home from './pages/Home.jsx';
 import Products from './pages/Products.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
 import SizeGuide from './pages/SizeGuide.jsx';
+import Maintenance from './pages/Maintenance.jsx';
 import Blog from './pages/Blog.jsx';
 import BlogPost from './pages/BlogPost.jsx';
 import Locations, { LocationDetail } from './pages/Locations.jsx';
@@ -47,6 +48,7 @@ function localeRoutes(lang, basePath) {
       <Route path="products/:slug" element={<ProductDetail />} />
       <Route path="accessories" element={<Products variant="accessories" />} />
       <Route path="size-guide" element={<SizeGuide />} />
+      <Route path="maintenance" element={<Maintenance />} />
       <Route path="blog" element={<Blog />} />
       <Route path="blog/topic/:category" element={<Blog variant="category" />} />
       <Route path="blog/:slug" element={<BlogPost />} />

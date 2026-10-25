@@ -9,10 +9,11 @@ export const FAQ_GROUPS = [
   { id: 'contact', title: { ar: 'التواصل والزيارة', en: 'Contact and visits' }, items: [
     { q: { ar: 'إزاي أتواصل مع مودي بايك؟', en: 'How do I contact ModyBike?' }, a: { ar: `واتساب ${SITE.contact.whatsappDisplay}، وللاتصال ${SITE.contact.phones[0]}. اطلب اللوكيشن مننا قبل الزيارة.`, en: `WhatsApp ${SITE.contact.whatsappDisplay}, or call ${SITE.contact.phones[0]}. Ask us for directions before visiting.` } },
     { q: { ar: 'مواعيد العمل إيه؟', en: 'What are the opening hours?' }, a: { ar: 'من ١١ صباحًا إلى ١١ مساءً. تواصل معنا لتأكيد المواعيد في الإجازات.', en: '11 am to 11 pm. Contact us to confirm holiday hours.' } },
-    { q: { ar: 'إزاي أأكد سعر وتوفر منتج؟', en: 'How do I confirm a product’s price and availability?' }, a: { ar: 'ابعت لنا اسم القسم وعمر وطول المستخدم على واتساب، وهنأكد معاك الصور والمواصفات والسعر والتوفر قبل إتمام الطلب. الموديلات والأسعار التوضيحية على النسخة الحالية ليست كتالوجًا مؤكدًا للمعرض.', en: 'Send the category and the rider’s age and height on WhatsApp. We will confirm photos, specifications, price and availability before ordering. Illustrative products and prices in this preview are not confirmed shop inventory.' } },
+    { q: { ar: 'إزاي أأكد سعر وتوفر منتج؟', en: 'How do I confirm a product’s price and availability?' }, a: { ar: 'ابعت لنا اسم القسم وعمر وطول المستخدم على واتساب، وهنأكد معاك الصور والمواصفات والسعر والتوفر قبل إتمام الطلب.', en: 'Send the category and the rider’s age and height on WhatsApp. We will confirm photos, specifications, price and availability before ordering.' } },
   ] },
-  { id: 'shipping', title: { ar: 'التوصيل والضمان', en: 'Delivery and warranty' }, items: [
-    { q: { ar: 'مصاريف التوصيل كام؟', en: 'How much is delivery?' }, a: { ar: 'التوصيل مجاني داخل مركز أبو كبير، و١٥٠ جنيه لأي مركز آخر في محافظة الشرقية. بنأكد العنوان وموعد التسليم معاك قبل الطلب.', en: 'Delivery is free within Abu Kabir district and EGP 150 to other Al Sharqia districts. We confirm your address and delivery timing before ordering.' } },
+  { id: 'shipping', title: { ar: 'التوصيل والصيانة والضمان', en: 'Delivery, repairs and warranty' }, items: [
+    { q: { ar: 'بتوصّلوا لحد البيت؟', en: 'Do you deliver?' }, a: { ar: 'أيوه. ابعت العنوان على واتساب ونأكد معاك التفاصيل ومعاد التوصيل.', en: 'Yes. Send your address on WhatsApp and we confirm the details and delivery time.' } },
+    { q: { ar: 'عندكم صيانة؟', en: 'Do you repair bikes?' }, a: { ar: 'أيوه: ظبط فرامل وسرعات، تغيير كاوتش وجنزير، وتركيب دراجات جديدة. هات الدراجة المعرض أو ابعت لنا على واتساب.', en: 'Yes — brake and gear adjustment, tyre and chain replacement, and assembly of new bikes. Bring the bike to the shop or message us on WhatsApp.' } },
     { q: { ar: 'إيه شروط الضمان؟', en: 'What are the warranty terms?' }, a: SITE.warranty.note },
   ] },
 ];

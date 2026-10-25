@@ -103,12 +103,14 @@ export function contactEnquiryUrl({ name, message }, lang = 'ar') {
   return whatsappUrl(msg);
 }
 
-/** Enquiry scoped to one Sharqia district, used on the location landing pages. */
+/** Enquiry from a city landing page. */
 export function locationEnquiryUrl(location, lang = 'ar') {
   const msg =
     lang === 'ar'
-      ? `السلام عليكم 👋\nعايز أستفسر عن توصيل دراجة إلى *${location.name.ar}* — محافظة الشرقية.\nإيه المتاح ومصاريف الشحن؟`
-      : `Hello 👋\nI would like to ask about delivering a bike to *${location.name.en}*, Al Sharqia.\nWhat is available and what is the delivery fee?`;
+      ? `السلام عليكم
+عايز أطلب دراجة توصيل لـ *${location.name.ar}*. إيه المتاح؟`
+      : `Hello
+I would like a bike delivered to *${location.name.en}*. What is available?`;
   return whatsappUrl(msg);
 }
 

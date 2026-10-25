@@ -6,31 +6,23 @@
     <meta name="theme-color" content="#F4F1EC" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0B0B0A" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!--
-      Each language gets its own typeface rather than one family stretched over
-      both scripts:
-        · Arabic  — Readex Pro, drawn for Arabic first, with real weight at
-                    display sizes and built for long-form reading.
-        · English — Archivo, an industrial grotesque with presence in a headline.
-        · Both    — IBM Plex Mono, for spec sheets and part numbers only.
-      The stack is switched by `html[lang]` in index.css, and Google Fonts' own
-      unicode-range subsetting means a page only downloads the script it renders.
-      Loaded async so first paint is never blocked on a slow Egyptian 3G link.
-    -->
+    <!-- Readex Pro for Arabic, Archivo for English. Loaded async so text paints in the system font first. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Readex+Pro:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Readex+Pro:wght@400;500;600;700&display=swap"
       media="print"
       onload="this.media='all';this.onload=null"
     />
     <noscript>
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Readex+Pro:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Readex+Pro:wght@400;500;600;700&display=swap"
       />
     </noscript>
 

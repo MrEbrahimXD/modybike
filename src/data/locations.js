@@ -6,7 +6,6 @@
  *  - `distanceKm` مسافات تقريبية من الزقازيق — راجعها لو حابب.
  *  - `areas` قوائم القرى والمناطق التابعة — دي أهم حاجة للـ SEO المحلي.
  *    ضيف عليها كل القرى اللي بتوصّل لها فعليًا (كل قرية = كلمة بحث إضافية).
- *  - `deliveryFee` غيّرها حسب سياسة الشحن الحقيقية.
  * ========================================================================== */
 
 import { SITE } from '../config/site.js';
@@ -19,7 +18,7 @@ export const GOVERNORATE = {
   country: { ar: 'مصر', en: 'Egypt' },
 };
 
-/** @typedef {{slug:string,name:{ar:string,en:string},type:'city'|'markaz',distanceKm:number,deliveryFee:number,etaDays:string,geo:{lat:number,lng:number},areas:{ar:string[],en:string[]},blurb:{ar:string,en:string}}} Location */
+/** @typedef {{slug:string,name:{ar:string,en:string},type:'city'|'markaz',distanceKm:number,etaDays:string,geo:{lat:number,lng:number},areas:{ar:string[],en:string[]},blurb:{ar:string,en:string}}} Location */
 
 /** @type {Location[]} */
 const LOCATION_DRAFTS = [
@@ -29,7 +28,6 @@ const LOCATION_DRAFTS = [
     type: 'city',
     isCapital: true,
     distanceKm: 0,
-    deliveryFee: 100,
     etaDays: { ar: 'نفس اليوم أو اليوم التالي', en: 'Same day or next day' },
     geo: { lat: 30.5877, lng: 31.502 },
     areas: {
@@ -46,7 +44,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'بلبيس', en: 'Belbeis' },
     type: 'markaz',
     distanceKm: 35,
-    deliveryFee: 150,
     etaDays: { ar: 'من ١ إلى ٢ يوم', en: '1–2 days' },
     geo: { lat: 30.4199, lng: 31.5644 },
     areas: {
@@ -63,7 +60,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'منيا القمح', en: 'Minya Al Qamh' },
     type: 'markaz',
     distanceKm: 20,
-    deliveryFee: 150,
     etaDays: { ar: 'من ١ إلى ٢ يوم', en: '1–2 days' },
     geo: { lat: 30.4636, lng: 31.3333 },
     areas: {
@@ -80,7 +76,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'أبو حماد', en: 'Abu Hammad' },
     type: 'markaz',
     distanceKm: 18,
-    deliveryFee: 150,
     etaDays: { ar: 'من ١ إلى ٢ يوم', en: '1–2 days' },
     geo: { lat: 30.5333, lng: 31.6667 },
     areas: {
@@ -97,7 +92,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'ههيا', en: 'Hehia' },
     type: 'markaz',
     distanceKm: 15,
-    deliveryFee: 150,
     etaDays: { ar: 'من ١ إلى ٢ يوم', en: '1–2 days' },
     geo: { lat: 30.6667, lng: 31.6 },
     areas: {
@@ -114,7 +108,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'أبو كبير', en: 'Abu Kabir' },
     type: 'markaz',
     distanceKm: 25,
-    deliveryFee: 150,
     etaDays: { ar: 'من ١ إلى ٢ يوم', en: '1–2 days' },
     geo: { lat: 30.7286, lng: 31.6706 },
     areas: {
@@ -131,7 +124,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'فاقوس', en: 'Faqous' },
     type: 'markaz',
     distanceKm: 35,
-    deliveryFee: 150,
     etaDays: { ar: 'من ١ إلى ٣ أيام', en: '1–3 days' },
     geo: { lat: 30.7286, lng: 31.7969 },
     areas: {
@@ -148,7 +140,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'الحسينية', en: 'El Husseiniya' },
     type: 'markaz',
     distanceKm: 45,
-    deliveryFee: 150,
     etaDays: { ar: 'من ٢ إلى ٣ أيام', en: '2–3 days' },
     geo: { lat: 30.8608, lng: 31.9167 },
     areas: {
@@ -165,7 +156,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'كفر صقر', en: 'Kafr Saqr' },
     type: 'markaz',
     distanceKm: 35,
-    deliveryFee: 150,
     etaDays: { ar: 'من ١ إلى ٣ أيام', en: '1–3 days' },
     geo: { lat: 30.7936, lng: 31.6231 },
     areas: {
@@ -182,7 +172,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'أولاد صقر', en: 'Awlad Saqr' },
     type: 'markaz',
     distanceKm: 45,
-    deliveryFee: 150,
     etaDays: { ar: 'من ٢ إلى ٣ أيام', en: '2–3 days' },
     geo: { lat: 30.8667, lng: 31.7333 },
     areas: {
@@ -199,7 +188,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'الإبراهيمية', en: 'El Ibrahimiya' },
     type: 'markaz',
     distanceKm: 25,
-    deliveryFee: 150,
     etaDays: { ar: 'من ١ إلى ٢ يوم', en: '1–2 days' },
     geo: { lat: 30.6, lng: 31.75 },
     areas: {
@@ -216,7 +204,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'ديرب نجم', en: 'Deyerb Negm' },
     type: 'markaz',
     distanceKm: 25,
-    deliveryFee: 150,
     etaDays: { ar: 'من ١ إلى ٢ يوم', en: '1–2 days' },
     geo: { lat: 30.8, lng: 31.5333 },
     areas: {
@@ -233,7 +220,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'مشتول السوق', en: 'Mashtoul El Souk' },
     type: 'markaz',
     distanceKm: 30,
-    deliveryFee: 150,
     etaDays: { ar: 'من ١ إلى ٣ أيام', en: '1–3 days' },
     geo: { lat: 30.4333, lng: 31.4 },
     areas: {
@@ -250,7 +236,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'القنايات', en: 'El Qanayat' },
     type: 'markaz',
     distanceKm: 10,
-    deliveryFee: 100,
     etaDays: { ar: 'نفس اليوم أو اليوم التالي', en: 'Same day or next day' },
     geo: { lat: 30.5333, lng: 31.4333 },
     areas: {
@@ -267,7 +252,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'القرين', en: 'El Qurein' },
     type: 'markaz',
     distanceKm: 25,
-    deliveryFee: 150,
     etaDays: { ar: 'من ١ إلى ٢ يوم', en: '1–2 days' },
     geo: { lat: 30.6167, lng: 31.7333 },
     areas: {
@@ -284,7 +268,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'الصالحية الجديدة', en: 'New Salhia' },
     type: 'markaz',
     distanceKm: 60,
-    deliveryFee: 150,
     etaDays: { ar: 'من ٢ إلى ٣ أيام', en: '2–3 days' },
     geo: { lat: 30.6167, lng: 31.9833 },
     areas: {
@@ -301,7 +284,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'منشأة أبو عمر', en: 'Menshat Abu Omar' },
     type: 'markaz',
     distanceKm: 65,
-    deliveryFee: 150,
     etaDays: { ar: 'من ٢ إلى ٣ أيام', en: '2–3 days' },
     geo: { lat: 30.7833, lng: 31.95 },
     areas: {
@@ -318,7 +300,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'صان الحجر', en: 'San El Hagar' },
     type: 'markaz',
     distanceKm: 55,
-    deliveryFee: 150,
     etaDays: { ar: 'من ٢ إلى ٣ أيام', en: '2–3 days' },
     geo: { lat: 30.9667, lng: 31.8833 },
     areas: {
@@ -335,7 +316,6 @@ const LOCATION_DRAFTS = [
     name: { ar: 'العاشر من رمضان', en: '10th of Ramadan City' },
     type: 'city',
     distanceKm: 60,
-    deliveryFee: 150,
     etaDays: { ar: 'من ١ إلى ٣ أيام', en: '1–3 days' },
     geo: { lat: 30.2887, lng: 31.7422 },
     areas: {
@@ -349,16 +329,14 @@ const LOCATION_DRAFTS = [
   },
 ];
 
-// The draft distances were measured from Zagazig, not the actual showroom.
-// Publish only the confirmed delivery policy, with timing agreed per order.
+// Distances in the drafts were measured from Zagazig, so they are not shown.
 export const LOCATIONS = LOCATION_DRAFTS.map((location) => ({
   ...location,
   distanceKm: null,
-  deliveryFee: location.slug === 'abu-kabir' ? SITE.shipping.flatRateAbuKabir : SITE.shipping.flatRateSharqia,
   etaDays: SITE.shipping.etaDays,
   blurb: {
-    ar: `توصيل دراجات وسكوتر وعربيات أطفال من مودي بايك بأبو كبير إلى ${location.name.ar}. ${location.slug === 'abu-kabir' ? 'التوصيل مجاني داخل مركز أبو كبير.' : 'مصاريف التوصيل ١٥٠ جنيه.'} تواصل معنا لتأكيد العنوان والمنتج وموعد التسليم.`,
-    en: `Bicycle, scooter and ride-on car delivery from ModyBike in Abu Kabir to ${location.name.en}. ${location.slug === 'abu-kabir' ? 'Free delivery within Abu Kabir district.' : 'Delivery costs EGP 150.'} Contact us to confirm the address, product and delivery time.`,
+    ar: `دراجات أطفال وكبار وسكوتر وإكسسوارات في ${location.name.ar}. اطلب على واتساب ونوصّل لحد البيت في ${location.name.ar} و${location.areas.ar.slice(0, 3).join(' و')}.`,
+    en: `Kids and adult bikes, scooters and accessories in ${location.name.en}. Order on WhatsApp for delivery to your door in ${location.name.en}, ${location.areas.en.slice(0, 3).join(', ')} and nearby.`,
   },
 }));
 
@@ -373,7 +351,7 @@ export function allAreaNames(lang = 'ar') {
 
 /** Options for the checkout city <select>. */
 export function cityOptions(lang = 'ar') {
-  return LOCATIONS.map((l) => ({ value: l.slug, label: l.name[lang], fee: l.deliveryFee }));
+  return LOCATIONS.map((l) => ({ value: l.slug, label: l.name[lang] }));
 }
 
 export default LOCATIONS;

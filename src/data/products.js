@@ -1,6 +1,6 @@
 import BIKES from './products.bikes.js';
 import ACCESSORIES from './products.accessories.js';
-import { matchesAgeGroup, productTypeOf } from './collections.js';
+import { matchesAgeGroup, productTypeOf, PRODUCT_TYPES } from './collections.js';
 
 /** الكتالوج الكامل — دراجات + إكسسوارات. */
 export const PRODUCTS = [...BIKES, ...ACCESSORIES];
@@ -172,3 +172,7 @@ export function featuredAccessories(limit = 6) {
 }
 
 export default PRODUCTS;
+
+/** Product types that actually have stock listed. Empty sections stay out of
+    menus and the sitemap rather than showing a blank page. */
+export const LIVE_PRODUCT_TYPES = PRODUCT_TYPES.filter((type) => PRODUCTS.some((p) => productTypeOf(p) === type.slug));

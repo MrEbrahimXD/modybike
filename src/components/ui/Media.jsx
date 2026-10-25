@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
 import { SITE } from '../../config/site.js';
 
 const assetUrl = (src) => src?.startsWith('/') && !src.startsWith('//') ? `${SITE.basePath}${src}` : src;
@@ -41,59 +40,42 @@ export default function Media({
   imgClassName = '',
   fallbackLabel = '',
   position = 'center',
-  /**
-   * Fill the nearest positioned ancestor instead of reserving its own ratio.
-   * Used for full-bleed hero backgrounds, where the section's own padding —
-   * not the photograph — decides the height.
-   */
+  /** 'cover' crops to the frame; 'contain' shows the whole product on white. */
+  fit = 'cover',
+  /** Fill the nearest positioned ancestor instead of reserving a ratio (hero backgrounds). */
   fill = false,
 }) {
-  const imgRef = useRef(null);
-  const [loaded, setLoaded] = useState(false);
-
-  // A cached or prerendered image can finish before React attaches onLoad.
-  useEffect(() => {
-    if (imgRef.current?.complete) setLoaded(true);
-  }, []);
-
   const box = ratio || (image ? `${image.w} / ${image.h}` : '4/3');
+  const contain = fit === 'contain';
 
-  /* `Frame` owns `relative`; a fill needs `absolute`, and Tailwind emits
-     `relative` after `absolute`, so the two can't simply be concatenated. */
-  const Wrapper = ({ children }) =>
+  // A plain function, not an inner component: an inner component gets a new
+  // identity every render and React would remount the <img> each time.
+  const wrap = (children) =>
     fill ? (
       <div className={`absolute inset-0 overflow-hidden ${className}`}>{children}</div>
     ) : (
-      <Frame ratio={box} className={`bg-carbon-100 dark:bg-carbon-800 ${className}`}>
+      <Frame ratio={box} className={`${contain ? 'bg-white' : 'bg-carbon-100 dark:bg-carbon-800'} ${className}`}>
         {children}
       </Frame>
     );
 
   if (!image) {
-    // Deliberate, flat, and obviously a placeholder — not a pastel blob
-    // pretending to be a photograph.
-    return (
-      <Wrapper>
-        <span className="label absolute bottom-3 start-3 text-carbon-400 dark:text-carbon-500">
-          {fallbackLabel || 'ModyBike'}
-        </span>
-      </Wrapper>
+    return wrap(
+      <span className="label absolute bottom-3 start-3 text-carbon-400 dark:text-carbon-500">
+        {fallbackLabel || 'ModyBike'}
+      </span>,
     );
   }
 
-  return (
-    <Wrapper>
-      {/* blur-up: painted instantly from an inlined data URI */}
+  // The blurred preview sits underneath and the real image simply paints over
+  // it. No opacity fade: a fade waits for JavaScript, which delays the largest
+  // paint on slow phones.
+  return wrap(
+    <>
+      {!contain && image.lqip ? (
+        <img src={image.lqip} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-105 object-cover blur-xl" />
+      ) : null}
       <img
-        src={image.lqip}
-        alt=""
-        aria-hidden="true"
-        className={`absolute inset-0 h-full w-full scale-105 object-cover blur-xl transition-opacity duration-500 ${
-          loaded ? 'opacity-0' : 'opacity-100'
-        }`}
-      />
-      <img
-        ref={imgRef}
         src={assetUrl(image.src)}
         srcSet={assetSrcSet(image.srcset)}
         sizes={sizes}
@@ -101,14 +83,11 @@ export default function Media({
         width={image.w}
         height={image.h}
         loading={priority ? 'eager' : 'lazy'}
-        decoding={priority ? 'sync' : 'async'}
-        fetchpriority={priority ? "high" : "auto"}
-        onLoad={() => setLoaded(true)}
+        decoding="async"
+        fetchpriority={priority ? 'high' : 'auto'}
         style={{ objectPosition: position }}
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-          loaded ? 'opacity-100' : 'opacity-0'
-        } ${imgClassName}`}
+        className={`absolute inset-0 h-full w-full ${contain ? 'object-contain p-2' : 'object-cover'} ${imgClassName}`}
       />
-    </Wrapper>
+    </>,
   );
 }

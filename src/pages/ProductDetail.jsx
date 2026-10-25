@@ -37,6 +37,7 @@ function Gallery({ product, images }) {
         image={images[active]}
         alt={t('a11y.productImage', { name })}
         ratio="4/3"
+        fit="contain"
         sizes="(max-width: 1024px) 100vw, 58vw"
         priority
         fallbackLabel={product.sku}
@@ -55,7 +56,7 @@ function Gallery({ product, images }) {
                   i === active ? 'opacity-100 ring-1 ring-carbon-950 dark:ring-paper' : 'opacity-55 hover:opacity-100'
                 }`}
               >
-                <Media image={img} alt="" ratio="4/3" sizes="120px" />
+                <Media image={img} alt="" ratio="4/3" fit="contain" sizes="120px" />
               </button>
             </li>
           ))}
@@ -116,7 +117,7 @@ export default function ProductDetail() {
         ].filter(Boolean)}
       />
 
-      <div className="container-page pt-8">
+      <div className="container-page pt-4 sm:pt-6">
         <Breadcrumbs
           items={[
             {
@@ -130,7 +131,7 @@ export default function ProductDetail() {
       </div>
 
       {/* ------------------------------------------------------ buy section */}
-      <div className="container-page py-10 lg:py-14">
+      <div className="container-page py-5 lg:py-10">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-16">
           <Gallery product={product} images={images} />
 
@@ -146,7 +147,7 @@ export default function ProductDetail() {
               ) : null}
             </div>
 
-            <h1 className="mt-4 text-display-sm">{name}</h1>
+            <h1 className="mt-3 text-2xl font-bold leading-snug sm:text-3xl">{name}</h1>
             {product.tagline ? (
               <p className="mt-3 text-base leading-relaxed muted sm:text-lg">{tr(product.tagline)}</p>
             ) : null}
@@ -228,18 +229,19 @@ export default function ProductDetail() {
               {t('product.buyNow')}
             </Button>
 
-            {/* the three promises, restated where the decision is made */}
-            <ul className="mt-8 space-y-3">
-              {[
-                ['shield', tr(SITE.warranty.note)],
-                ['truck', t('why.delivery.d')],
-                ['wrench', t('why.support.d')],
-              ].map(([icon, text]) => (
-                <li key={text} className="flex gap-3 text-[13px] leading-relaxed muted">
-                  <Icon name={icon} className="mt-0.5 h-4 w-4 shrink-0 text-signal-500" />
-                  {text}
-                </li>
-              ))}
+            <ul className="mt-6 space-y-2.5 text-sm">
+              <li>
+                <Link to={path(paths.shipping())} className="flex items-center gap-3 hover:underline">
+                  <Icon name="truck" className="h-4 w-4 shrink-0 text-signal-600" />
+                  {t('why.delivery.d')}
+                </Link>
+              </li>
+              <li>
+                <Link to={path(paths.maintenance())} className="flex items-center gap-3 hover:underline">
+                  <Icon name="wrench" className="h-4 w-4 shrink-0 text-signal-600" />
+                  {t('why.support.d')}
+                </Link>
+              </li>
             </ul>
 
             <p className="label mt-7 muted">
@@ -363,6 +365,21 @@ export default function ProductDetail() {
         </Section>
       ) : null}
 
+      {/* Phone buy bar: price and the two actions stay in reach while reading. */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t bg-paper/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur rule dark:bg-carbon-950/95 lg:hidden print:hidden">
+        <div className="flex items-center gap-3">
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-xs muted">{name}</p>
+            <p className="tnum text-lg font-bold leading-tight">{price(product.price)}</p>
+          </div>
+          <Button variant="signal" size="md" icon={added ? 'check' : 'cart'} onClick={onAdd} disabled={out} aria-label={t('product.addToCart')} className="!px-4">
+            <span className="hidden xs:inline">{added ? t('product.added') : t('product.addToCart')}</span>
+          </Button>
+          <Button href={productEnquiryUrl(product, lang)} variant="whatsapp" size="md" icon="whatsapp" className="!px-4">
+            {lang === 'ar' ? 'اطلب' : 'Order'}
+          </Button>
+        </div>
+      </div>
       {related.length ? (
         <Section className="border-t rule">
           <div className="container-page">
@@ -371,6 +388,7 @@ export default function ProductDetail() {
           </div>
         </Section>
       ) : null}
+      <div className="h-20 lg:hidden" aria-hidden="true" />
     </>
   );
 }

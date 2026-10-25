@@ -10,14 +10,12 @@ import { paths } from '../lib/routes.js';
 import { locationEnquiryUrl } from '../lib/whatsapp.js';
 import { LOCATIONS, GOVERNORATE, getLocation } from '../data/locations.js';
 import { featuredProducts } from '../data/products.js';
-import { editorialImage } from '../data/media.js';
 import { SITE } from '../config/site.js';
 
 /* ==========================================================================
    Delivery areas
    --------------------------------------------------------------------------
-   These pages exist to be found locally, so the useful facts — fee, time,
-   distance, and the villages each area covers — are the design, not filler.
+   One page per Sharqia city with the villages it covers. No delivery prices.
    ========================================================================== */
 
 export default function Locations() {
@@ -42,7 +40,6 @@ export default function Locations() {
         eyebrow={tr(GOVERNORATE.name)}
         title={t('locations.title')}
         lede={t('locations.subtitle')}
-        image={editorialImage('hero-locations')}
         breadcrumbs={[{ label: t('locations.title') }]}
       />
 
@@ -57,7 +54,7 @@ export default function Locations() {
                 >                  <div className="min-w-0">
                     <h2 className="text-xl font-bold tracking-tight transition-colors group-hover:text-signal-600 dark:group-hover:text-signal-400 sm:text-2xl">
                       {tr(loc.name)}
-                      {loc.isCapital ? (
+                      {loc.slug === 'abu-kabir' ? (
                         <span className="label ms-3 align-middle text-signal-600 dark:text-signal-400">
                           {lang === 'ar' ? 'المعرض' : 'Showroom'}
                         </span>
@@ -68,9 +65,6 @@ export default function Locations() {
                     </p>
                   </div>
 
-                  <span className="label tnum whitespace-nowrap muted">
-                    {num(loc.deliveryFee)} {lang === 'ar' ? 'ج.م توصيل' : 'EGP delivery'}
-                  </span>
                 </Link>
               </li>
             ))}
@@ -115,7 +109,6 @@ export function LocationDetail() {
         eyebrow={tr(GOVERNORATE.name)}
         title={t('locations.pageTitle', { city })}
         lede={tr(loc.blurb)}
-        image={editorialImage('hero-locations')}
         breadcrumbs={[{ label: t('locations.title'), to: path(paths.locations()) }, { label: city }]}
       />
 
@@ -127,10 +120,6 @@ export function LocationDetail() {
               <SpecRow
                 label={t('locations.deliveryTime')}
                 value={tr(loc.etaDays) || tr(SITE.shipping.etaDays)}
-              />
-              <SpecRow
-                label={lang === 'ar' ? 'مصاريف التوصيل' : 'Delivery fee'}
-                value={`${num(loc.deliveryFee)} ${lang === 'ar' ? 'ج.م' : 'EGP'}`}
               />
             </dl>
 

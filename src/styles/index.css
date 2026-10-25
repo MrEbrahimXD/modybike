@@ -139,13 +139,10 @@
     letter-spacing: 0.005em;
   }
 
-  /**
-   * `.spec` — the tracked mono micro-type, kept for the one place it is
-   * honest: actual technical data. Spec-table keys, part numbers, the
-   * wheel/gear/brake summary on a product tile.
-   */
+  /* Short technical summaries ("16" · كفة · بدون سرعات"). Same face as the
+     body: a tracked monospace breaks Arabic letter joining. */
   .spec {
-    @apply font-mono text-spec font-medium uppercase;
+    @apply text-[0.8125rem] font-medium leading-snug;
   }
 
   /* Hairline rules do the work that borders-on-cards used to do. */

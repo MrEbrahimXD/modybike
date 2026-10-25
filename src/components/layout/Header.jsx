@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo.jsx';
 import Icon from '../ui/Icon.jsx';
-import Media from '../ui/Media.jsx';
 import { Button } from '../ui/primitives.jsx';
 import { useLocale, stripLocale } from '../../i18n/index.jsx';
 import { useTheme } from '../../lib/theme.jsx';
@@ -10,49 +9,34 @@ import { useCart } from '../../lib/cart.jsx';
 import { useLockBodyScroll, useMediaQuery } from '../../lib/hooks.js';
 import { paths } from '../../lib/routes.js';
 import { CATEGORIES } from '../../data/categories.js';
-import { AGE_GROUPS, PRODUCT_TYPES } from '../../data/collections.js';
-import { categoryImage } from '../../data/media.js';
+import { AGE_GROUPS } from '../../data/collections.js';
+import { LIVE_PRODUCT_TYPES } from '../../data/products.js';
 import SearchOverlay from '../search/SearchOverlay.jsx';
 import { SITE, WHATSAPP_LINK } from '../../config/site.js';
 
 const SHOP_LINKS = [
-  ...AGE_GROUPS.map((group) => ({ ...group, name: group.label, href: paths.byAge(group.slug) })),
-  ...PRODUCT_TYPES.map((type) => ({ ...type, name: type.label, href: paths.byType(type.slug) })),
+  ...AGE_GROUPS.map((group) => ({ ...group, name: group.label, href: paths.byAge(group.slug), icon: 'kids' })),
+  ...CATEGORIES.filter((c) => c.kind === 'bike').map((c) => ({ ...c, href: paths.productsByCategory(c.slug) })),
+  ...LIVE_PRODUCT_TYPES.filter((type) => type.slug !== 'bikes').map((type) => ({ ...type, name: type.label, href: paths.byType(type.slug) })),
 ];
 
-/* ==========================================================================
-   Header
-   --------------------------------------------------------------------------
-   Sits transparent over the hero photograph and turns solid on scroll, so the
-   first thing a visitor sees is the picture, not a toolbar.
-   ========================================================================== */
+/* Header: transparent over the home photo, solid everywhere else. */
 
-/** Thin retail signal strip: the three promises a bike buyer actually checks. */
+/** Slim strip with the two numbers people actually want. */
 function Ticker() {
-  const { t } = useLocale();
-  /* Deliberately no delivery pricing here — the fee is quoted per area when
-     the order is confirmed, not advertised as a headline number. */
-  const items = [t('why.warranty.t'), t('why.delivery.t'), t('why.fit.t')];
-
+  const { lang } = useLocale();
+  const phone = SITE.contact.phones[0];
   return (
     <div className="hidden bg-carbon-950 text-paper dark:bg-carbon-900 sm:block">
-      <div className="container-page flex h-9 items-center justify-between">
-        <ul className="flex items-center gap-7">
-          {items.map((it) => (
-            <li key={it} className="label flex items-center gap-2 opacity-80">
-              <Icon name="check" className="h-3 w-3 text-signal-400" />
-              {it}
-            </li>
-          ))}
-        </ul>
-        <a
-          href={`tel:${SITE.contact.phones[0].replace(/\s/g, '')}`}
-          className="label flex items-center gap-2 opacity-80 transition-opacity hover:opacity-100"
-        >
-          <Icon name="phone" className="h-3 w-3" />
-          <span className="tnum" dir="ltr">
-            {SITE.contact.phones[0]}
-          </span>
+      <div className="container-page flex h-9 items-center justify-end gap-6 text-[13px]">
+        <a href={`tel:${phone}`} className="flex items-center gap-2 opacity-85 hover:opacity-100">
+          <Icon name="phone" className="h-3.5 w-3.5" />
+          <span className="tnum" dir="ltr">{phone}</span>
+        </a>
+        <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 opacity-85 hover:opacity-100">
+          <Icon name="whatsapp" className="h-3.5 w-3.5" />
+          <span className="tnum" dir="ltr">{SITE.contact.whatsappDisplay}</span>
+          <span className="sr-only">{lang === 'ar' ? 'واتساب' : 'WhatsApp'}</span>
         </a>
       </div>
     </div>
@@ -105,6 +89,9 @@ function BikesMenu({ open, onClose }) {
           <Link to={path(paths.accessories())} onClick={onClose} className="label link-underline">
             {t('nav.accessories')}
           </Link>
+          <Link to={path(paths.maintenance())} onClick={onClose} className="label link-underline">
+            {t('nav.maintenance')}
+          </Link>
         </div>
       </div>
     </div>
@@ -117,6 +104,7 @@ function MobileNav({ open, onClose }) {
   const location = useLocation();
   const navigate = useNavigate();
   const panelRef = useRef(null);
+  const { theme, toggleTheme } = useTheme();
 
   useLockBodyScroll(open);
 
@@ -133,14 +121,15 @@ function MobileNav({ open, onClose }) {
   if (!open) return null;
 
   const links = [
-    [t('nav.products'), paths.products()],
-    [t('nav.accessories'), paths.accessories()],
-    [t('nav.sizeGuide'), paths.sizeGuide()],
-    [t('nav.blog'), paths.blog()],
-    [t('nav.locations'), paths.locations()],
-    [t('nav.about'), paths.about()],
-    [t('nav.contact'), paths.contact()],
-    [t('nav.faq'), paths.faq()],
+    [t('nav.products'), paths.products(), 'bike'],
+    [t('nav.accessories'), paths.accessories(), 'accessories'],
+    [t('nav.maintenance'), paths.maintenance(), 'wrench'],
+    [t('nav.sizeGuide'), paths.sizeGuide(), 'ruler'],
+    [t('nav.contact'), paths.contact(), 'phone'],
+    [t('nav.faq'), paths.faq(), 'info'],
+    [t('nav.locations'), paths.locations(), 'truck'],
+    [t('nav.about'), paths.about(), 'users'],
+    [t('nav.blog'), paths.blog(), 'tag'],
   ];
 
   const otherLang = lang === 'ar' ? 'en' : 'ar';
@@ -166,14 +155,17 @@ function MobileNav({ open, onClose }) {
 
       <nav aria-label={t('nav.mainNav')} className="flex-1 overflow-y-auto overscroll-contain">
         <ul>
-          {links.map(([label, to]) => (
+          {links.map(([label, to, icon]) => (
             <li key={to}>
               <Link
                 to={path(to)}
                 onClick={onClose}
-                className="flex items-center justify-between gap-4 border-b px-5 py-5 rule"
+                className="flex items-center justify-between gap-4 border-b px-5 py-4 rule"
               >
-                <span className="text-2xl font-bold tracking-tight">{label}</span>
+                <span className="flex items-center gap-3 text-lg font-bold">
+                  <Icon name={icon} className="h-5 w-5 shrink-0 text-signal-600 dark:text-signal-400" />
+                  {label}
+                </span>
                 <Icon name="arrowRight" className="h-4 w-4 shrink-0 flip-rtl text-carbon-400" />
               </Link>
             </li>
@@ -181,7 +173,7 @@ function MobileNav({ open, onClose }) {
         </ul>
 
         <div className="px-5 py-6">
-          <p className="label mb-4 muted">{t('home.categoriesTitle')}</p>
+          <p className="label mb-4 muted">{lang === 'ar' ? 'الأقسام' : 'Sections'}</p>
           <ul className="grid grid-cols-2 gap-2">
             {SHOP_LINKS.map((c) => (
               <li key={c.slug}>
@@ -213,6 +205,10 @@ function MobileNav({ open, onClose }) {
         >
           <Icon name="globe" className="h-3.5 w-3.5" />
           {t('nav.switchLang')}
+        </button>
+        <button type="button" onClick={toggleTheme} className="label mt-1 flex w-full items-center justify-center gap-2 py-2">
+          <Icon name={theme === 'dark' ? 'sun' : 'moon'} className="h-3.5 w-3.5" />
+          {t('nav.toggleTheme')}
         </button>
       </div>
     </div>
@@ -271,10 +267,9 @@ export default function Header() {
 
   const navLinks = [
     { label: t('nav.accessories'), to: paths.accessories() },
+    { label: t('nav.maintenance'), to: paths.maintenance() },
     { label: t('nav.sizeGuide'), to: paths.sizeGuide() },
-    { label: t('nav.blog'), to: paths.blog() },
-    { label: t('nav.locations'), to: paths.locations() },
-    { label: t('nav.about'), to: paths.about() },
+    { label: t('nav.contact'), to: paths.contact() },
   ];
 
   const switchLang = () => {
@@ -302,7 +297,7 @@ export default function Header() {
         <div className="container-page">
           <div className="flex h-[68px] items-center justify-between gap-4 xl:gap-6">
             <Link to={path(paths.home())} aria-label={t('common.brand')} className="shrink-0">
-              <Logo />
+              <Logo onDark={overHero} />
             </Link>
 
             {/* ---------------------------------------------------- desktop nav */}
@@ -385,7 +380,7 @@ export default function Header() {
                 type="button"
                 onClick={toggleTheme}
                 aria-label={t('nav.toggleTheme')}
-                className="tap-target grid place-items-center transition-opacity hover:opacity-60"
+                className="tap-target hidden place-items-center transition-opacity hover:opacity-60 sm:grid"
               >
                 <Icon name={theme === 'dark' ? 'sun' : 'moon'} className="h-[18px] w-[18px]" />
               </button>

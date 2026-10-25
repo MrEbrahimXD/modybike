@@ -161,7 +161,7 @@ export function organizationSchema(lang = 'ar') {
     ...(SITE.contact.email ? { email: SITE.contact.email } : {}),
     telephone: SITE.contact.phones[0],
     image: absoluteUrl('/og-default.png'),
-    logo: absoluteUrl('/favicon.svg'),
+    logo: absoluteUrl('/icon-512.png'),
     priceRange: 'EGP',
     currenciesAccepted: 'EGP',
     address: {
@@ -184,10 +184,13 @@ export function organizationSchema(lang = 'ar') {
       closes: h.closes,
     })),
     sameAs: Object.values(SITE.social).filter(Boolean),
-    areaServed: {
-      '@type': 'AdministrativeArea',
-      name: lang === 'ar' ? 'محافظة الشرقية' : 'Al Sharqia Governorate',
-      containedInPlace: { '@type': 'Country', name: lang === 'ar' ? 'مصر' : 'Egypt' },
+    areaServed: [
+      { '@type': 'Country', name: lang === 'ar' ? 'مصر' : 'Egypt' },
+      { '@type': 'AdministrativeArea', name: lang === 'ar' ? 'محافظة الشرقية' : 'Al Sharqia Governorate' },
+    ],
+    makesOffer: {
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: lang === 'ar' ? 'صيانة وتركيب الدراجات' : 'Bicycle repair and assembly' },
     },
   };
 }
@@ -286,7 +289,7 @@ export function productSchema(product, { lang = 'ar', path } = {}) {
       availability: AVAILABILITY[product.stock] || AVAILABILITY.in_stock,
       itemCondition: 'https://schema.org/NewCondition',
       seller: { '@id': `${SITE.baseUrl}/#organization` },
-      areaServed: { '@type': 'AdministrativeArea', name: lang === 'ar' ? 'محافظة الشرقية' : 'Al Sharqia' },
+      areaServed: { '@type': 'Country', name: lang === 'ar' ? 'مصر' : 'Egypt' },
       ...(SITE.warranty.months ? { warranty: {
         '@type': 'WarrantyPromise',
         durationOfWarranty: { '@type': 'QuantitativeValue', value: SITE.warranty.months, unitCode: 'MON' },

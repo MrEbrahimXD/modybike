@@ -2,7 +2,8 @@ import { PRODUCTS } from '../data/products.js';
 import { LOCATIONS } from '../data/locations.js';
 import { POSTS, POST_CATEGORIES } from '../content/posts/index.js';
 import { CATEGORIES } from '../data/categories.js';
-import { AGE_GROUPS, PRODUCT_TYPES } from '../data/collections.js';
+import { AGE_GROUPS } from '../data/collections.js';
+import { LIVE_PRODUCT_TYPES } from '../data/products.js';
 
 /**
  * Single source of truth for every URL on the site.
@@ -19,6 +20,7 @@ export const ROUTE_IDS = {
   product: 'product',
   accessories: 'accessories',
   sizeGuide: 'sizeGuide',
+  maintenance: 'maintenance',
   blog: 'blog',
   blogPost: 'blogPost',
   blogCategory: 'blogCategory',
@@ -44,6 +46,7 @@ export const ROUTE_PATTERNS = [
   { id: ROUTE_IDS.product, pattern: 'products/:slug' },
   { id: ROUTE_IDS.accessories, pattern: 'accessories' },
   { id: ROUTE_IDS.sizeGuide, pattern: 'size-guide' },
+  { id: ROUTE_IDS.maintenance, pattern: 'maintenance' },
   { id: ROUTE_IDS.blog, pattern: 'blog' },
   { id: ROUTE_IDS.blogCategory, pattern: 'blog/topic/:category' },
   { id: ROUTE_IDS.blogPost, pattern: 'blog/:slug' },
@@ -69,6 +72,7 @@ export const paths = {
   product: (slug) => `/products/${slug}`,
   accessories: () => '/accessories',
   sizeGuide: () => '/size-guide',
+  maintenance: () => '/maintenance',
   blog: () => '/blog',
   blogPost: (slug) => `/blog/${slug}`,
   blogCategory: (cat) => `/blog/topic/${cat}`,
@@ -96,6 +100,7 @@ export function getStaticPaths() {
     { path: '/products', changefreq: 'daily', priority: 0.9, lastmod: today },
     { path: '/accessories', changefreq: 'weekly', priority: 0.8, lastmod: today },
     { path: '/size-guide', changefreq: 'monthly', priority: 0.9, lastmod: today },
+    { path: '/maintenance', changefreq: 'monthly', priority: 0.8, lastmod: today },
     { path: '/blog', changefreq: 'weekly', priority: 0.8, lastmod: today },
     { path: '/locations', changefreq: 'monthly', priority: 0.8, lastmod: today },
     { path: '/about', changefreq: 'yearly', priority: 0.5, lastmod: today },
@@ -139,7 +144,7 @@ export function getStaticPaths() {
 
   const collectionPaths = [
     ...AGE_GROUPS.map((group) => ({ path: paths.byAge(group.slug), changefreq: 'weekly', priority: 0.9 })),
-    ...PRODUCT_TYPES.map((type) => ({ path: paths.byType(type.slug), changefreq: 'weekly', priority: 0.8 })),
+    ...LIVE_PRODUCT_TYPES.filter((type) => type.slug !== 'bikes').map((type) => ({ path: paths.byType(type.slug), changefreq: 'weekly', priority: 0.8 })),
   ];
   return [...core, ...collectionPaths, ...productPaths, ...locationPaths, ...postPaths, ...blogCategoryPaths];
 }

@@ -9,22 +9,8 @@ import { paths } from '../../lib/routes.js';
 import { productImage } from '../../data/media.js';
 import { isAccessory } from '../../data/products.js';
 
-/* ==========================================================================
-   Product card
-   --------------------------------------------------------------------------
-   No card. The photograph is the object; type sits underneath it on the page,
-   not inside a rounded box with a shadow. The only chrome is a hairline above
-   the name and the quick-add that slides in over the image on hover.
-   ========================================================================== */
-
 /**
- * The one-line spec summary that makes a tile feel like a real bike listing.
- *
- * Three short tokens, not four long ones. The full brake name ("فرامل قرصية
- * ميكانيكية") and the frame material ran past the tile and got cut off by an
- * ellipsis, and the material reads the same on every bike in the shop, so it
- * told a browsing customer nothing. Wheel size, brake type and gear count are
- * what actually separates one listing from the next.
+ * Wheel size, brake type and gear count — what separates one listing from the next.
  */
 function specLine(product, t) {
   if (isAccessory(product)) return null;
@@ -37,6 +23,7 @@ function specLine(product, t) {
   return bits.join(' · ');
 }
 
+/** Listing tile: photo, name, specs, price, stock and a visible add button. */
 export default function ProductCard({ product, priority = false, sizes, className = '' }) {
   const { t, tr, path, price } = useLocale();
   const { add } = useCart();
@@ -47,9 +34,7 @@ export default function ProductCard({ product, priority = false, sizes, classNam
   const spec = specLine(product, t);
   const href = path(paths.product(product.slug));
 
-  const quickAdd = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const quickAdd = () => {
     add(product, 1);
     setAdded(true);
     window.setTimeout(() => setAdded(false), 1600);
@@ -57,65 +42,48 @@ export default function ProductCard({ product, priority = false, sizes, classNam
 
   return (
     <article className={`group relative flex flex-col ${className}`}>
-      <Link to={href} className="block focus:outline-none" tabIndex={-1} aria-hidden="true">
-        <div className="zoom-frame bg-carbon-100 dark:bg-carbon-900">
-          <Media
-            image={image}
-            alt=""
-            ratio="4/3"
-            sizes={sizes || '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 380px'}
-            priority={priority}
-            fallbackLabel={product.sku}
-            className={out ? 'opacity-55 grayscale' : ''}
-          />
-
-          {/* badges */}
-          <div className="pointer-events-none absolute start-0 top-0 flex flex-col items-start gap-px p-0">
-            {product.badges?.includes('bestseller') ? (
-              <Tag tone="paper">{t('common.new') === 'New' ? 'Bestseller' : 'الأكثر مبيعًا'}</Tag>
-            ) : null}
-            {product.compareAtPrice > product.price ? (
-              <Tag tone="signal">
-                −{Math.round((1 - product.price / product.compareAtPrice) * 100)}%
-              </Tag>
-            ) : null}
+      <div className="relative bg-white dark:bg-carbon-900">
+        <Media
+          image={image}
+          alt={tr(product.name)}
+          ratio="1/1"
+          fit="contain"
+          sizes={sizes || '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 300px'}
+          priority={priority}
+          fallbackLabel={product.sku}
+          className={out ? 'opacity-55 grayscale' : ''}
+        />
+        {product.compareAtPrice > product.price ? (
+          <div className="pointer-events-none absolute start-0 top-0">
+            <Tag tone="signal">−{Math.round((1 - product.price / product.compareAtPrice) * 100)}%</Tag>
           </div>
+        ) : null}
+      </div>
 
-          {/* quick add — pointer devices only; the card link stays the a11y path */}
-          {!out ? (
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full opacity-0 transition-all duration-300 ease-editorial group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 max-lg:hidden">
-              <button
-                type="button"
-                onClick={quickAdd}
-                tabIndex={-1}
-                className="flex w-full items-center justify-center gap-2 bg-carbon-950/[0.92] py-3.5 text-sm font-semibold text-paper backdrop-blur-[2px] transition-colors hover:bg-signal-500 hover:text-white"
-              >
-                <Icon name={added ? 'check' : 'plus'} className="h-4 w-4" />
-                {added ? t('product.added') : t('product.addToCart')}
-              </button>
-            </div>
-          ) : null}
-        </div>
-      </Link>
-
-      <div className="mt-4 flex flex-1 flex-col border-t pt-4 rule">
-        {spec ? <p className="spec mb-2 muted">{spec}</p> : null}
-
-        <h3 className="text-base font-bold leading-snug">
-          {/* stretched link: the whole card is clickable, one tab stop */}
-          <Link to={href} className="after:absolute after:inset-0 after:content-['']">
+      <div className="flex flex-1 flex-col pt-3">
+        <h3 className="line-clamp-2 text-[15px] font-semibold leading-snug sm:text-base">
+          {/* stretched link: the whole tile opens the product */}
+          <Link to={href} className="after:absolute after:inset-0 after:content-[''] group-hover:underline">
             {tr(product.name)}
           </Link>
         </h3>
+        {spec ? <p className="spec mt-1 muted">{spec}</p> : null}
 
-        {product.tagline ? (
-          <p className="mt-1.5 line-clamp-2 text-[13px] leading-relaxed muted">{tr(product.tagline)}</p>
-        ) : null}
-
-        <div className="mt-4 flex items-end justify-between gap-3 pt-1">
+        <div className="mt-auto pt-2">
           <Price value={product.price} compareAt={product.compareAtPrice} price={price} size="sm" />
-          <StockPill stock={product.stock} t={t} className="shrink-0 pb-1" />
+          <StockPill stock={product.stock} t={t} className="mt-1" />
         </div>
+
+        {!out ? (
+          <button
+            type="button"
+            onClick={quickAdd}
+            className="relative z-10 mt-3 flex min-h-[44px] w-full items-center justify-center gap-2 border border-carbon-950 text-sm font-semibold transition-colors hover:bg-carbon-950 hover:text-paper dark:border-carbon-300 dark:hover:bg-paper dark:hover:text-carbon-950"
+          >
+            <Icon name={added ? 'check' : 'plus'} className="h-4 w-4" />
+            {added ? t('product.added') : t('product.addToCart')}
+          </button>
+        ) : null}
       </div>
     </article>
   );
@@ -126,7 +94,7 @@ export function ProductGrid({ products = [], priorityCount = 0, className = '', 
   if (!products.length) return null;
   const grid = cols || 'grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
   return (
-    <ul className={`grid gap-x-5 gap-y-12 sm:gap-x-8 ${grid} ${className}`} role="list">
+    <ul className={`grid gap-x-3 gap-y-8 sm:gap-x-6 sm:gap-y-10 ${grid} ${className}`} role="list">
       {products.map((p, i) => (
         <li key={p.id} className="flex">
           <ProductCard product={p} priority={i < priorityCount} className="w-full" />

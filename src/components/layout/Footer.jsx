@@ -4,16 +4,12 @@ import { LogoMark } from './Logo.jsx';
 import { useLocale } from '../../i18n/index.jsx';
 import { paths } from '../../lib/routes.js';
 import { CATEGORIES } from '../../data/categories.js';
-import { AGE_GROUPS, PRODUCT_TYPES } from '../../data/collections.js';
+import { AGE_GROUPS } from '../../data/collections.js';
+import { LIVE_PRODUCT_TYPES } from '../../data/products.js';
 import { LOCATIONS } from '../../data/locations.js';
 import { SITE, WHATSAPP_LINK } from '../../config/site.js';
 
-/* ==========================================================================
-   Footer
-   --------------------------------------------------------------------------
-   Dark, tall, and genuinely useful — the place a local shop proves it exists:
-   address, hours, phone, and every district it delivers to.
-   ========================================================================== */
+/* Footer: contact details, hours, sections and city pages. */
 
 function Column({ title, children }) {
   return (
@@ -95,7 +91,7 @@ export default function Footer() {
           {/* brand + address */}
           <div className="lg:col-span-4">
             <span className="inline-flex items-center gap-2.5 text-white">
-              <LogoMark className="h-7 w-9" />
+              <LogoMark onDark className="h-12 w-12" />
               <span className="text-lg font-bold tracking-tight">{SITE.name[lang]}</span>
             </span>
 
@@ -107,8 +103,7 @@ export default function Footer() {
               <p className="flex items-start gap-3 text-sm text-carbon-300">
                 <Icon name="mapPin" className="mt-0.5 h-4 w-4 shrink-0 text-signal-500" />
                 <span>
-                  {tr(addr.street)} — {tr(addr.district)}
-                  <br />
+                  {addr.streetVerified ? <>{tr(addr.street)}<br /></> : null}
                   {tr(addr.city)}، {tr(addr.region)}
                 </span>
               </p>
@@ -152,10 +147,14 @@ export default function Footer() {
 
           <div className="lg:col-span-2">
             <Column title={t('footer.categories')}>
-              {[...AGE_GROUPS, ...PRODUCT_TYPES].map((c) => (
-                <FooterLink key={c.slug} to={path(c.min ? paths.byAge(c.slug) : paths.byType(c.slug))}>
-                  {tr(c.label)}
-                </FooterLink>
+              {AGE_GROUPS.map((c) => (
+                <FooterLink key={c.slug} to={path(paths.byAge(c.slug))}>{tr(c.label)}</FooterLink>
+              ))}
+              {CATEGORIES.filter((c) => c.kind === 'bike').map((c) => (
+                <FooterLink key={c.slug} to={path(paths.productsByCategory(c.slug))}>{tr(c.name)}</FooterLink>
+              ))}
+              {LIVE_PRODUCT_TYPES.filter((c) => c.slug !== 'bikes').map((c) => (
+                <FooterLink key={c.slug} to={path(paths.byType(c.slug))}>{tr(c.label)}</FooterLink>
               ))}
             </Column>
           </div>
@@ -164,7 +163,10 @@ export default function Footer() {
             <Column title={t('footer.quickLinks')}>
               <FooterLink to={path(paths.products())}>{t('nav.products')}</FooterLink>
               <FooterLink to={path(paths.accessories())}>{t('nav.accessories')}</FooterLink>
+              <FooterLink to={path(paths.maintenance())}>{t('nav.maintenance')}</FooterLink>
+              <FooterLink href={`${import.meta.env.BASE_URL}catalogue/modybike-catalogue-${lang}.pdf`}>{t('nav.catalogue')}</FooterLink>
               <FooterLink to={path(paths.sizeGuide())}>{t('nav.sizeGuide')}</FooterLink>
+              <FooterLink to={path(paths.contact())}>{t('nav.contact')}</FooterLink>
               <FooterLink to={path(paths.blog())}>{t('nav.blog')}</FooterLink>
               <FooterLink to={path(paths.about())}>{t('nav.about')}</FooterLink>
               <FooterLink to={path(paths.faq())}>{t('nav.faq')}</FooterLink>

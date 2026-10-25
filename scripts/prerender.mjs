@@ -247,7 +247,7 @@ const llms = `# ${SITE.name.ar} (${SITE.name.en})
 ## About
 - Business type: bicycle and accessory retailer (BikeStore)
 - Location: ${SITE.address.city.en}, ${SITE.address.region.en}, Egypt
-- Service area: the whole of Al Sharqia Governorate, including Zagazig, Belbeis, Minya Al Qamh, Abu Hammad, Hehia, Abu Kabir, Faqous, El Husseiniya, Kafr Saqr, Awlad Saqr, El Ibrahimiya, Deyerb Negm, Mashtoul El Souk, El Qanayat, El Qurein, New Salhia, Menshat Abu Omar, San El Hagar and 10th of Ramadan City
+- Service area: delivery across Egypt; local pages cover Al Sharqia Governorate, including Zagazig, Belbeis, Minya Al Qamh, Abu Hammad, Hehia, Abu Kabir, Faqous, El Husseiniya, Kafr Saqr, Awlad Saqr, El Ibrahimiya, Deyerb Negm, Mashtoul El Souk, El Qanayat, El Qurein, New Salhia, Menshat Abu Omar, San El Hagar and 10th of Ramadan City
 - Languages: Arabic (primary), English
 - WhatsApp: ${SITE.contact.whatsappDisplay}; phone: ${SITE.contact.phones[0]}
 - Ordering: customers build an order on the website and send it over WhatsApp
@@ -265,7 +265,8 @@ const llms = `# ${SITE.name.ar} (${SITE.name.en})
 - [Accessories](${BASE_URL}/accessories): lights, locks, baskets, helmets, bells, pumps and tools
 - [Size guide](${BASE_URL}/size-guide): wheel and frame sizing by rider height and age, with an interactive calculator
 - [Blog](${BASE_URL}/blog): buying, sizing, maintenance and safety guides
-- [Delivery areas](${BASE_URL}/locations): per-district delivery information across Al Sharqia
+- [Repairs](${BASE_URL}/maintenance): bike servicing, brakes, gears, tyres, chains, assembly
+- [Delivery areas](${BASE_URL}/locations): city pages across Al Sharqia
 - [FAQ](${BASE_URL}/faq)
 - [Contact](${BASE_URL}/contact)
 
@@ -275,7 +276,8 @@ const llms = `# ${SITE.name.ar} (${SITE.name.en})
 - Saddle height (bottom bracket to saddle top) = inseam × 0.883.
 - Wheel sizes by ETRTO rim diameter: 26" = 559 mm, 27.5" = 584 mm, 29"/700C = 622 mm.
 - Warranty terms are confirmed for the selected model before ordering.
-- Free delivery within Abu Kabir district; EGP ${SITE.shipping.flatRateSharqia} to other Al Sharqia districts.
+- The shop also offers bike repairs and servicing: ${BASE_URL}/maintenance
+- A PDF catalogue is available in Arabic and English: ${BASE_URL}/catalogue/
 - ${SITE.isPlaceholderContent ? 'Product models, photos and prices are demonstration content, not verified stock or offers.' : 'Contact the shop to confirm availability and prices.'}
 
 ## Notes

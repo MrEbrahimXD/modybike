@@ -16,18 +16,14 @@ const LAST_UPDATED = '2026-09-01';
 const CONTENT = {
   shipping: {
     ar: [
-      { h: 'مناطق التوصيل', p: 'بنوصّل داخل محافظة الشرقية من معرض مودي بايك في أبو كبير. ابعت عنوانك لتأكيد إمكانية التوصيل قبل الطلب.' },
-      { h: 'مواعيد التوصيل', p: SITE.shipping.etaDays.ar },
-      { h: 'مصاريف الشحن', p: 'التوصيل مجاني داخل مركز أبو كبير، و١٥٠ جنيه لأي مركز آخر في محافظة الشرقية. بنأكد العنوان وإجمالي الطلب معاك قبل إتمامه.' },
-      { h: 'الاستلام من المعرض', p: 'تقدر تستلم طلبك من معرضنا في أبو كبير مجانًا خلال مواعيد العمل. هنبلّغك لما الطلب يكون جاهز.' },
+      { h: 'التوصيل', p: 'ابعت عنوانك على واتساب، وبنأكد معاك الطلب وتفاصيل ومعاد التوصيل قبل ما نبعته.' },
+      { h: 'الاستلام من المعرض', p: 'تقدر تستلم طلبك من المعرض خلال مواعيد العمل. هنبلّغك لما الطلب يكون جاهز.' },
       { h: 'الاسترجاع والاستبدال', p: 'تواصل مع المعرض لمعرفة سياسة الاسترجاع والاستبدال الخاصة بالمنتج قبل تأكيد الطلب.' },
       { h: 'الضمان', p: SITE.warranty.note.ar },
     ],
     en: [
-      { h: 'Delivery areas', p: 'We deliver within Al Sharqia from the ModyBike showroom in Abu Kabir. Share your address to confirm delivery coverage before ordering.' },
-      { h: 'Delivery times', p: SITE.shipping.etaDays.en },
-      { h: 'Delivery fees', p: 'Free delivery within Abu Kabir district; EGP 150 to other Al Sharqia districts. We confirm the address and order total with you before completing the order.' },
-      { h: 'Showroom collection', p: 'You may collect your order free of charge from our Abu Kabir showroom during opening hours. We will let you know when it is ready.' },
+      { h: 'Delivery', p: 'Send your address on WhatsApp and we confirm the order, delivery details and time before dispatch.' },
+      { h: 'Showroom collection', p: 'You can collect your order from the shop during opening hours. We will let you know when it is ready.' },
       { h: 'Returns and exchanges', p: 'Contact the showroom for the product’s return and exchange policy before confirming your order.' },
       { h: 'Warranty', p: SITE.warranty.note.en },
     ],

@@ -43,8 +43,10 @@ export default {
 
   nav: {
     home: 'Home',
-    products: 'Shop',
+    products: 'Bikes',
     accessories: 'Accessories',
+    maintenance: 'Repairs',
+    catalogue: 'PDF catalogue',
     sizeGuide: 'Size guide',
     blog: 'Blog',
     locations: 'Delivery areas',
@@ -62,29 +64,27 @@ export default {
 
   home: {
     heroEyebrow: 'A bicycle showroom for every age',
-    heroTitle: "Every age. A new adventure.",
-    heroSubtitle: "ModyBike — from their very first bike to your everyday ride.",
-    heroCtaPrimary: "Explore the collections",
+    heroTitle: "Bikes for every age",
+    heroSubtitle: "12 to 26 inch, with the price on every model.",
+    heroCtaPrimary: "See all bikes",
     heroCtaSecondary: 'Find your size',
     heroStat1: "Models in the catalogue",
     heroStat2: 'districts covered',
     heroStat3: "Age groups",
-    categoriesTitle: 'Choose a bike type',
-    categoriesSubtitle: 'Each type has its purpose — the size guide will help if you are unsure.',
+    categoriesTitle: 'Shop by age',
+    categoriesSubtitle: 'Pick the rider’s age to see the sizes that fit.',
     featuredTitle: "Explore the bikes",
     featuredSubtitle: "Illustrative models while the shop catalogue is being prepared.",
-    accessoriesTitle: 'Accessories you should not skip',
-    accessoriesSubtitle: 'Lights, bell, basket, lock, helmet — everything for a safe ride.',
-    whyTitle: 'Why buy from ModyBike?',
-    whySubtitle: 'We do not just sell bikes — we help you choose right and keep it running.',
+    accessoriesTitle: 'Accessories',
+    accessoriesSubtitle: 'Lights, bells, baskets, locks, helmets and training wheels.',
     sizeTeaserTitle: 'Not sure which size fits?',
     sizeTeaserBody:
       'Enter your height (or your child’s) and we will tell you the right wheel and frame size, then show the models that actually fit.',
     sizeTeaserCta: 'Open the size calculator',
-    blogTitle: 'Guides that help you choose',
-    blogSubtitle: 'Sizes, ages, maintenance and accessories — explained in detail.',
-    locationsTitle: 'We deliver across Al Sharqia',
-    locationsSubtitle: 'Zagazig, Belbeis, Minya Al Qamh, Abu Hammad, Faqous, Hehia and more.',
+    blogTitle: 'Guides',
+    blogSubtitle: 'Sizing, maintenance and safety.',
+    locationsTitle: 'Delivered to your door',
+    locationsSubtitle: 'Order on WhatsApp and we arrange a delivery time.',
     testimonialsTitle: 'What our customers say',
     ctaTitle: 'Ready to pick your bike?',
     ctaBody:
@@ -93,18 +93,14 @@ export default {
   },
 
   why: {
-    quality: { t: 'Durable materials', d: 'Tested alloy and steel frames built for Sharqia roads.' },
-    fit: { t: 'The right fit', d: 'We size by height and age — never by guesswork.' },
-    warranty: {"t":"Details before ordering","d":"Confirm the price, availability and model warranty terms before ordering."},
-    delivery: {"t":"Delivery in Al Sharqia","d":"Free delivery within Abu Kabir district; EGP 150 to other Al Sharqia districts."},
-    support: {"t":"Talk to the shop","d":"Contact us on WhatsApp or by phone to discuss suitable options."},
-    prices: { t: 'Clear pricing', d: 'The price is on the product — no surprises.' },
+    delivery: { t: 'Delivery', d: 'Delivered to your door — we agree the time on WhatsApp.' },
+    support: { t: 'Repairs', d: 'Tune-ups, repairs and assembly at the shop.' },
   },
 
   product: {
-    products: 'Shop',
+    products: 'Bikes',
     accessories: 'Accessories',
-    allProducts: 'All products',
+    allProducts: 'All bikes',
     price: 'Price',
     save: 'Save',
     inStock: 'In stock',
@@ -112,7 +108,7 @@ export default {
     outOfStock: 'Out of stock',
     addToCart: 'Add to order',
     added: 'Added ✓',
-    buyNow: 'Order now on WhatsApp',
+    buyNow: 'Order on WhatsApp',
     askAboutProduct: 'Ask about this product',
     quantity: 'Quantity',
     increase: 'Increase quantity',
@@ -242,8 +238,7 @@ export default {
     itemsCount: '{count} items in cart',
     subtotal: 'Subtotal',
     shipping: 'Shipping',
-    shippingCalc: 'Calculated by area',
-    shippingFree: 'Free shipping',
+    shippingCalc: 'Confirmed on WhatsApp',
     total: 'Total',
     checkout: 'Checkout',
     continueShopping: 'Continue shopping',
@@ -253,8 +248,6 @@ export default {
     clearCart: 'Empty cart',
     confirmClear: 'Are you sure you want to empty the cart?',
     updateQty: 'Update quantity for {name}',
-    freeShippingProgress: '{amount} away from free shipping',
-    freeShippingReached: 'Nice! Your order ships free 🎉',
   },
 
   upsell: {
@@ -281,14 +274,14 @@ export default {
     altPhone: 'Alternative mobile',
     city: 'District / city',
     cityPlaceholder: 'Choose a district or city',
-    cityOutside: 'Outside Al Sharqia',
+    cityOutside: 'Another governorate',
     address: 'Full address',
     addressPlaceholder: 'Street, building number, landmark…',
     notes: 'Additional notes',
     notesPlaceholder: 'e.g. I would like it in blue, or a specific delivery time…',
     deliveryOption: 'Deliver to my address',
     pickupOption: 'Pick up from showroom',
-    pickupNote: 'Collect it yourself from our showroom and save the delivery fee.',
+    pickupNote: 'Collect it from the shop during opening hours.',
     submit: 'Send order on WhatsApp',
     orderNumber: 'Order number',
     alsoEmail: 'Prefer email? Send your order to',
@@ -341,7 +334,7 @@ export default {
 
   blog: {
     title: 'ModyBike blog',
-    subtitle: 'Everything you need to know about bikes: sizes, ages, maintenance, accessories and safety.',
+    subtitle: 'Sizing, maintenance and safety.',
     allPosts: 'All articles',
     categories: 'Categories',
     readingTime: '{min} min read',
@@ -360,13 +353,12 @@ export default {
   },
 
   locations: {
-    title: 'Delivery areas in Al Sharqia',
+    title: 'Delivery areas',
     subtitle:
-      'We deliver bikes and accessories to every district, city and village in Al Sharqia governorate — showroom pickup is always available.',
+      'Delivered to your door, or collect from the shop.',
     pageTitle: 'Bicycles in {city}',
     deliveryTo: 'Delivery to {city}',
     deliveryTime: 'Delivery time',
-    deliveryFee: 'Delivery fee',
     nearbyAreas: 'Villages and nearby areas',
     otherAreas: 'Other districts and cities',
     orderNow: 'Order delivery to {city}',
@@ -395,7 +387,7 @@ export default {
 
   contact: {
     title: 'Contact us',
-    subtitle: 'We are here to answer your questions and help you pick the right bike.',
+    subtitle: 'WhatsApp or phone, during opening hours.',
     whatsappTitle: 'WhatsApp (fastest)',
     whatsappBody: 'Instant replies during opening hours.',
     phoneTitle: 'Phone',
@@ -434,7 +426,7 @@ export default {
     contactUs: 'Contact us',
     followUs: 'Follow us',
     rights: 'All rights reserved',
-    madeIn: 'Made with care in Al Sharqia 🇪🇬',
+    madeIn: '',
     backToTop: 'Back to top',
   },
 
@@ -442,7 +434,7 @@ export default {
     title: '404 — Page not found',
     body: 'The link may have changed or the page was removed. Start from the home page or search for what you need.',
     home: 'Home page',
-    products: 'Shop',
+    products: 'Bikes',
   },
 
   a11y: {

@@ -21,7 +21,7 @@ export default {
          see the `html[lang]` blocks in src/styles/index.css. */
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'sans-serif'],
-        mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+        mono: ['var(--font-sans)', 'system-ui', 'sans-serif'],
       },
 
       colors: {
